@@ -23,6 +23,13 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
+      local sources = {
+        { name = "emoji" },
+      }
+
+      -- add emoji to opts.sources
+      opts.sources = vim.tbl_extend("force", opts.sources, sources)
+
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
