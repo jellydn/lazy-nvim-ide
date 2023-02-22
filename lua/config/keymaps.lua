@@ -7,9 +7,3 @@ local opts = { silent = true }
 
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
-
--- Copilot
-keymap("i", "<C-j>", "<Plug>(copilot-next)", opts)
-keymap("i", "<C-k>", "<Plug>(copilot-previous)", opts)
-keymap("i", "<C-l>", "<Plug>(copilot-suggest)", opts)
-keymap("i", "<C-a>", "<Plug>(copilot-accept)", opts)
