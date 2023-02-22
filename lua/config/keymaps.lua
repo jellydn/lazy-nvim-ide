@@ -5,9 +5,6 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
--- Close buffers
-keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
-
 -- Copy whole file content to clipboard with C-c
 keymap("n", "<C-c>", ":%y+<CR>", opts)
 
