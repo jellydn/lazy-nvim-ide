@@ -15,6 +15,17 @@ return {
       vim.cmd([[
         let g:copilot_assume_mapped = v:true
       ]])
+
+      -- setup keymap
+      local keymap = vim.keymap.set
+      -- Silent keymap option
+      local opts = { silent = true }
+
+      -- Copilot
+      keymap("i", "<C-j>", "<Plug>(copilot-next)", opts)
+      keymap("i", "<C-k>", "<Plug>(copilot-previous)", opts)
+      keymap("i", "<C-l>", "<Plug>(copilot-suggest)", opts)
+      keymap("i", "<C-a>", "<Plug>(copilot-accept)", opts)
     end,
   },
 }
