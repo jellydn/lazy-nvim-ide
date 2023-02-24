@@ -64,7 +64,6 @@ return {
 
         server = vim.split(server, "@")[1]
 
-        -- TODO: fix deno and typescript conflict
         local require_ok, conf_opts = pcall(require, "plugins.lsp.settings." .. server)
         if require_ok then
           lsp_opts = vim.tbl_deep_extend("force", conf_opts, opts)
