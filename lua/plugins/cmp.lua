@@ -11,22 +11,6 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji",
-      -- github copilot
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = {
-          "zbirenbaum/copilot.lua",
-          config = function()
-            require("copilot").setup({
-              suggestion = { enabled = false },
-              panel = { enabled = false },
-            })
-          end,
-        },
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -40,14 +24,7 @@ return {
       local cmp = require("cmp")
 
       local sources = {
-        -- Copilot Source
-        { name = "copilot", group_index = 2 },
-        -- Other Sources
-        { name = "nvim_lsp", group_index = 2 },
-        { name = "path", group_index = 2 },
-        { name = "luasnip", group_index = 2 },
         { name = "emoji" },
-        { name = "buffer" },
       }
       opts.sources = vim.tbl_extend("force", opts.sources, sources)
 
