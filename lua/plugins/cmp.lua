@@ -25,6 +25,10 @@ return {
 
       local sources = {
         { name = "emoji" },
+        { name = "path" },
+        { name = "nvim_lsp", keyword_length = 1 },
+        { name = "buffer", keyword_length = 3 },
+        { name = "luasnip", keyword_length = 2 },
       }
       opts.sources = vim.tbl_extend("force", opts.sources, sources)
 
