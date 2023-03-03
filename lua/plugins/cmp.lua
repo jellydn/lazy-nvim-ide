@@ -30,7 +30,7 @@ return {
         { name = "buffer", keyword_length = 3 },
         { name = "luasnip", keyword_length = 2 },
       }
-      opts.sources = vim.tbl_extend("force", opts.sources, sources)
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, sources))
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
