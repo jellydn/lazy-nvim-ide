@@ -2,6 +2,7 @@ return {
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
   {
     "L3MON4D3/LuaSnip",
+    event = "VeryLazy",
     keys = function()
       return {}
     end,
@@ -25,10 +26,6 @@ return {
 
       local sources = {
         { name = "emoji" },
-        { name = "path" },
-        { name = "nvim_lsp", keyword_length = 1 },
-        { name = "buffer", keyword_length = 3 },
-        { name = "luasnip", keyword_length = 2 },
       }
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, sources))
 
