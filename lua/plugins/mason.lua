@@ -1,6 +1,7 @@
 local servers = {
   "lua_ls",
   -- web
+  "rome",
   "tsserver",
   "jsonls",
   "yamlls",
