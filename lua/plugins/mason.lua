@@ -14,7 +14,7 @@ local servers = {
   -- go
   "gopls",
   -- deno
-  --"denols",
+  "denols",
   -- svelte
   "svelte",
 }
