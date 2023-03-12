@@ -13,6 +13,11 @@ keymap("i", "jk", "<ESC>", opts)
 -- Close buffers
 keymap("n", "<S-q>", function()
   require("mini.bufremove").delete(0, false)
+  local bufs = vim.fn.getbufinfo({ buflisted = true })
+  -- open alpha if no buffers are left
+  if not bufs[2] then
+    require("alpha").start(true)
+  end
 end, opts)
 
 -- Copy whole file content to clipboard with C-c
