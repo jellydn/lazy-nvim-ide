@@ -24,7 +24,6 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
-        "deno",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
