@@ -1,8 +1,6 @@
 local servers = {
   "lua_ls",
   -- web
-  "rome",
-  "tsserver",
   "jsonls",
   "yamlls",
   "html",
@@ -13,8 +11,6 @@ local servers = {
   "rust_analyzer",
   -- go
   "gopls",
-  -- deno
-  "denols",
   -- svelte
   "svelte",
 }
