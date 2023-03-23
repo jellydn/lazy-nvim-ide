@@ -119,6 +119,7 @@ return {
     }
     return {
       sources = sources,
+      default_timeout = 20000, -- set timeout to 20 seconds for slow formatters
     }
   end,
 }

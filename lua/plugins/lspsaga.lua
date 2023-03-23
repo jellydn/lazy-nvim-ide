@@ -3,7 +3,7 @@ local keymap = vim.keymap.set
 return {
   {
     "glepnir/lspsaga.nvim",
-    event = "VeryLazy",
+    event = "BufRead",
     config = function()
       require("lspsaga").setup({})
 
@@ -30,5 +30,10 @@ return {
       keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
       keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
     end,
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+      --Please make sure you install markdown and markdown_inline parser
+      { "nvim-treesitter/nvim-treesitter" },
+    },
   },
 }
