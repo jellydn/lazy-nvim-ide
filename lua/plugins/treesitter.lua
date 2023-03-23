@@ -19,7 +19,6 @@ return {
         "jsonc",
         "graphql",
         "prisma",
-        "tsx",
         "rust",
         "go",
         "toml",
