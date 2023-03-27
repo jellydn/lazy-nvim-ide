@@ -24,6 +24,14 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
+        -- formatters
+        "eslint_d",
+        "prettierd",
+        -- code spell
+        "codespell",
+        "misspell",
+        -- rustywind for tailwindcss
+        "rustywind",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
