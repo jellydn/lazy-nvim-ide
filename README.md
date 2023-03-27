@@ -34,3 +34,16 @@ Open `nvim` and enter the following:
 I recommend using the following repo to get a "Nerd Font" (Font that supports icons)
 
 [getnf](https://github.com/ronniedroid/getnf)
+
+## Try With Docker
+
+```
+docker run -w /root -it --rm alpine:latest sh -uelic '
+  apk add git nodejs npm neovim ripgrep build-base make musl-dev go --update
+  go install github.com/jesseduffield/lazygit@latest
+  git clone https://github.com/jellydn/lazy-nvim-ide ~/.config/nvim
+  nvim
+  '
+```
+
+
