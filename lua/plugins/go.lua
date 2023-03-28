@@ -7,6 +7,11 @@ return {
       -- import packages automatically
       local go = require("go")
       go.setup({
+        -- notify: use nvim-notify
+        notify = false,
+        -- auto commands
+        auto_format = false,
+        auto_lint = true,
         -- lint_prompt_style: qf (quickfix), vt (virtual text)
         lint_prompt_style = "vt",
         -- linters: revive, errcheck, staticcheck, golangci-lint
