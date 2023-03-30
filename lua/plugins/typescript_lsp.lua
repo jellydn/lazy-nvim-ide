@@ -17,6 +17,9 @@ return {
         single_file_support = false,
       },
     },
+    format = {
+      timeout_ms = 20000, -- 20 seconds
+    },
     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
     -- setup = {
     --   tsserver = function(_, opts)

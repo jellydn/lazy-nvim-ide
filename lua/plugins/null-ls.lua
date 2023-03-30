@@ -65,7 +65,9 @@ return {
       b.code_actions.proselint,
 
       -- webdev stuff
-      b.formatting.rustywind,
+      b.formatting.rustywind.with({
+        filetypes = { "html", "css", "javascriptreact", "typescriptreact", "svelte" },
+      }),
       b.code_actions.eslint_d.with({
         filetypes = { "javascript", "javascriptreact", "vue", "typescript", "typescriptreact", "svelte" },
         condition = function()
@@ -79,8 +81,6 @@ return {
         end,
       }),
       b.formatting.eslint_d.with({
-        -- milliseconds
-        timeout = 10000,
         filetypes = { "javascript", "javascriptreact", "vue", "typescript", "typescriptreact", "svelte" },
         condition = function()
           return eslint_config_exists() and not rome_config_exists()
@@ -98,8 +98,6 @@ return {
         end,
       }),
       b.formatting.prettierd.with({
-        -- milliseconds
-        timeout = 10000,
         filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact", "svelte" },
         condition = function()
           return not rome_config_exists() and not deno_config_exists()
@@ -123,7 +121,6 @@ return {
     }
     return {
       sources = sources,
-      default_timeout = 20000, -- set timeout to 20 seconds for slow formatters
     }
   end,
 }
