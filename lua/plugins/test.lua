@@ -21,7 +21,7 @@ end
 -- Usage: :TestWithJest when in test file or :TestWithVitest when in test file
 -- vim-test plugin has not supported on large project or monorepo yet. A lot of issues on github
 -- e.g: "Not a test file" error when running any of the test command
-create_cmd("TestWithJest", function()
+create_cmd("JestRunner", function()
   setProjectRootByCurrentBuffer()
   vim.g["test#javascript#runner"] = "jest"
 
@@ -32,7 +32,7 @@ create_cmd("TestWithJest", function()
   vim.cmd("TestNearest")
 end, {})
 
-create_cmd("TestWithVitest", function()
+create_cmd("VitestRunner", function()
   setProjectRootByCurrentBuffer()
   vim.g["test#javascript#runner"] = "vitest"
 
