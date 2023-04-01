@@ -35,7 +35,7 @@ I recommend using the following repo to get a "Nerd Font" (Font that supports ic
 
 [getnf](https://github.com/ronniedroid/getnf)
 
-## Try With Docker
+## Try with Docker
 
 ```
 docker run -w /root -it --rm alpine:latest sh -uelic '
@@ -46,5 +46,15 @@ docker run -w /root -it --rm alpine:latest sh -uelic '
   '
 ```
 
+## Uninstall
+
+```sh
+  rm -rf ~/.config/nvim
+  rm -rf ~/.local/share/nvim
+  rm -rf ~/.cache/nvim
+  rm -rf ~/.local/state/nvim
+```
+
 ## Screenshots
+
 <img width="1792" alt="image" src="https://user-images.githubusercontent.com/870029/228557089-0faaa49f-5dab-4704-a919-04decfc781ac.png">
