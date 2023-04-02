@@ -13,6 +13,8 @@ local servers = {
   "gopls",
   -- svelte
   "svelte",
+  -- python
+  -- "pyright",
 }
 
 return {
@@ -73,6 +75,7 @@ return {
 
         server = vim.split(server, "@")[1]
 
+        -- load server specific config if exists
         local require_ok, conf_opts = pcall(require, "plugins.lsp.settings." .. server)
         if require_ok then
           lsp_opts = vim.tbl_deep_extend("force", conf_opts, opts)
