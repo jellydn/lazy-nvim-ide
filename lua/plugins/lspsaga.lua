@@ -1,5 +1,3 @@
-local keymap = vim.keymap.set
-
 return {
   {
     "glepnir/lspsaga.nvim",
