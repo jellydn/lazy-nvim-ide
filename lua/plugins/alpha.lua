@@ -26,6 +26,22 @@ return {
       dashboard.button("l", "鈴" .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
     }
+    dashboard.section.footer.val = "productsway.com"
+
     return dashboard
+  end,
+  config = function(_, dashboard)
+    -- close Lazy and re-open when the dashboard is ready
+    if vim.o.filetype == "lazy" then
+      vim.cmd.close()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "AlphaReady",
+        callback = function()
+          require("lazy").show()
+        end,
+      })
+    end
+
+    require("alpha").setup(dashboard.opts)
   end,
 }
