@@ -86,3 +86,11 @@ if Util.has("todo-comments.nvim") then
   -- show fixme on telescope
   keymap("n", "<leader>xf", "<cmd>TodoTelescope keywords=FIX,FIXME<CR>")
 end
+
+-- Gitsigns
+-- Add toggle gitsigns blame line
+if Util.has("gitsigns.nvim") then
+  keymap("n", "<leader>ub", "<cmd>lua require('gitsigns').toggle_current_line_blame()<CR>", {
+    desc = "Toggle current line blame",
+  })
+end
