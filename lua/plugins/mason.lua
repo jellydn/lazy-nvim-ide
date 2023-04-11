@@ -14,7 +14,8 @@ local servers = {
   -- svelte
   "svelte",
   -- python
-  -- "pyright",
+  "pyright",
+  "pylsp",
 }
 
 return {
