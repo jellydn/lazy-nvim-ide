@@ -3,8 +3,14 @@ local opts = { silent = true }
 
 return {
   "stevearc/aerial.nvim",
-  event = "VeryLazy",
-  keys = { { "<leader>a", "<cmd>AerialToggle<cr>", desc = "AerialToggle" } },
+  keys = {
+    { "<leader>a", "<cmd>AerialToggle<cr>", desc = "AerialToggle" },
+    {
+      "<leader>fi",
+      "<cmd>Telescope aerial<cr>",
+      desc = "Telescope Aerial",
+    },
+  },
   config = function()
     local status_ok, aerial = pcall(require, "aerial")
     if not status_ok then
