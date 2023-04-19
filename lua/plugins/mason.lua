@@ -15,7 +15,7 @@ local servers = {
   "svelte",
   -- python
   "pyright",
-  "pylsp",
+  "ruff_lsp",
 }
 
 return {
@@ -35,6 +35,8 @@ return {
         "misspell",
         -- rustywind for tailwindcss
         "rustywind",
+        -- python
+        "ruff",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

@@ -118,6 +118,10 @@ return {
 
       -- proto buf
       b.diagnostics.protolint,
+
+      -- python
+      b.diagnostics.ruff,
+      b.formatting.ruff,
     }
     return {
       sources = sources,
