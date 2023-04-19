@@ -1,13 +1,5 @@
 return {
-  -- first: disable default <tab> and <s-tab> behavior in LuaSnip
-  {
-    "L3MON4D3/LuaSnip",
-    event = "VeryLazy",
-    keys = function()
-      return {}
-    end,
-  },
-  -- then: setup supertab in cmp
+  -- Add emoji support
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -29,8 +21,9 @@ return {
       }
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, sources))
 
+      -- add Ctrl-j and Ctrl-k to navigate through the completion menu
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<C-j>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
@@ -43,7 +36,7 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        ["<C-k>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then
