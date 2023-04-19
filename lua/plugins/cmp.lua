@@ -1,9 +1,15 @@
 return {
-  -- Add emoji support
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
+      -- Add emoji support
       "hrsh7th/cmp-emoji",
+      -- Add tabnine support
+      {
+        "tzachar/cmp-tabnine",
+        build = "./install.sh",
+        dependencies = "hrsh7th/nvim-cmp",
+      },
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -18,8 +24,38 @@ return {
 
       local sources = {
         { name = "emoji" },
+        { name = "cmp_tabnine" },
       }
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, sources))
+
+      opts.formatting = {
+        format = function(entry, vim_item)
+          local icons = require("lazyvim.config").icons.kinds
+          if icons[vim_item.kind] then
+            vim_item.kind = icons[vim_item.kind] .. vim_item.kind
+          end
+
+          -- Add tabnine icon and hide percentage in the menu
+          if entry.source.name == "cmp_tabnine" then
+            vim_item.kind = " [TabNine]"
+            vim_item.menu = ""
+
+            if (entry.completion_item.data or {}).multiline then
+              vim_item.kind = vim_item.kind .. " " .. "[ML]"
+            end
+
+            local maxwidth = 80
+            vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+          end
+
+          return vim_item
+        end,
+      }
+
+      -- Disable ghost text for copilot completions
+      opts.experimental = {
+        ghost_text = false,
+      }
 
       -- add Ctrl-j and Ctrl-k to navigate through the completion menu
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
