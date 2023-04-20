@@ -1,13 +1,4 @@
 return {
-  -- first: disable default <tab> and <s-tab> behavior in LuaSnip
-  {
-    "L3MON4D3/LuaSnip",
-    event = "VeryLazy",
-    keys = function()
-      return {}
-    end,
-  },
-  -- then: setup tab in copilot
   {
     "github/copilot.vim",
     event = "VeryLazy",

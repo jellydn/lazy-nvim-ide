@@ -1,4 +1,12 @@
 return {
+  -- Disable default <tab> and <s-tab> behavior in LuaSnip
+  {
+    "L3MON4D3/LuaSnip",
+    event = "VeryLazy",
+    keys = function()
+      return {}
+    end,
+  },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -43,10 +51,10 @@ return {
             if (entry.completion_item.data or {}).multiline then
               vim_item.kind = vim_item.kind .. " " .. "[ML]"
             end
-
-            local maxwidth = 80
-            vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
           end
+
+          local maxwidth = 80
+          vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
 
           return vim_item
         end,
