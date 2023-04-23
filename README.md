@@ -66,5 +66,5 @@ docker run -w /root -it --rm alpine:latest sh -uelic '
 - Improve key repeat on Mac OSX, need to restart
 ```sh 
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 12
+defaults write NSGlobalDomain InitialKeyRepeat -int 14
 ```
