@@ -65,9 +65,9 @@ return {
         ghost_text = false,
       }
 
-      -- add Ctrl-j and Ctrl-k to navigate through the completion menu
+      -- add Ctrl-n and Ctrl-p to navigate through the completion menu
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<C-j>"] = cmp.mapping(function(fallback)
+        ["<C-n>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
@@ -80,7 +80,7 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-        ["<C-k>"] = cmp.mapping(function(fallback)
+        ["<C-p>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif luasnip.jumpable(-1) then
