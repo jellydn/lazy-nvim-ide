@@ -18,6 +18,11 @@ return {
         build = "./install.sh",
         dependencies = "hrsh7th/nvim-cmp",
       },
+      -- Add Codeium support
+      {
+        "jcdickinson/codeium.nvim",
+        config = true,
+      },
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -32,15 +37,27 @@ return {
 
       local sources = {
         { name = "emoji" },
+        { name = "codeium" },
         { name = "cmp_tabnine" },
       }
+
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, sources))
 
+      -- format the completion menu
       opts.formatting = {
         format = function(entry, vim_item)
           local icons = require("lazyvim.config").icons.kinds
           if icons[vim_item.kind] then
             vim_item.kind = icons[vim_item.kind] .. vim_item.kind
+          end
+
+          -- Set a name for each source
+          if entry.source.name == "emoji" then
+            vim_item.kind = " [Emoji]"
+          end
+
+          if entry.source.name == "codeium" then
+            vim_item.kind = " [Codeium]"
           end
 
           -- Add tabnine icon and hide percentage in the menu
