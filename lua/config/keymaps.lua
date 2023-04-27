@@ -7,11 +7,6 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
--- Insert --
--- Press jj,jk fast to enter
-keymap("i", "jj", "<ESC>", opts)
-keymap("i", "jk", "<ESC>", opts)
-
 -- Dashboard
 -- Add keymap to open alpha dashboard
 keymap("n", "<leader>;", function()
