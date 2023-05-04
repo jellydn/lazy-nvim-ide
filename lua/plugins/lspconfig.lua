@@ -18,7 +18,7 @@ return {
       },
     },
     format = {
-      timeout_ms = 20000, -- 20 seconds
+      timeout_ms = 10000, -- 10 seconds
     },
     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
     setup = {
