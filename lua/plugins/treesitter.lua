@@ -1,6 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = { "windwp/nvim-ts-autotag" },
     opts = {
       ensure_installed = {
         "bash",
@@ -43,6 +44,11 @@ return {
       context_commentstring = {
         enable = true,
         enable_autocmd = false,
+      },
+
+      -- auto tag
+      autotag = {
+        enable = true,
       },
     },
   },
