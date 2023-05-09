@@ -21,12 +21,9 @@ return {
       dashboard.button("p", " " .. " Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
       dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
       dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
+      dashboard.button("m", " " .. " Open Mark", ":Telescope harpoon marks <CR>"),
+      dashboard.button("s", "勒" .. " Last Session", [[:lua require("persistence").load({ last = true }) <cr>]]),
       dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-      dashboard.button(
-        "s",
-        "勒" .. " Restore Last Session",
-        [[:lua require("persistence").load({ last = true }) <cr>]]
-      ),
       dashboard.button("l", "鈴" .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
     }

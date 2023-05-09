@@ -105,3 +105,53 @@ if Util.has("gitsigns.nvim") then
     desc = "Toggle current line blame",
   })
 end
+
+-- Refactoring
+if Util.has("refactoring.nvim") then
+  -- Extract block doesn't need visual mode
+  keymap(
+    "n",
+    "<leader>rb",
+    [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]],
+    { desc = "Extract Block", noremap = true, silent = true, expr = false }
+  )
+
+  keymap(
+    "n",
+    "<leader>rbf",
+    [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]],
+    { desc = "Extract Block To File", noremap = true, silent = true, expr = false }
+  )
+
+  -- Inline variable can also pick up the identifier currently under the cursor without visual mode
+  keymap(
+    "n",
+    "<leader>ri",
+    [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+    { desc = "Inline Variable", noremap = true, silent = true, expr = false }
+  )
+
+  -- remap to open the Telescope refactoring menu in visual mode
+  keymap(
+    "v",
+    "<leader>rr",
+    "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+    { desc = "Refactors", noremap = true }
+  )
+end
+
+-- Harpoon
+if Util.has("harpoon") then
+  keymap("n", "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", {
+    desc = "Toggle Harpoon menu",
+  })
+
+  keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<CR>", {
+    desc = "Add file to Harpoon",
+  })
+end
+
+-- Fix spellchecking
+keymap("n", "z0", "1z=", {
+  desc = "Fix world under cursor",
+})
