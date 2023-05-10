@@ -151,7 +151,7 @@ if Util.has("harpoon") then
   })
 end
 
--- Fix spellchecking
+-- Fix Spell checking
 keymap("n", "z0", "1z=", {
   desc = "Fix world under cursor",
 })
