@@ -46,7 +46,8 @@ return {
 
       local sources = {
         { name = "emoji" },
-        { name = "codeium" },
+        -- move codeium to above text source
+        { name = "codeium", keyword_length = 2 },
         { name = "cmp_tabnine" },
       }
 
