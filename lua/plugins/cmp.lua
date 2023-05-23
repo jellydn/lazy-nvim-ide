@@ -1,12 +1,4 @@
 return {
-  -- Disable default <tab> and <s-tab> behavior in LuaSnip
-  {
-    "L3MON4D3/LuaSnip",
-    event = "VeryLazy",
-    keys = function()
-      return {}
-    end,
-  },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -44,13 +36,13 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
+      -- add custom sources
       local sources = {
         { name = "emoji" },
-        -- move codeium to above text source
-        { name = "codeium", keyword_length = 2 },
-        { name = "cmp_tabnine" },
+        -- move codeium to same group as copilot
+        { name = "codeium", group_index = 2 },
+        { name = "cmp_tabnine", group_index = 3 },
       }
-
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, sources))
 
       -- format the completion menu
@@ -85,11 +77,6 @@ return {
 
           return vim_item
         end,
-      }
-
-      -- Disable ghost text for copilot completions
-      opts.experimental = {
-        ghost_text = false,
       }
 
       -- add Ctrl-n and Ctrl-p to navigate through the completion menu
