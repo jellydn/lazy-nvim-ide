@@ -12,13 +12,7 @@ return {
         desc = "Telescope Harpoon Marks",
       },
     },
-    opts = {
-      menu = {
-        -- 50% width, height
-        width = vim.api.nvim_win_get_width(0) / 2,
-        height = vim.api.nvim_win_get_height(0) / 2,
-      },
-    },
+    opts = {},
     config = function(_, options)
       local status_ok, harpoon = pcall(require, "harpoon")
       if not status_ok then
