@@ -6,6 +6,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
       -- add adapter for neotest
+      "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-vim-test",
       "haydenmeade/neotest-jest",
       "marilari88/neotest-vitest",
@@ -24,6 +25,7 @@ return {
         ["neotest-vim-test"] = {
           ignore_file_types = { "python", "vim", "lua" },
         },
+        ["neotest-python"] = {},
         ["neotest-go"] = {},
         ["neotest-rust"] = {},
       },
