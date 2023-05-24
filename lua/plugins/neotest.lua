@@ -23,7 +23,7 @@ return {
         ["neotest-jest"] = {},
         ["neotest-vitest"] = {},
         ["neotest-vim-test"] = {
-          ignore_file_types = { "python", "vim", "lua" },
+          ignore_file_types = { "python", "vim", "lua", "go", "rust" },
         },
         ["neotest-python"] = {},
         ["neotest-go"] = {},
