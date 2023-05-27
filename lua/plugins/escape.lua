@@ -1,11 +1,7 @@
 return {
   {
-    "nvim-zh/better-escape.vim",
+    "max397574/better-escape.nvim",
     event = "InsertEnter",
-    config = function()
-      vim.cmd([[
-        let g:better_escape_shortcut = ['jk', 'jj']
-      ]])
-    end,
+    config = true,
   },
 }
