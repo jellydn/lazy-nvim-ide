@@ -1,5 +1,5 @@
 return {
-  -- add gbprod/nord.nvim colorscheme
+  -- add nord;wave
   {
     "gbprod/nord.nvim",
     lazy = true,
@@ -13,12 +13,24 @@ return {
   -- add night-owl
   { "haishanh/night-owl.vim", lazy = true },
 
-  -- add kanagawa
-  { "rebelot/kanagawa.nvim", lazy = true },
+  -- default is tokyonight
+  {
+    "folke/tokyonight.nvim",
+    opts = {
+      style = "moon",
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
 
   -- set LazyVim to load colorscheme
   {
     "LazyVim/LazyVim",
-    opts = {},
+    opts = {
+      -- colorscheme = "nightfox",
+    },
   },
 }

@@ -32,7 +32,6 @@ local function fallback_to_find_files_if_not_git()
 end
 
 return {
-  -- add telescope-fzf-native
   {
     "telescope.nvim",
     keys = {
@@ -55,6 +54,7 @@ return {
         desc = "Find Word In Files",
       },
     },
+    -- add telescope-fzf-native
     dependencies = {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
