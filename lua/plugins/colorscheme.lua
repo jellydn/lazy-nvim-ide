@@ -1,5 +1,5 @@
 return {
-  -- add nord;wave
+  -- add nord
   {
     "gbprod/nord.nvim",
     lazy = true,

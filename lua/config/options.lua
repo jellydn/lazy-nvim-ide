@@ -11,3 +11,15 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Enable spell check by default
 vim.o.spell = true
+
+-- Persist undo, refer https://github.com/mbbill/undotree#usage
+local undodir = vim.fn.expand("~/.undo-nvim")
+
+if vim.fn.has("persistent_undo") == 1 then
+  if vim.fn.isdirectory(undodir) == 0 then
+    os.execute("mkdir -p " .. undodir)
+  end
+
+  vim.opt.undodir = undodir
+  vim.opt.undofile = true
+end
