@@ -1,18 +1,26 @@
 return {
-  -- add nord
   {
-    "gbprod/nord.nvim",
+    "rebelot/kanagawa.nvim",
+    lazy = true,
+    opts = {
+      transparent = true,
+      theme = "wave",
+    },
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    opts = {
+      options = {
+        transparent = true,
+        styles = {
+          comments = "italic",
+          keywords = "bold",
+          types = "italic,bold",
+        },
+      },
+    },
     lazy = true,
   },
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim", lazy = true },
-
-  -- add nightfox
-  { "EdenEast/nightfox.nvim", lazy = true },
-
-  -- add night-owl
-  { "haishanh/night-owl.vim", lazy = true },
-
   -- default is tokyonight
   {
     "folke/tokyonight.nvim",
@@ -30,7 +38,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      -- colorscheme = "nightfox",
+      -- colorscheme = "kanagawa",
     },
   },
 }
