@@ -17,6 +17,9 @@ return {
         vim.opt.undodir = undodir
         vim.opt.undofile = true
       end
+
+      -- set layout style to 2, let g:undotree_WindowLayout = 2
+      vim.g.undotree_WindowLayout = 2
     end,
   },
 }
