@@ -21,6 +21,20 @@ return {
     },
     lazy = true,
   },
+  {
+    "Mofiqul/dracula.nvim",
+    config = function()
+      local dracula = require("dracula")
+      dracula.setup({
+        transparent_bg = true, -- default false
+        -- set italic comment
+        italic_comment = true, -- default false
+        overrides = {},
+      })
+    end,
+    lazy = true,
+  },
+
   -- default is tokyonight
   {
     "folke/tokyonight.nvim",
@@ -38,7 +52,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      -- colorscheme = "kanagawa",
+      -- colorscheme = "dracula",
     },
   },
 }
