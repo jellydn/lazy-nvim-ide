@@ -23,8 +23,13 @@ return {
       vim.opt.splitkeep = "screen"
     end,
     opts = {
+      wo = {
+        spell = false,
+      },
+      animate = {
+        enabled = false,
+      },
       bottom = {
-        -- lazyterm
         {
           ft = "lazyterm",
           title = "LazyTerm",
@@ -51,13 +56,13 @@ return {
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "filesystem"
           end,
-          pinned = true,
-          open = function()
-            vim.api.nvim_input("<esc><space>e")
-          end,
           size = { height = 0.5 },
         },
         { ft = "undotree", title = "UndoTree" },
+      },
+      right = {
+        "aerial",
+        "lspsagaoutline",
       },
     },
   },
