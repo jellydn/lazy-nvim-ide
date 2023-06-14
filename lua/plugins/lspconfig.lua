@@ -8,6 +8,10 @@ return {
       tsserver = {
         root_dir = require("lspconfig").util.root_pattern("package.json"),
         single_file_support = false,
+        -- refer https://github.com/jose-elias-alvarez/null-ls.nvim/discussions/274#discussioncomment-1515526
+        on_attach = function(client)
+          client.resolved_capabilities.document_formatting = false -- disable formatting in tsserver in favor of null-ls
+        end,
       },
       denols = {
         root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),

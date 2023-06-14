@@ -53,7 +53,7 @@ return {
   "jose-elias-alvarez/null-ls.nvim",
   dependencies = { "mason.nvim" },
   event = { "BufReadPre", "BufNewFile" },
-  opts = function()
+  opts = function(_, opts)
     local sources = {
 
       -- spell check
@@ -123,8 +123,7 @@ return {
       b.diagnostics.ruff,
       b.formatting.ruff,
     }
-    return {
-      sources = sources,
-    }
+
+    opts.sources = vim.list_extend(opts.sources, sources)
   end,
 }
