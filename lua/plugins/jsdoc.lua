@@ -7,5 +7,6 @@ return {
       { "<leader>d", "<cmd>JsDoc<cr>", desc = "JsDoc" },
     },
     build = "make install",
+    vscode = true,
   },
 }
