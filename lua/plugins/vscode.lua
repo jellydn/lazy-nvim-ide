@@ -45,9 +45,16 @@ end
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyVimKeymaps",
   callback = function()
+    -- find file
     vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
+    -- find in files
     vim.keymap.set("n", "<leader>/", [[<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>]])
+    -- open symbol
     vim.keymap.set("n", "<leader>ss", [[<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>]])
+    -- view problem
+    vim.keymap.set("n", "<leader>xx", [[<cmd>call VSCodeNotify('workbench.actions.view.problems')<cr>]])
+    -- open file explorer in left sidebar
+    vim.keymap.set("n", "<leader>e", [[<cmd>call VSCodeNotify('workbench.view.explorer')<cr>]])
   end,
 })
 
