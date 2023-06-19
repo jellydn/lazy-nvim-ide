@@ -51,6 +51,9 @@ end
 -- formatters
 return {
   "jose-elias-alvarez/null-ls.nvim",
+  keys = {
+    { "<leader>cn", "<cmd>NullLsInfo<cr>", desc = "NullLs Info" },
+  },
   dependencies = { "mason.nvim" },
   event = { "BufReadPre", "BufNewFile" },
   opts = function(_, opts)

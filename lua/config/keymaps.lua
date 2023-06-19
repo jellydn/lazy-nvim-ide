@@ -49,11 +49,6 @@ keymap("i", "<A-Up>", "<Esc>:m .-2<CR>==gi", opts)
 keymap("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
 
--- NullLs Info keymap
-if Util.has("null-ls.nvim") then
-  keymap("n", "<leader>cn", "<cmd>NullLsInfo<CR>", opts)
-end
-
 -- LspSaga
 if Util.has("lspsaga.nvim") then
   -- when you use action in finder like open vsplit then you can
