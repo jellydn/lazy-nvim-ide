@@ -2,8 +2,6 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      -- Add emoji support
-      "hrsh7th/cmp-emoji",
       -- Add tabnine support
       {
         "tzachar/cmp-tabnine",
@@ -38,7 +36,6 @@ return {
 
       -- add custom sources
       local sources = {
-        { name = "emoji" },
         -- move codeium to same group as copilot
         { name = "codeium", group_index = 2 },
         { name = "cmp_tabnine", group_index = 3 },
