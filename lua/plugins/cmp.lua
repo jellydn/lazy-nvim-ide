@@ -17,9 +17,10 @@ return {
           })
         end,
       },
-      -- Add Codeium support
+      -- Add Codeium support, pin to stable version due to crash on input auth key
       {
         "jcdickinson/codeium.nvim",
+        commit = "b1ff0d6c993e3d87a4362d2ccd6c660f7444599f",
         config = true,
       },
     },
