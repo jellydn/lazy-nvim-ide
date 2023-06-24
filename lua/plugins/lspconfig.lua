@@ -19,7 +19,7 @@ return {
               includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
               includeInlayFunctionParameterTypeHints = false,
-              includeInlayVariableTypeHints = true,
+              includeInlayVariableTypeHints = false,
               includeInlayVariableTypeHintsWhenTypeMatchesName = false,
               includeInlayPropertyDeclarationTypeHints = false,
               includeInlayFunctionLikeReturnTypeHints = true,
@@ -30,7 +30,7 @@ return {
             inlayHints = {
               includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayVariableTypeHints = true,
+              includeInlayVariableTypeHints = false,
               includeInlayFunctionParameterTypeHints = false,
               includeInlayVariableTypeHintsWhenTypeMatchesName = false,
               includeInlayPropertyDeclarationTypeHints = false,
