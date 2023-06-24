@@ -54,6 +54,8 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<leader>xx", [[<cmd>call VSCodeNotify('workbench.actions.view.problems')<cr>]])
     -- open file explorer in left sidebar
     vim.keymap.set("n", "<leader>e", [[<cmd>call VSCodeNotify('workbench.view.explorer')<cr>]])
+    -- Code Action
+    vim.keymap.set("n", "<leader>ca", [[<cmd>call VSCodeNotify('editor.action.codeAction')<cr>]])
   end,
 })
 
