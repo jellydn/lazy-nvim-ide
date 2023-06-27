@@ -24,6 +24,9 @@ return {
   {
     "Mofiqul/dracula.nvim",
     config = function()
+      -- Disable spell check as it's too red
+      vim.o.spell = false
+
       local dracula = require("dracula")
       dracula.setup({
         transparent_bg = true, -- default false
