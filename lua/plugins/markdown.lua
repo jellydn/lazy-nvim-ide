@@ -14,12 +14,6 @@ return {
         "<cmd>PrevimOpen<cr>",
         desc = "Markdown preview",
       },
-      -- add <leader>mr to refresh markdown
-      {
-        "<leader>mr",
-        "<cmd>PreviewRehfresh<cr>",
-        desc = "Markdown preview in real time",
-      },
     },
   },
 }
