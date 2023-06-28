@@ -127,12 +127,6 @@ return {
       b.formatting.ruff,
     }
 
-    local tsserver_sources = require("typescript.extensions.null-ls.code-actions")
-    -- merge ts sources to sources
-    for _, source in ipairs(tsserver_sources) do
-      table.insert(sources, source)
-    end
-
     return {
       sources = sources,
     }
