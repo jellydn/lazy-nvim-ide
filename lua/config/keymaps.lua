@@ -37,8 +37,17 @@ else
   keymap("n", "<S-q>", "<cmd>bd<CR>", opts)
 end
 
+-- Better paste
+-- remap "p" in visual mode to delete the highlighted text without overwriting your yanked/copied text, and then paste the content from the unnamed register.
+keymap("v", "p", '"_dP', opts)
+
 -- Copy whole file content to clipboard with C-c
 keymap("n", "<C-c>", ":%y+<CR>", opts)
+
+-- Visual --
+-- Stay in indent mode
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
 
 -- Move live up or down
 -- moving
