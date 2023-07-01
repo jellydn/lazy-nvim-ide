@@ -5,7 +5,11 @@ end
 
 local b = null_ls.builtins
 local h = require("null-ls.helpers")
+local cmd_resolver = require("null-ls.helpers.command_resolver")
+local methods = require("null-ls.methods")
 local u = require("null-ls.utils")
+
+local FORMATTING = methods.internal.FORMATTING
 
 local function eslint_config_exists()
   local eslintrc = vim.fn.glob(".eslintrc*", false, true)
@@ -62,14 +66,12 @@ local function find_upwards(filename)
     end
     -- stop find if we reach a git repo
     if vim.loop.fs_stat(current_dir .. "/.git") then
-      print("Found git repo, stopping search" .. current_dir)
       return nil
     end
     current_dir = vim.fn.fnamemodify(current_dir, ":h")
     search_count = search_count + 1
   end
 
-  print("Reached max search count, stopping search" .. current_dir)
   return nil
 end
 
@@ -92,7 +94,6 @@ local function prettier_config_dir()
   for _, file in ipairs(prettier_files) do
     local dir = find_upwards(file)
     if dir then
-      print("Found prettier config in " .. dir .. " directory")
       return dir
     end
   end
@@ -139,11 +140,25 @@ return {
       }),
       -- prettier
       b.formatting.prettierd.with({
-        filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact", "svelte" },
         condition = function()
           return not rome_config_exists() and not deno_config_exists() and prettier_config_dir()
         end,
         generator_opts = {
+          command = "prettierd",
+          args = function(params)
+            if params.method == FORMATTING then
+              return { "$FILENAME" }
+            end
+
+            local row, end_row = params.range.row - 1, params.range.end_row - 1
+            local col, end_col = params.range.col - 1, params.range.end_col - 1
+            local start_offset = vim.api.nvim_buf_get_offset(params.bufnr, row) + col
+            local end_offset = vim.api.nvim_buf_get_offset(params.bufnr, end_row) + end_col
+
+            return { "$FILENAME", "--range-start=" .. start_offset, "--range-end=" .. end_offset }
+          end,
+          dynamic_command = cmd_resolver.from_node_modules(),
+          to_stdin = true,
           cwd = h.cache.by_bufnr(function(params)
             return prettier_config_dir()
               or u.root_pattern(
@@ -185,6 +200,8 @@ return {
 
     return {
       sources = sources,
+      debounce = 200,
+      debug = true,
     }
   end,
 }
