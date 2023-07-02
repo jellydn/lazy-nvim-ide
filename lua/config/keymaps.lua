@@ -12,6 +12,7 @@ local opts = { silent = true }
 keymap("n", "<leader>;", function()
   -- close all open buffers before open dashboard
   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    ---@diagnostic disable-next-line: redundant-parameter
     local buftype = vim.api.nvim_buf_get_option(bufnr, "buftype")
     if buftype ~= "terminal" then
       vim.api.nvim_buf_delete(bufnr, { force = true })
@@ -67,10 +68,10 @@ if Util.has("lspsaga.nvim") then
   keymap({ "n", "v" }, "ca", "<cmd>Lspsaga code_action<CR>")
 
   -- Rename all occurrences of the hovered word for the entire file
-  keymap("n", "gr", "<cmd>Lspsaga rename<CR>")
+  keymap("n", "cr", "<cmd>Lspsaga rename<CR>")
 
   -- Rename all occurrences of the hovered word for the selected files
-  keymap("n", "gR", "<cmd>Lspsaga rename ++project<CR>")
+  keymap("n", "cR", "<cmd>Lspsaga rename ++project<CR>")
 
   -- Peek definition
   keymap("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
@@ -98,10 +99,6 @@ if Util.has("lspsaga.nvim") then
 
   -- Pressing the key twice will enter the hover window
   keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
-
-  -- Callhierarchy
-  keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-  keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 end
 
 -- Trouble
