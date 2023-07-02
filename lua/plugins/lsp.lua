@@ -45,6 +45,24 @@ return {
       -- Please make sure you install markdown and markdown_inline parser
       { "nvim-treesitter/nvim-treesitter" },
     },
+    keys = {
+      -- LSP finder - Find the symbol's definition
+      { "glf", "<cmd>Lspsaga lsp_finder<CR>", desc = "LSP Finder" },
+      -- Code action
+      { "gla", "<cmd>Lspsaga code_action<CR>", desc = "Code Action" },
+      -- Rename all occurrences of the hovered word for the entire file
+      { "glr", "<cmd>Lspsaga rename<CR>", desc = "Rename" },
+      -- Peek definition
+      { "glp", "<cmd>Lspsaga peek_definition<CR>", desc = "Peek Definition" },
+      -- Go to definition
+      { "gld", "<cmd>Lspsaga goto_definition<CR>", desc = "Go to Definition" },
+      -- Go to type definition
+      { "glt", "<cmd>Lspsaga goto_type_definition<CR>", desc = "Go to Type Definition" },
+      -- Toggle Outline
+      { "glo", "<cmd>Lspsaga outline<CR>", desc = "Toggle Outline" },
+      -- Hover Doc
+      { "glh", "<cmd>Lspsaga hover_doc<CR>", desc = "Hover Doc" },
+    },
   },
   {
     -- Displaying references and definition infos upon functions like JB's IDEA.

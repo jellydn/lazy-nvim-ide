@@ -69,27 +69,6 @@ end
 
 -- LspSaga
 if Util.has("lspsaga.nvim") then
-  -- LSP finder - Find the symbol's definition
-  keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
-
-  -- Code action
-  keymap({ "n", "v" }, "ca", "<cmd>Lspsaga code_action<CR>")
-
-  -- Rename all occurrences of the hovered word for the entire file
-  keymap("n", "cr", "<cmd>Lspsaga rename<CR>")
-
-  -- Rename all occurrences of the hovered word for the selected files
-  keymap("n", "cR", "<cmd>Lspsaga rename ++project<CR>")
-
-  -- Peek definition
-  keymap("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
-
-  -- Go to definition
-  keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
-
-  -- Go to type definition
-  keymap("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>")
-
   -- Diagnostic jump can use `<c-o>` to jump back
   keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
   keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
@@ -101,12 +80,6 @@ if Util.has("lspsaga.nvim") then
   keymap("n", "]E", function()
     require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
   end)
-
-  -- Toggle Outline
-  keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
-
-  -- Pressing the key twice will enter the hover window
-  keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 end
 
 -- Trouble
