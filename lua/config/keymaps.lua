@@ -59,9 +59,14 @@ keymap("i", "<A-Up>", "<Esc>:m .-2<CR>==gi", opts)
 keymap("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
 
+-- Show references on telescope
+if Util.has("telescope.nvim") then
+  keymap("n", "gr", "<cmd>Telescope lsp_references<CR>")
+end
+
 -- LspSaga
 if Util.has("lspsaga.nvim") then
-  -- when you use action in finder like open vsplit then you can
+  -- LSP finder - Find the symbol's definition
   keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
 
   -- Code action
