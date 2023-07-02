@@ -59,6 +59,9 @@ keymap("i", "<A-Up>", "<Esc>:m .-2<CR>==gi", opts)
 keymap("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
 
+-- Show Lsp info
+keymap("n", "<leader>cl", "<cmd>LspInfo<CR>", opts)
+
 -- Show references on telescope
 if Util.has("telescope.nvim") then
   keymap("n", "gr", "<cmd>Telescope lsp_references<CR>")
