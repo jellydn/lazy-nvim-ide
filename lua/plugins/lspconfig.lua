@@ -12,6 +12,11 @@ return {
         on_attach = function(client)
           client.resolved_capabilities.document_formatting = false -- disable formatting in tsserver in favor of null-ls
         end,
+        -- add keymap
+        keys = {
+          { "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", desc = "Organize Imports" },
+          { "<leader>cR", "<cmd>TypescriptRenameFile<CR>", desc = "Rename File" },
+        },
         -- inlay hints
         settings = {
           typescript = {
@@ -59,13 +64,10 @@ return {
     },
     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
     setup = {
-      -- tsserver = function(_, opts)
-      --   -- Configure `typescript.nvim`.
-      --   require("typescript").setup({
-      --     server = opts,
-      --   })
-      --   return true
-      -- end,
+      tsserver = function(_, opts)
+        require("typescript").setup({ server = opts })
+        return true
+      end,
       ruff_lsp = function(_, opts)
         -- Configure `ruff-lsp`.
         -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
