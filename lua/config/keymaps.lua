@@ -7,6 +7,26 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
+-- Disable `q` for macro recording as default
+-- Set initial state for 'q'
+vim.g.q_record_macro = false
+
+-- Function to toggle 'q' functionality
+function _G.toggle_q_macro()
+  if vim.g.q_record_macro then
+    -- If currently set for recording macros, make 'q' do nothing
+    keymap("n", "q", "<Nop>", { noremap = true })
+    vim.g.q_record_macro = false
+  else
+    -- If currently set to do nothing, make 'q' record macros
+    keymap("n", "q", "q", { noremap = true })
+    vim.g.q_record_macro = true
+  end
+end
+
+keymap("n", "<leader>uq", "<cmd>lua _G.toggle_q_macro()<CR>", { noremap = true, silent = true })
+keymap("n", "q", "<Nop>", { noremap = true })
+
 -- Dashboard
 -- Add keymap to open alpha dashboard
 keymap("n", "<leader>;", function()
