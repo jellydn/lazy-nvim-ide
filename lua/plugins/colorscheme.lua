@@ -1,3 +1,21 @@
+local function selectColorSchemeByTime()
+  local hour = tonumber(os.date("%H"))
+  local colorscheme
+
+  if hour >= 8 and hour < 18 then
+    colorscheme = "tokyonight"
+  else
+    local night_themes = { "kanagawa", "nightfox", "dracula" }
+    local idx = math.random(#night_themes)
+    colorscheme = night_themes[idx]
+  end
+
+  -- notify about the selected colorscheme based on the time
+  vim.notify("Selected colorscheme: " .. colorscheme)
+
+  return colorscheme
+end
+
 return {
   {
     "rebelot/kanagawa.nvim",
@@ -5,6 +23,18 @@ return {
     opts = {
       transparent = true,
       theme = "wave",
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none",
+              float = {
+                bg = "none",
+              },
+            },
+          },
+        },
+      },
     },
   },
   {
@@ -38,7 +68,7 @@ return {
     lazy = true,
   },
 
-  -- default is tokyonight
+  -- default is tokyonight in moon style
   {
     "folke/tokyonight.nvim",
     opts = {
@@ -55,7 +85,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      -- colorscheme = "dracula",
+      colorscheme = selectColorSchemeByTime(),
     },
   },
 }
