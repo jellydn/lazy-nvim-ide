@@ -1,4 +1,9 @@
 local function selectColorSchemeByTime()
+  -- skip if running in vscode
+  if vim.g.vscode then
+    return "tokyonight"
+  end
+
   local hour = tonumber(os.date("%H"))
   local colorscheme
 
