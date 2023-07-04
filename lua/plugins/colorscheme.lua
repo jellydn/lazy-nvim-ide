@@ -1,3 +1,6 @@
+-- Select colorscheme based on the time, and load it with LazyVim
+-- day time: tokyonight (moon)
+-- night time: kanagawa, nightfox, dracula
 local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
@@ -11,12 +14,11 @@ local function selectColorSchemeByTime()
     colorscheme = "tokyonight"
   else
     local night_themes = { "kanagawa", "nightfox", "dracula" }
-    local idx = math.random(#night_themes)
+    local idx = tonumber(os.date("%S")) % #night_themes + 1
     colorscheme = night_themes[idx]
-  end
 
-  -- notify about the selected colorscheme based on the time
-  vim.notify("Selected colorscheme: " .. colorscheme)
+    vim.notify("Selected colorscheme: " .. colorscheme)
+  end
 
   return colorscheme
 end
