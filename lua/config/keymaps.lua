@@ -24,8 +24,53 @@ function _G.toggle_q_macro()
   end
 end
 
-keymap("n", "<leader>uq", "<cmd>lua _G.toggle_q_macro()<CR>", { noremap = true, silent = true })
+keymap(
+  "n",
+  "<leader>uq",
+  "<cmd>lua _G.toggle_q_macro()<CR>",
+  { noremap = true, silent = true, desc = "Toggle 'q' Functionality" }
+)
 keymap("n", "q", "<Nop>", { noremap = true })
+
+-- Set initial state for diagnostic level
+vim.g.diagnostics_level = "all"
+
+-- Function to toggle diagnostic level
+function _G.toggle_diagnostics_level()
+  if vim.g.diagnostics_level == "all" then
+    vim.notify("Diagnostics level: error", "info", { title = "Diagnostics" })
+    vim.g.diagnostics_level = "error"
+    vim.diagnostic.config({
+      severity_sort = true,
+      underline = { severity = vim.diagnostic.severity.ERROR },
+      signs = { severity = vim.diagnostic.severity.ERROR },
+      virtual_text = {
+        prefix = "●",
+        spacing = 2,
+        severity = vim.diagnostic.severity.ERROR,
+      },
+    })
+  else
+    vim.notify("Diagnostics level: all", "info", { title = "Diagnostics" })
+    vim.g.diagnostics_level = "all"
+    vim.diagnostic.config({
+      severity_sort = true,
+      underline = true,
+      signs = true,
+      virtual_text = {
+        prefix = "●",
+        spacing = 2,
+      },
+    })
+  end
+end
+
+keymap(
+  "n",
+  "<leader>uD",
+  "<cmd>lua toggle_diagnostics_level()<CR>",
+  { noremap = true, silent = true, desc = "Toggle Diagnostics Level" }
+)
 
 -- Dashboard
 -- Add keymap to open alpha dashboard
