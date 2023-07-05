@@ -113,12 +113,8 @@ return {
     local sources = {
 
       -- spell check
-      -- b.code_actions.cspell,
-      -- b.diagnostics.cspell,
-      -- b.diagnostics.write_good,
       b.diagnostics.codespell,
       b.diagnostics.misspell,
-      b.code_actions.proselint,
 
       -- tailwind
       b.formatting.rustywind.with({
