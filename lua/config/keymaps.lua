@@ -162,17 +162,6 @@ if Util.has("gitsigns.nvim") then
   })
 end
 
--- Refactoring
-if Util.has("refactoring.nvim") then
-  -- remap to open the Telescope refactoring menu in visual mode
-  keymap(
-    "v",
-    "<leader>rr",
-    "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
-    { desc = "Refactors", noremap = true }
-  )
-end
-
 -- Harpoon
 if Util.has("harpoon") then
   keymap("n", "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", {
