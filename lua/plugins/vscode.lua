@@ -4,7 +4,6 @@ end
 
 -- Add any additional plugins in vscode, you can set vscode=true on a plugin spec.
 local enabled = {
-  "hardtime.nvim",
   "better-escape.nvim",
   "flash.nvim",
   "lazy.nvim",
@@ -24,23 +23,8 @@ local Config = require("lazy.core.config")
 local Plugin = require("lazy.core.plugin")
 Config.options.checker.enabled = false
 Config.options.change_detection.enabled = false
-
--- HACK: disable all plugins except the ones we want
-local fix_disabled = Plugin.Spec.fix_disabled
-function Plugin.Spec.fix_disabled(self)
-  for _, plugin in pairs(self.plugins) do
-    if not (vim.tbl_contains(enabled, plugin.name) or plugin.vscode) then
-      plugin.enabled = false
-    end
-  end
-  fix_disabled(self)
-end
-
--- HACK: don't clean plugins in vscode
-local update_state = Plugin.update_state
-function Plugin.update_state()
-  update_state()
-  Config.to_clean = {}
+Config.options.defaults.cond = function(plugin)
+  return vim.tbl_contains(enabled, plugin.name) or plugin.vscode
 end
 
 -- Add some vscode specific keymaps
@@ -65,11 +49,10 @@ vim.api.nvim_create_autocmd("User", {
 return {
   {
     "LazyVim/LazyVim",
-    opts = {
-      -- don't let LazyVim load a colorscheme, refer https://github.com/LazyVim/LazyVim/discussions/648#discussioncomment-5682446
-      colorscheme = function() end,
-    },
     config = function(_, opts)
+      opts = opts or {}
+      -- disable the colorscheme
+      opts.colorscheme = function() end
       require("lazyvim").setup(opts)
     end,
   },
