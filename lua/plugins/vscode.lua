@@ -4,6 +4,8 @@ end
 
 -- Add any additional plugins in vscode, you can set vscode=true on a plugin spec.
 local enabled = {
+  "hardtime.nvim",
+  "better-escape.nvim",
   "flash.nvim",
   "lazy.nvim",
   "mini.ai",
