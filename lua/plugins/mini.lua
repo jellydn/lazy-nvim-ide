@@ -1,3 +1,8 @@
+-- disable ]f or [f if is vscode
+if vim.g.vscode then
+  return {}
+end
+
 return {
   -- borrow from https://github.com/folke/dot/blob/master/nvim/lua/plugins/coding.lua
   {
