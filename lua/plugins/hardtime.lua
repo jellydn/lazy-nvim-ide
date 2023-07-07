@@ -15,6 +15,16 @@ return {
     opts = {
       -- default values is disabled the arrow keys
       disabled_keys = {},
+      restricted_keys = {
+        ["h"] = { "n", "x" },
+        ["l"] = { "n", "x" },
+        ["-"] = { "n", "x" },
+        ["+"] = { "n", "x" },
+        ["<CR>"] = { "n", "x" },
+        ["<C-M>"] = { "n", "x" },
+        ["<C-N>"] = { "n", "x" },
+        ["<C-P>"] = { "n", "x" },
+      },
       disabled_filetypes = {
         "qf",
         "netrw",
@@ -26,6 +36,7 @@ return {
         "lspsagaoutline",
       },
     },
+    event = "VeryLazy",
     keys = {
       {
         "<leader>ht",
