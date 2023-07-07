@@ -30,6 +30,7 @@ return {
         enabled = false,
       },
       bottom = {
+        { title = "Neotest Summary", ft = "neotest-summary" },
         {
           ft = "lazyterm",
           title = "LazyTerm",
