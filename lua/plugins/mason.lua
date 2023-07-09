@@ -27,7 +27,7 @@ return {
         "stylua",
         -- formatters
         "eslint_d",
-        "prettierd",
+        "prettier",
         -- code spell
         "codespell",
         "misspell",
