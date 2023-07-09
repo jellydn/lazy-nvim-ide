@@ -21,7 +21,8 @@ return {
         settings = {
           typescript = {
             inlayHints = {
-              includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
+              -- You can set this to 'all' or 'literals' to enable more hints
+              includeInlayParameterNameHints = "literals", -- 'none' | 'literals' | 'all'
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
               includeInlayFunctionParameterTypeHints = false,
               includeInlayVariableTypeHints = false,
@@ -33,7 +34,8 @@ return {
           },
           javascript = {
             inlayHints = {
-              includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
+              -- You can set this to 'all' or 'literals' to enable more hints
+              includeInlayParameterNameHints = "literals", -- 'none' | 'literals' | 'all'
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
               includeInlayVariableTypeHints = false,
               includeInlayFunctionParameterTypeHints = false,
