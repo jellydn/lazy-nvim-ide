@@ -23,6 +23,12 @@ return {
         commit = "b1ff0d6c993e3d87a4362d2ccd6c660f7444599f",
         config = true,
       },
+      -- Support Rust
+      {
+        "Saecki/crates.nvim",
+        event = { "BufRead Cargo.toml" },
+        config = true,
+      },
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -40,6 +46,8 @@ return {
         -- move codeium to same group as copilot
         { name = "codeium", group_index = 2 },
         { name = "cmp_tabnine", group_index = 3 },
+        -- support rust
+        { name = "crates" },
       }
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, sources))
 
