@@ -30,7 +30,6 @@ return {
         enabled = false,
       },
       bottom = {
-        { title = "Neotest Summary", ft = "neotest-summary" },
         {
           ft = "lazyterm",
           title = "LazyTerm",
@@ -55,6 +54,7 @@ return {
         { ft = "undotree", title = "UndoTree" },
       },
       right = {
+        { title = "Neotest Summary", ft = "neotest-summary" },
         "aerial",
         "lspsagaoutline",
       },
