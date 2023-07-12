@@ -30,9 +30,9 @@ return {
       -- define key map for toggle inlay hints: require('lsp-inlayhints').toggle()
       vim.api.nvim_set_keymap(
         "n",
-        "<leader>uI",
+        "<leader>uh",
         "<cmd>lua require('lsp-inlayhints').toggle()<CR>",
-        { noremap = true, silent = true }
+        { noremap = true, silent = true, desc = "Toggle Inlay Hints" }
       )
     end,
   },
