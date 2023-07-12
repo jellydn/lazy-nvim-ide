@@ -1,9 +1,3 @@
-local disable_github_copilot = true
-
-if disable_github_copilot then
-  return {}
-end
-
 return {
   -- Disable default <tab> and <s-tab> behavior in LuaSnip
   {
