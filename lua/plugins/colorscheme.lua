@@ -13,7 +13,7 @@ local function selectColorSchemeByTime()
   if hour >= 8 and hour < 18 then
     colorscheme = "tokyonight"
   else
-    local night_themes = { "kanagawa", "nightfox", "dracula", "cobalt2" }
+    local night_themes = { "kanagawa", "nightfox", "dracula", "cobalt2", "everforest" }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
     colorscheme = night_themes[idx]
 
@@ -82,6 +82,19 @@ return {
       -- Disable spell check as it's too red
       vim.o.spell = false
       require("colorbuddy").colorscheme("cobalt2")
+    end,
+    lazy = true,
+  },
+  {
+    "sainnhe/everforest",
+    config = function()
+      -- " Available values: 'hard', 'medium'(default), 'soft'
+      vim.g.everforest_background = "soft"
+      vim.g.everforest_transparent_background = 1
+      -- For better performance
+      vim.g.everforest_better_performance = 1
+      -- Enable italic
+      vim.g.everforest_enable_italic = 1
     end,
     lazy = true,
   },
