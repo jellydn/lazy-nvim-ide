@@ -14,12 +14,16 @@ return {
     "m4xshen/hardtime.nvim",
     opts = {
       -- default values is disabled the arrow keys
-      disabled_keys = {},
+      disabled_keys = { ["<LEFT>"] = {}, ["<RIGHT>"] = {} },
       restricted_keys = {
         ["h"] = { "n", "x" },
         ["l"] = { "n", "x" },
+        ["j"] = {},
+        ["k"] = {},
         ["-"] = { "n", "x" },
         ["+"] = { "n", "x" },
+        ["gj"] = { "n", "x" },
+        ["gk"] = { "n", "x" },
         ["<CR>"] = { "n", "x" },
         ["<C-M>"] = { "n", "x" },
         ["<C-N>"] = { "n", "x" },
