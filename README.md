@@ -68,3 +68,14 @@ docker run -w /root -it --rm alpine:latest sh -uelic '
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 14
 ```
+
+- VSCode on Mac
+
+To enable key-repeating, execute the following in your Terminal, log out and back in, and then restart VS Code:
+
+```sh
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false              # For VS Code
+defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false      # For VS Code Insider
+defaults delete -g ApplePressAndHoldEnabled                                           # If necessary, reset global default
+```
+
