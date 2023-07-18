@@ -144,11 +144,11 @@ return {
       }),
 
       -- go
-      b.diagnostics.revive,
+      b.diagnostics.revive, -- go install github.com/mgechev/revive@latest
       b.formatting.gofmt,
 
       -- proto buf
-      b.diagnostics.protolint,
+      b.diagnostics.protolint, -- brew tap yoheimuta/protolint && brew install protolint
 
       -- python
       b.diagnostics.ruff,
