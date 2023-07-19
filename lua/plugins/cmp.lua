@@ -17,10 +17,10 @@ return {
           })
         end,
       },
-      -- Add Codeium support, pin to stable version due to crash on input auth key
       {
-        "jcdickinson/codeium.nvim",
-        commit = "b1ff0d6c993e3d87a4362d2ccd6c660f7444599f",
+        "jellydn/codeium.nvim",
+        -- NOTE: Use my fork to fix the Codeium Auth issue. Will remove this once the PR is merged.
+        branch = "patch-1",
         config = true,
       },
       -- Support Rust
