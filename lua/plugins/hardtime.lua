@@ -16,8 +16,8 @@ return {
       -- default values is disabled the arrow keys
       disabled_keys = { ["<LEFT>"] = {}, ["<RIGHT>"] = {} },
       restricted_keys = {
-        ["h"] = { "n", "x" },
-        ["l"] = { "n", "x" },
+        ["h"] = {},
+        ["l"] = {},
         ["j"] = {},
         ["k"] = {},
         ["-"] = { "n", "x" },
