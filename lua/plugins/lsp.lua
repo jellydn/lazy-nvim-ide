@@ -62,6 +62,7 @@ return {
       { "glo", "<cmd>Lspsaga outline<CR>", desc = "Toggle Outline" },
       -- Hover Doc
       { "glh", "<cmd>Lspsaga hover_doc<CR>", desc = "Hover Doc" },
+      { "gh", "<cmd>Lspsaga hover_doc<CR>", desc = "Hover Doc" },
     },
   },
   {
