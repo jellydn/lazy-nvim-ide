@@ -13,7 +13,7 @@ local function selectColorSchemeByTime()
   if hour >= 8 and hour < 18 then
     colorscheme = "tokyonight"
   else
-    local night_themes = { "kanagawa", "nightfox", "dracula", "cobalt2", "everforest", "rose-pine" }
+    local night_themes = { "kanagawa", "nightfox", "dracula", "everforest", "rose-pine", "catppuccin-frappe" }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
     colorscheme = night_themes[idx]
 
@@ -75,17 +75,6 @@ return {
     lazy = true,
   },
   {
-    "lalitmee/cobalt2.nvim",
-    event = { "ColorSchemePre" }, -- if you want to lazy load
-    dependencies = { "tjdevries/colorbuddy.nvim" },
-    init = function()
-      -- Disable spell check as it's too red
-      vim.o.spell = false
-      require("colorbuddy").colorscheme("cobalt2")
-    end,
-    lazy = true,
-  },
-  {
     "sainnhe/everforest",
     config = function()
       -- " Available values: 'hard', 'medium'(default), 'soft'
@@ -107,7 +96,42 @@ return {
       disable_float_background = true,
     },
   },
-
+  {
+    "catppuccin/nvim",
+    lazy = true,
+    name = "catppuccin",
+    opts = {
+      transparent_background = true,
+      integrations = {
+        alpha = true,
+        cmp = true,
+        gitsigns = true,
+        illuminate = true,
+        indent_blankline = { enabled = true },
+        lsp_trouble = true,
+        mason = true,
+        mini = true,
+        native_lsp = {
+          enabled = true,
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
+        },
+        navic = { enabled = true, custom_bg = "lualine" },
+        neotest = true,
+        noice = true,
+        notify = false,
+        neotree = true,
+        semantic_tokens = true,
+        telescope = true,
+        treesitter = true,
+        which_key = true,
+      },
+    },
+  },
   -- default is tokyonight in moon style
   {
     "folke/tokyonight.nvim",
