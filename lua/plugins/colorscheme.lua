@@ -95,6 +95,7 @@ return {
       disable_background = true,
       disable_float_background = true,
     },
+    lazy = true,
   },
   {
     "catppuccin/nvim",
