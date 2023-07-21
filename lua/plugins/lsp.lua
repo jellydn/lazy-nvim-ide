@@ -37,9 +37,26 @@ return {
     end,
   },
   {
+    "rmagatti/goto-preview",
+    opts = {
+      default_mappings = true,
+      -- default_mappings = false, and then you can map preview window with your favorite keymap
+      -- nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
+      -- nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
+      -- nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
+      -- nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
+      -- nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
+    },
+    keys = {
+      -- map gh to preview definition
+      { "gh", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", desc = "Goto Preview Definition" },
+    },
+  },
+  {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
     config = true,
+    enabled = false, -- it is not stable, migrate to goto-preview plugin
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
       -- Please make sure you install markdown and markdown_inline parser
