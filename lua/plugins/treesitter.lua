@@ -15,6 +15,7 @@ return {
         "typescript",
         "tsx",
         "javascript",
+        "http",
         "json",
         "json5",
         "jsonc",
