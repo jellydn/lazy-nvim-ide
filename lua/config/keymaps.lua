@@ -134,10 +134,6 @@ end
 
 -- LspSaga
 if Util.has("lspsaga.nvim") then
-  -- Diagnostic jump can use `<c-o>` to jump back
-  keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-  keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
-
   -- Diagnostic jump with filters such as only jumping to an error
   keymap("n", "[E", function()
     require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
