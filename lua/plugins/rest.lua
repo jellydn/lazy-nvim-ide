@@ -11,6 +11,7 @@ return {
       result = {
         formatters = {
           json = "jq",
+          html = false,
         },
       },
     },
