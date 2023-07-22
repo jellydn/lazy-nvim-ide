@@ -7,15 +7,7 @@ local servers = {
   "cssls",
   "tailwindcss",
   "jsonls",
-  -- rust
-  "rust_analyzer",
-  -- go
-  "gopls",
-  -- svelte
   "svelte",
-  -- python
-  "pyright",
-  "ruff_lsp",
 }
 
 return {
@@ -33,8 +25,6 @@ return {
         "misspell",
         -- rustywind for tailwindcss
         "rustywind",
-        -- python
-        "ruff",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

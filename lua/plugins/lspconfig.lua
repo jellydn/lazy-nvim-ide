@@ -83,21 +83,6 @@ return {
         root_dir = require("lspconfig").util.root_pattern("rome.json", "rome.jsonc"),
         single_file_support = false,
       },
-      gopls = {
-        settings = {
-          gopls = {
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-          },
-        },
-      },
     },
     -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
     -- Be aware that you also will need to properly configure your LSP server to
@@ -112,23 +97,6 @@ return {
     setup = {
       tsserver = function(_, opts)
         require("typescript").setup({ server = opts })
-        return true
-      end,
-      ruff_lsp = function(_, opts)
-        -- Configure `ruff-lsp`.
-        -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
-        -- For the default config, along with instructions on how to customize the settings
-        require("lspconfig").ruff_lsp.setup({
-          on_attach = function(client, bufnr)
-            client.server_capabilities.hoverProvider = false
-          end,
-          init_options = {
-            settings = {
-              -- Any extra CLI arguments for `ruff` go here.
-              args = { "--line-length=120" },
-            },
-          },
-        })
         return true
       end,
     },

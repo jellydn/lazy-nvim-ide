@@ -138,21 +138,8 @@ return {
       -- Lua
       b.formatting.stylua,
 
-      -- rust
-      b.formatting.rustfmt.with({
-        extra_args = { "--edition", "2018" },
-      }),
-
-      -- go
-      b.diagnostics.revive, -- go install github.com/mgechev/revive@latest
-      b.formatting.gofmt,
-
       -- proto buf
       b.diagnostics.protolint, -- brew tap yoheimuta/protolint && brew install protolint
-
-      -- python
-      b.diagnostics.ruff,
-      b.formatting.ruff,
     }
 
     return {
