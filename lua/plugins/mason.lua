@@ -25,6 +25,8 @@ return {
         "misspell",
         -- rustywind for tailwindcss
         "rustywind",
+        -- php
+        "pint",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

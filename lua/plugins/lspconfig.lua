@@ -11,10 +11,14 @@ return {
     -- Php
     {
       "gbprod/phpactor.nvim",
+      ft = { "php", "yaml" },
       build = function()
-        require("phpactor.handler.update")
+        require("phpactor.handler.update")()
       end,
       opts = {
+        install = {
+          check_on_startup = "daily",
+        },
         lspconfig = {
           enabled = true,
           init_options = {
