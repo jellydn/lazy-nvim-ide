@@ -1,10 +1,27 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
+    -- Typescript
     {
       "jose-elias-alvarez/typescript.nvim",
       dependencies = {
         "davidosomething/format-ts-errors.nvim",
+      },
+    },
+    -- Php
+    {
+      "gbprod/phpactor.nvim",
+      build = function()
+        require("phpactor.handler.update")
+      end,
+      opts = {
+        lspconfig = {
+          enabled = true,
+          init_options = {
+            ["language_server_phpstan.enabled"] = true,
+            ["phpunit.enabled"] = true,
+          },
+        },
       },
     },
   },

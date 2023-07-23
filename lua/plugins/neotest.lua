@@ -13,6 +13,7 @@ return {
       "markemmons/neotest-deno",
       "nvim-neotest/neotest-go",
       "rouge8/neotest-rust",
+      "theutz/neotest-pest",
     },
     opts = {
       -- Can be a list of adapters like what neotest expects,
@@ -28,6 +29,11 @@ return {
         ["neotest-python"] = {},
         ["neotest-go"] = {},
         ["neotest-rust"] = {},
+        ["neotest-pest"] = {
+          pest_cmd = function()
+            return "vendor/bin/pest"
+          end,
+        },
       },
     },
   },
