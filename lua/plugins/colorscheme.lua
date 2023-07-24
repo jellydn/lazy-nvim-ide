@@ -1,6 +1,6 @@
 -- Select colorscheme based on the time, and load it with LazyVim
 -- day time: tokyonight (moon)
--- night time: random from {kanagawa, nightfox, dracula, cobalt2, everforest, rose-pine}
+-- night time: random from {kanagawa, nightfox, cobalt2, everforest, rose-pine}
 local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
@@ -13,7 +13,7 @@ local function selectColorSchemeByTime()
   if hour >= 8 and hour < 18 then
     colorscheme = "tokyonight"
   else
-    local night_themes = { "kanagawa", "nightfox", "dracula", "everforest", "rose-pine", "catppuccin-frappe" }
+    local night_themes = { "kanagawa", "nightfox", "everforest", "rose-pine", "catppuccin-frappe" }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
     colorscheme = night_themes[idx]
 
@@ -73,22 +73,6 @@ return {
         },
       },
     },
-    lazy = true,
-  },
-  {
-    "Mofiqul/dracula.nvim",
-    config = function()
-      -- Disable spell check as it's too red
-      vim.o.spell = false
-
-      local dracula = require("dracula")
-      dracula.setup({
-        transparent_bg = true, -- default false
-        -- set italic comment
-        italic_comment = true, -- default false
-        overrides = {},
-      })
-    end,
     lazy = true,
   },
   {
