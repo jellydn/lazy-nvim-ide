@@ -7,6 +7,13 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
+keymap(
+  "n",
+  "<leader>ut",
+  ':echo "Color scheme: " . g:colors_name<CR>',
+  { noremap = true, silent = true, desc = "Show current color scheme" }
+)
+
 -- Disable `q` for macro recording as default
 -- Set initial state for 'q'
 vim.g.q_record_macro = false
