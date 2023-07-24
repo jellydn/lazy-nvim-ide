@@ -15,13 +15,13 @@ return {
       },
     },
     keys = {
-      -- add <leader>sr to search and replace
+      -- Search and replace in current buffer
       {
-        "<leader>sr",
+        "<leader>bs",
         function()
           require("ssr").open()
         end,
-        desc = "Sarch and replace",
+        desc = "Search and Replace",
       },
     },
   },

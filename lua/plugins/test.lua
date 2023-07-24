@@ -16,8 +16,6 @@ local function setProjectRootByCurrentBuffer()
   vim.g["test#project_root"] = path
 end
 
--- TODO: find vitest or jest on devDependencies or dependencies package.json and set test#javascript#runner
-
 -- Usage: :TestWithJest when in test file or :TestWithVitest when in test file
 -- vim-test plugin has not supported on large project or monorepo yet. A lot of issues on github
 -- e.g: "Not a test file" error when running any of the test command
