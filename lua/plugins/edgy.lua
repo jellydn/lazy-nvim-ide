@@ -51,6 +51,7 @@ return {
       },
       left = {
         "neo-tree",
+        { ft = "spectre_panel", size = { width = 0.3 } },
         { ft = "undotree", title = "UndoTree" },
       },
       right = {
