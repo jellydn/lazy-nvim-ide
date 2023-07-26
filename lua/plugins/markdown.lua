@@ -9,7 +9,7 @@ return {
     keys = {
       -- add <leader>m to open markdown preview
       {
-        "<leader>m",
+        "<leader>mp",
         "<cmd>PrevimOpen<cr>",
         desc = "Markdown preview",
       },
