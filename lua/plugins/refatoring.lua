@@ -8,14 +8,40 @@ return {
     keys = {
       {
         "<leader>r",
-        ":lua require('refactoring').select_refactor()<CR>",
-        mode = "v",
-        noremap = true,
-        silent = true,
-        expr = false,
-        desc = "Refactoring",
+        function()
+          require("telescope").extensions.refactoring.refactors()
+        end,
+        mode = { "v" },
+        desc = "Refactoring menu",
       },
     },
-    opts = {},
+    opts = {
+      prompt_func_return_type = {
+        go = false,
+        java = false,
+
+        cpp = false,
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+      },
+      prompt_func_param_type = {
+        go = false,
+        java = false,
+
+        cpp = false,
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+      },
+      printf_statements = {},
+      print_var_statements = {},
+    },
+    config = function(_, options)
+      require("refactoring").setup(options)
+      require("telescope").load_extension("refactoring")
+    end,
   },
 }
