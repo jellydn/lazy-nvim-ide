@@ -1,8 +1,10 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
--- Enable spell check by default
-vim.o.spell = true
+-- Enable spell check by default unless in vscode
+if not vim.g.vscode then
+	vim.o.spell = true
+end
 -- Set conceal level to 0
 vim.o.conceallevel = 0
 
