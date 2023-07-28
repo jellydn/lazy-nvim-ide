@@ -15,19 +15,12 @@ return {
     opts = {
       -- default values is disabled the arrow keys
       disabled_keys = { ["<LEFT>"] = {}, ["<RIGHT>"] = {} },
+      -- allow use h j k l to move cursor
       restricted_keys = {
         ["h"] = {},
         ["l"] = {},
         ["j"] = {},
         ["k"] = {},
-        ["-"] = { "n", "x" },
-        ["+"] = { "n", "x" },
-        ["gj"] = { "n", "x" },
-        ["gk"] = { "n", "x" },
-        ["<CR>"] = { "n", "x" },
-        ["<C-M>"] = { "n", "x" },
-        ["<C-N>"] = { "n", "x" },
-        ["<C-P>"] = { "n", "x" },
       },
       disabled_filetypes = {
         "qf",

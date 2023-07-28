@@ -59,7 +59,6 @@ return {
     },
     keys = {
       -- add a keymap to browse plugin files
-      -- stylua: ignore
       {
         "<leader>fg",
         function()
@@ -67,14 +66,21 @@ return {
         end,
         desc = "Find Git File",
       },
-      -- find in file 
-      -- stylua: ignore
+      -- find in file
       {
         "<leader>fw",
         function()
           live_grep_from_project_git_root()
         end,
         desc = "Live Grep in Project Root",
+      },
+      -- add gR to resume telescope
+      {
+        "gR",
+        function()
+          require("telescope.builtin").resume()
+        end,
+        desc = "Resume Last Telescope",
       },
     },
     -- add telescope-fzf-native
