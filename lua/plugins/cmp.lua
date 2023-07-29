@@ -18,9 +18,11 @@ return {
         end,
       },
       {
-        "jellydn/codeium.nvim",
-        -- NOTE: Use my fork to fix the Codeium Auth issue. Will remove this once the PR is merged.
-        branch = "patch-1",
+        "jcdickinson/codeium.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+          "hrsh7th/nvim-cmp",
+        },
         config = true,
       },
       -- Support Rust
