@@ -21,7 +21,7 @@ return {
         function()
           require("ssr").open()
         end,
-        desc = "Search and Replace",
+        desc = "Structural Search and Replace",
       },
     },
   },
