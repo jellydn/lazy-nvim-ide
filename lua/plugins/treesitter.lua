@@ -15,7 +15,7 @@ return {
         "typescript",
         "tsx",
         "javascript",
-        "http",
+        "hurl",
         "json",
         "json5",
         "jsonc",
