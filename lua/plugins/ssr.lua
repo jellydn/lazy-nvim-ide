@@ -17,7 +17,7 @@ return {
     keys = {
       -- Search and replace in current buffer
       {
-        "<leader>bs",
+        "<leader>bs", -- [b]uffer [s]tructural [s]earch and [r]eplace
         function()
           require("ssr").open()
         end,
