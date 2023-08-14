@@ -154,7 +154,9 @@ end
 -- Add keymap only show FIXME
 if Util.has("todo-comments.nvim") then
   -- show fixme on telescope
-  keymap("n", "<leader>xf", "<cmd>TodoTelescope keywords=FIX,FIXME<CR>")
+  keymap("n", "<leader>xf", "<cmd>TodoTelescope keywords=FIX,FIXME<CR>", {
+    desc = "Show FIXME",
+  })
 end
 
 -- Gitsigns
