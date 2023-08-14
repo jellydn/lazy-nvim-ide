@@ -12,7 +12,7 @@ return {
   ]]
   {
     "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     opts = {
       -- default values is disabled the arrow keys
       disabled_keys = { ["<LEFT>"] = {}, ["<RIGHT>"] = {} },
