@@ -54,14 +54,6 @@ return {
       { "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", desc = "Close All Preview Windows" },
       -- Hover doc with native lsp
       { "gh", vim.lsp.buf.hover, desc = "Hover Doc" },
-      -- Go to type
-      {
-        "gt",
-        function()
-          require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
-        end,
-        desc = "Go to Type Definition",
-      },
     },
   },
   {
