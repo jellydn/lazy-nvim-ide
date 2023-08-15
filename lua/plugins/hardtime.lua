@@ -41,6 +41,11 @@ return {
         "<cmd>Hardtime toggle<CR>",
         desc = "Toggle Hardtime",
       },
+      {
+        "<leader>hr",
+        "<cmd>Hardtime report<CR>",
+        desc = "Hardtime report",
+      },
     },
   },
 }
