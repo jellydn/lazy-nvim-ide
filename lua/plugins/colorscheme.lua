@@ -1,6 +1,6 @@
 -- Select colorscheme based on the time, and load it with LazyVim
 -- day time: tokyonight (moon)
--- night time: random from {kanagawa, nightfox, cobalt2, everforest, rose-pine}
+-- night time: random from {kanagawa, nightfox, cobalt2, rose-pine}
 local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
@@ -13,7 +13,7 @@ local function selectColorSchemeByTime()
   if hour >= 8 and hour < 18 then
     colorscheme = "tokyonight"
   else
-    local night_themes = { "kanagawa", "nightfox", "everforest", "rose-pine", "catppuccin-frappe" }
+    local night_themes = { "kanagawa", "nightfox", "rose-pine", "catppuccin-frappe" }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
     colorscheme = night_themes[idx]
 
@@ -73,19 +73,6 @@ return {
         },
       },
     },
-    lazy = true,
-  },
-  {
-    "sainnhe/everforest",
-    config = function()
-      -- " Available values: 'hard', 'medium'(default), 'soft'
-      vim.g.everforest_background = "soft"
-      vim.g.everforest_transparent_background = 1
-      -- For better performance
-      vim.g.everforest_better_performance = 1
-      -- Enable italic
-      vim.g.everforest_enable_italic = 1
-    end,
     lazy = true,
   },
   {
