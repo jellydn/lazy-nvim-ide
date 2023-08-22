@@ -13,7 +13,7 @@ local function selectColorSchemeByTime()
   if hour >= 8 and hour < 18 then
     colorscheme = "tokyonight"
   else
-    local night_themes = { "kanagawa", "nightfox", "rose-pine", "catppuccin-frappe" }
+    local night_themes = { "kanagawa", "nightfox", "cobalt2", "rose-pine", "catppuccin-frappe" }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
     colorscheme = night_themes[idx]
 
@@ -92,6 +92,16 @@ return {
     opts = {
       transparent_background = true,
     },
+  },
+  {
+    "lalitmee/cobalt2.nvim",
+    lazy = true,
+    dependencies = { "tjdevries/colorbuddy.nvim" },
+    config = function()
+      require("colorbuddy").colorscheme("cobalt2")
+      -- Disable spell checking as it is not readable
+      vim.o.spell = false
+    end,
   },
   -- default is tokyonight in moon style
   {
