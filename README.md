@@ -64,7 +64,8 @@ docker run -w /root -it --rm alpine:latest sh -uelic '
 ## Tips
 
 - Improve key repeat on Mac OSX, need to restart
-```sh 
+
+```sh
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 14
 ```
@@ -77,5 +78,9 @@ To enable key-repeating, execute the following in your Terminal, log out and bac
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false              # For VS Code
 defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false      # For VS Code Insider
 defaults delete -g ApplePressAndHoldEnabled                                           # If necessary, reset global default
+defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool false     # For Cursor
 ```
 
+Also increasing Key Repeat and Delay Until Repeat settings in System Preferences -> Keyboard.
+
+[![Key repeat rate](https://i.gyazo.com/e58be996275fe50bee31412ea5930017.png)](https://gyazo.com/e58be996275fe50bee31412ea5930017)
