@@ -4,14 +4,14 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     keys = {
       {
-        "<leader>n",
+        "<leader>mn",
         "<cmd>MyNote<cr>",
-        desc = "Open note",
+        desc = "Open MyNote",
       },
       {
-        "<leader>ng",
+        "<leader>mg",
         "<cmd>MyNote global<cr>",
-        desc = "Open note",
+        desc = "Open MyNote Global",
       },
     },
     opts = {
