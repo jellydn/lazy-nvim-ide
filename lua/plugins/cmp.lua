@@ -1,6 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    commit = "6c84bc75c64f778e9f1dcb798ed41c7fcb93b639", -- lock update (break codeium)
     dependencies = {
       -- Add tabnine support
       {
@@ -17,6 +18,7 @@ return {
           })
         end,
       },
+      -- Add Codeium support
       {
         "jcdickinson/codeium.nvim",
         dependencies = {
