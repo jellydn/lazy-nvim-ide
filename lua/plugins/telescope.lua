@@ -82,6 +82,12 @@ return {
         end,
         desc = "Resume Last Telescope",
       },
+      -- add <leader>fa to find all, including hidden files
+      {
+        "<leader>fa",
+        "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>",
+        desc = "Find All Files (including hidden)",
+      },
     },
     -- add telescope-fzf-native
     dependencies = {
