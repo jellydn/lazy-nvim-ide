@@ -5,24 +5,6 @@ end
 
 local b = null_ls.builtins
 
-local function eslint_config_exists()
-  local eslintrc = vim.fn.glob(".eslintrc*", false, true)
-
-  if not vim.tbl_isempty(eslintrc) then
-    return true
-  end
-
-  local current_dir = vim.fn.getcwd()
-  local config_file = current_dir .. "/package.json"
-  if vim.fn.filereadable(config_file) == 1 then
-    if vim.fn.json_decode(vim.fn.readfile(config_file))["eslintConfig"] then
-      return true
-    end
-  end
-
-  return false
-end
-
 local function deno_config_exists()
   local current_dir = vim.fn.getcwd()
   local config_file = current_dir .. "/deno.json"
