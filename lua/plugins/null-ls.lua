@@ -23,16 +23,6 @@ local function eslint_config_exists()
   return false
 end
 
-local function rome_config_exists()
-  local current_dir = vim.fn.getcwd()
-  local config_file = current_dir .. "/rome.json"
-  if vim.fn.filereadable(config_file) == 1 then
-    return true
-  end
-
-  return false
-end
-
 local function deno_config_exists()
   local current_dir = vim.fn.getcwd()
   local config_file = current_dir .. "/deno.json"
@@ -122,16 +112,10 @@ return {
           return deno_config_exists()
         end,
       }),
-      -- romejs
-      b.formatting.rome.with({
-        condition = function()
-          return rome_config_exists() and not eslint_config_exists() and not deno_config_exists()
-        end,
-      }),
       -- prettier
       b.formatting.prettier.with({
         condition = function()
-          return not rome_config_exists() and not deno_config_exists() and prettier_config_dir()
+          return not deno_config_exists() and prettier_config_dir()
         end,
       }),
 

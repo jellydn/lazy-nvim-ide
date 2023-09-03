@@ -105,10 +105,6 @@ return {
       denols = {
         root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
       },
-      rome = {
-        root_dir = require("lspconfig").util.root_pattern("rome.json", "rome.jsonc"),
-        single_file_support = false,
-      },
     },
     -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
     -- Be aware that you also will need to properly configure your LSP server to
