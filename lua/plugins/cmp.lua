@@ -1,14 +1,13 @@
 return {
   {
     "hrsh7th/nvim-cmp",
-    commit = "6c84bc75c64f778e9f1dcb798ed41c7fcb93b639", -- lock update (break codeium)
     dependencies = {
-      -- Add tabnine support
+      -- Add Tabnine support
       {
         "tzachar/cmp-tabnine",
         build = "./install.sh",
         dependencies = "hrsh7th/nvim-cmp",
-        -- only limit top 3 suggestions from tabnine
+        -- only limit top 3 suggestions from Tabnine
         config = function()
           local tabnine = require("cmp_tabnine.config")
           tabnine:setup({
