@@ -107,8 +107,8 @@ return {
       -- proto buf
       b.diagnostics.protolint, -- brew tap yoheimuta/protolint && brew install protolint
 
-      -- Php
-      b.formatting.pint,
+      -- Php - comment out as I don't use php much
+      -- b.formatting.pint,
     }
 
     return {
