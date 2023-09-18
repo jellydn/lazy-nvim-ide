@@ -8,6 +8,7 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
+    vscode = true, -- Support for VSCode
     keys = {
       {
         "<leader>d",
