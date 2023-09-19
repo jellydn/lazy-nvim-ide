@@ -14,6 +14,27 @@ return {
         mode = { "v" },
         desc = "Refactoring menu",
       },
+      -- Debug variable
+      {
+        "<leader>dv",
+        function()
+          require("refactoring").debug.print_var({
+            below = true,
+          })
+        end,
+        mode = { "n", "x" },
+        desc = "Print variables",
+      },
+      -- Clean up debugging
+      {
+        "<leader>dc",
+        function()
+          require("refactoring").debug.cleanup({
+            force = true,
+          })
+        end,
+        desc = "Clear debugging",
+      },
     },
     opts = {
       prompt_func_return_type = {
