@@ -1,14 +1,14 @@
--- disable lsp-inlayhints if that is nightly version, will remove when 0.10.0 is stable
-local enabled_inlay_hints = true
+-- disable lsp-inlayhints and lsp lenf if that is nightly version, will remove when 0.10.0 is stable
+local is_stable_version = true
 if vim.fn.has("nvim-0.10.0") == 1 then
-  enabled_inlay_hints = false
+  is_stable_version = false
 end
 
 return {
   {
     "lvimuser/lsp-inlayhints.nvim",
     ft = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact", "svelte", "go" },
-    enabled = enabled_inlay_hints,
+    enabled = is_stable_version,
     opts = {
       debug_mode = true,
     },
@@ -86,6 +86,8 @@ return {
     -- Displaying references and definition infos upon functions like JB's IDEA.
     "VidocqH/lsp-lens.nvim",
     event = "BufRead",
+    -- Disable lsp lens if that is nightly version
+    enabled = is_stable_version,
     opts = {
       include_declaration = true, -- Reference include declaration
       sections = { -- Enable / Disable specific request
