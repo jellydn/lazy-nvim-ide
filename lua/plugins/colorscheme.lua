@@ -1,6 +1,6 @@
 -- Select colorscheme based on the time, and load it with LazyVim
 -- day time: tokyonight (moon)
--- night time: random from {kanagawa, nightfox, cobalt2, rose-pine}
+-- night time: random from {kanagawa, nightfox, rose-pine, catppuccin-frappe}
 local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
@@ -13,7 +13,7 @@ local function selectColorSchemeByTime()
   if hour >= 8 and hour < 18 then
     colorscheme = "tokyonight"
   else
-    local night_themes = { "kanagawa", "nightfox", "cobalt2", "rose-pine", "catppuccin-frappe" }
+    local night_themes = { "kanagawa", "nightfox", "rose-pine", "catppuccin-frappe" }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
     colorscheme = night_themes[idx]
 
@@ -93,6 +93,7 @@ return {
       transparent_background = true,
     },
   },
+  -- NOTE: Do not look good in my eyes yet!
   {
     "lalitmee/cobalt2.nvim",
     lazy = true,
