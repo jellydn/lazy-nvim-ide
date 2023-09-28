@@ -76,12 +76,13 @@ return {
     event = "LspAttach",
     opts = {},
     config = true,
-    enabled = false, -- disable lspsaga, use goto-preview instead
+    enabled = false, -- Disable lspsaga, use goto-preview instead
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
       -- Please make sure you install markdown and markdown_inline parser
       { "nvim-treesitter/nvim-treesitter" },
     },
+    -- Group LspSaga keymap with prefix "gl"
     keys = {
       -- LSP finder - Find the symbol's definition
       { "glf", "<cmd>Lspsaga finder<CR>", desc = "LSP Finder" },
@@ -94,7 +95,7 @@ return {
       -- Peek definition
       { "glp", "<cmd>Lspsaga peek_definition<CR>", desc = "Peek Definition" },
       -- Hover Doc
-      { "gh", "<cmd>Lspsaga hover_doc<CR>", desc = "Hover Doc" },
+      { "glh", "<cmd>Lspsaga hover_doc<CR>", desc = "Hover Doc" },
     },
   },
   {
