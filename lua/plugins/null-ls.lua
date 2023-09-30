@@ -1,9 +1,9 @@
-local null_ls_status_ok, null_ls = pcall(require, "null-ls")
-if not null_ls_status_ok then
+local ok, none_ls = pcall(require, "null-ls")
+if not ok then
   return
 end
 
-local b = null_ls.builtins
+local b = none_ls.builtins
 
 local function deno_config_exists()
   local current_dir = vim.fn.getcwd()
@@ -69,7 +69,7 @@ end
 
 -- formatters
 return {
-  "jose-elias-alvarez/null-ls.nvim",
+  "nvimtools/none-ls.nvim",
   keys = {
     { "<leader>cn", "<cmd>NullLsInfo<cr>", desc = "NullLs Info" },
   },

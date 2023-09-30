@@ -1,12 +1,10 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    -- Typescript
+    -- Typescript formatter
     {
-      "jose-elias-alvarez/typescript.nvim",
-      dependencies = {
-        "davidosomething/format-ts-errors.nvim",
-      },
+      "davidosomething/format-ts-errors.nvim",
+      ft = "javascript,typescript,typescriptreact,svelte",
     },
     -- Php
     {
@@ -69,8 +67,19 @@ return {
         },
         -- add keymap
         keys = {
-          { "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", desc = "Organize Imports" },
-          { "<leader>cR", "<cmd>TypescriptRenameFile<CR>", desc = "Rename File" },
+          {
+            "<leader>co",
+            function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                  only = { "source.organizeImports.ts" },
+                  diagnostics = {},
+                },
+              })
+            end,
+            desc = "Organize Imports",
+          },
         },
         -- inlay hints
         settings = {
@@ -116,11 +125,10 @@ return {
       timeout_ms = 10000, -- 10 seconds
     },
     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-    setup = {
-      tsserver = function(_, opts)
-        require("typescript").setup({ server = opts })
-        return true
-      end,
-    },
+    -- setup = {
+    --   tsserver = function(_, opts)
+    --     return true
+    --   end,
+    -- },
   },
 }
