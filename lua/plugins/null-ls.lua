@@ -112,11 +112,7 @@ return {
       }),
 
       -- biome
-      b.formatting.biome.with({
-        condition = function()
-          return biome_config_exists()
-        end,
-      }),
+      b.formatting.biome,
 
       -- Lua
       b.formatting.stylua,
