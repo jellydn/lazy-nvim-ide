@@ -54,8 +54,10 @@ return {
       }
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, sources))
 
-      -- format the completion menu
+      -- Format the completion menu
       opts.formatting = {
+        fields = { "abbr", "kind", "menu" },
+        expandable_indicator = true,
         format = function(entry, vim_item)
           local icons = require("lazyvim.config").icons.kinds
           if icons[vim_item.kind] then
@@ -88,7 +90,7 @@ return {
         end,
       }
 
-      -- add Ctrl-n and Ctrl-p to navigate through the completion menu
+      -- Add Ctrl-n and Ctrl-p to navigate through the completion menu
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<C-n>"] = cmp.mapping(function(fallback)
           if cmp.visible() then

@@ -67,6 +67,16 @@ local function prettier_config_dir()
   return nil
 end
 
+local function biome_config_exists()
+  local current_dir = vim.fn.getcwd()
+  local config_file = current_dir .. "/.biome.json"
+  if vim.fn.filereadable(config_file) == 1 then
+    return true
+  end
+
+  return false
+end
+
 -- formatters
 return {
   "nvimtools/none-ls.nvim",
@@ -97,7 +107,14 @@ return {
       -- prettier
       b.formatting.prettier.with({
         condition = function()
-          return not deno_config_exists() and prettier_config_dir()
+          return not deno_config_exists() and not biome_config_exists() and prettier_config_dir()
+        end,
+      }),
+
+      -- biome
+      b.formatting.biome.with({
+        condition = function()
+          return biome_config_exists()
         end,
       }),
 
