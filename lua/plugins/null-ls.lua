@@ -69,7 +69,7 @@ end
 
 local function biome_config_exists()
   local current_dir = vim.fn.getcwd()
-  local config_file = current_dir .. "/.biome.json"
+  local config_file = current_dir .. "/biome.json"
   if vim.fn.filereadable(config_file) == 1 then
     return true
   end
@@ -112,7 +112,11 @@ return {
       }),
 
       -- biome
-      b.formatting.biome,
+      b.formatting.biome.with({
+        condition = function()
+          return biome_config_exists() and not prettier_config_dir() and not deno_config_exists()
+        end,
+      }),
 
       -- Lua
       b.formatting.stylua,

@@ -115,7 +115,24 @@ return {
         root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
       },
       biome = {
-        root_dir = require("lspconfig").util.root_pattern("biome.json"),
+        -- root_dir = require("lspconfig").util.root_pattern("biome.json"),
+        -- Fallback to nvim config dir if biome.json is not found
+        root_dir = function()
+          local dir = require("lspconfig").util.root_pattern("biome.json")()
+          local config_dir = vim.fn.stdpath("config")
+          if dir == nil then
+            vim.notify("biome.json not found, using nvim config dir as root", vim.log.levels.WARN)
+            return config_dir
+          end
+
+          local biome_file = dir .. "/biome.json"
+          if vim.fn.filereadable(biome_file) == 0 then
+            vim.notify("biome.json not found, using nvim config dir as root", vim.log.levels.WARN)
+            return config_dir
+          end
+
+          return dir
+        end,
       },
     },
     -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
