@@ -1,3 +1,34 @@
+local function biome_config_exists()
+  local function is_git_repo()
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+
+    return vim.v.shell_error == 0
+  end
+
+  local function get_git_root()
+    local dot_git_path = vim.fn.finddir(".git", ".;")
+    return vim.fn.fnamemodify(dot_git_path, ":h")
+  end
+
+  local current_dir = vim.fn.getcwd()
+  local config_file = current_dir .. "/biome.json"
+  if vim.fn.filereadable(config_file) == 1 then
+    return true
+  end
+
+  -- If the current directory is a git repo, check if the root of the repo
+  -- contains a biome.json file
+  local git_root = get_git_root()
+  if is_git_repo() and git_root ~= current_dir then
+    config_file = git_root .. "/biome.json"
+    if vim.fn.filereadable(config_file) == 1 then
+      return true
+    end
+  end
+
+  return false
+end
+
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -118,20 +149,13 @@ return {
         -- root_dir = require("lspconfig").util.root_pattern("biome.json"),
         -- Fallback to nvim config dir if biome.json is not found
         root_dir = function()
-          local dir = require("lspconfig").util.root_pattern("biome.json")()
-          local config_dir = vim.fn.stdpath("config")
-          if dir == nil then
-            vim.notify("biome.json not found, using nvim config dir as root", vim.log.levels.WARN)
-            return config_dir
+          if biome_config_exists() then
+            vim.notify("Use project biome.json", "info", { title = "Biome LSP" })
+            return require("lspconfig").util.root_pattern("biome.json")()
           end
 
-          local biome_file = dir .. "/biome.json"
-          if vim.fn.filereadable(biome_file) == 0 then
-            vim.notify("biome.json not found, using nvim config dir as root", vim.log.levels.WARN)
-            return config_dir
-          end
-
-          return dir
+          vim.notify("Use global biome.json", "info", { title = "Biome LSP" })
+          return vim.fn.stdpath("config")
         end,
       },
     },
