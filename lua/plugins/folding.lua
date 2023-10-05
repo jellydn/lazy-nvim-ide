@@ -1,10 +1,11 @@
 return {
-  -- UFO folding
+  -- Disable ufo folding with treesitter from LazyVim
   {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async",
     },
+    enabled = false,
     event = "BufReadPost",
     opts = {
       provider_selector = function()
