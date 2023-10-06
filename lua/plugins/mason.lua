@@ -16,6 +16,8 @@ return {
         "rustywind",
         -- php
         "pint",
+        -- astro
+        "astro-language-server",
       },
     },
   },

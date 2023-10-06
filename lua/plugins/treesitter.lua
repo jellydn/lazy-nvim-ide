@@ -27,6 +27,7 @@ return {
         "c",
         "proto",
         "svelte",
+        "astro",
       },
       auto_install = true,
       -- ensure_installed = "all", -- one of "all" or a list of languages

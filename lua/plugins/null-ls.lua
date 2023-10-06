@@ -54,6 +54,7 @@ local function prettier_config_dir()
     ".prettierrc.toml",
     "prettier.config.js",
     "prettier.config.cjs",
+    "prettier.config.mjs",
     -- "package.json", ignore package.json for monorepo as the prettier config is usually in the root
   }
 
