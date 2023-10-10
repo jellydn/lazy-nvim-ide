@@ -17,13 +17,6 @@ return {
       restriction_mode = "hint", -- block or hint
       -- default values is disabled the arrow keys
       disabled_keys = { ["<Left>"] = {}, ["<Right>"] = {} },
-      -- allow use h j k l to move cursor
-      restricted_keys = {
-        ["h"] = {},
-        ["l"] = {},
-        ["j"] = {},
-        ["k"] = {},
-      },
       disabled_filetypes = {
         "qf",
         "netrw",
