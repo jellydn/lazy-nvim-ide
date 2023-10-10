@@ -5,7 +5,6 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
     },
-    enabled = false,
     event = "BufReadPost",
     opts = {
       provider_selector = function()
