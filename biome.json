@@ -6,7 +6,8 @@
       "recommended": true,
       "suspicious": {
         "noExplicitAny": "off",
-        "noCommentText": "warn"
+        "noCommentText": "warn",
+        "noShadowRestrictedNames": "warn"
       },
       "style": {
         "noUnusedTemplateLiteral": "warn"
