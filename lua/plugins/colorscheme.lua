@@ -1,19 +1,22 @@
+local function is_day_time()
+  local hour = tonumber(os.date("%H"))
+  return hour >= 9 and hour < 19
+end
 -- Select colorscheme based on the time, and load it with LazyVim
 -- day time: tokyonight (moon)
--- night time: random from {kanagawa, nightfox, rose-pine, catppuccin-frappe, cobalt2}
+-- night time: random from {nightfox, rose-pine, catppuccin-frappe, everforest, dracula}
 local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
     return "tokyonight"
   end
 
-  local hour = tonumber(os.date("%H"))
   local colorscheme
 
-  if hour >= 8 and hour < 18 then
+  if is_day_time() then
     colorscheme = "tokyonight"
   else
-    local night_themes = { "kanagawa", "nightfox", "rose-pine", "catppuccin-frappe", "cobalt2" }
+    local night_themes = { "nightfox", "rose-pine", "catppuccin-frappe", "everforest", "dracula" }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
     colorscheme = night_themes[idx]
   end
@@ -22,54 +25,19 @@ local function selectColorSchemeByTime()
   return colorscheme
 end
 
+local is_transparent = is_day_time()
+
 return {
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = true,
-    opts = {
-      transparent = true,
-      theme = "wave",
-      colors = {
-        theme = {
-          all = {
-            ui = {
-              bg_gutter = "none",
-              float = {
-                bg = "none",
-              },
-            },
-          },
-        },
-      },
-      overrides = function(colors)
-        local theme = colors.theme
-        return {
-          -- Transparent Floating Windows
-          NormalFloat = { bg = "none" },
-          FloatBorder = { bg = "none" },
-          FloatTitle = { bg = "none" },
-          -- Borderless Telescope
-          TelescopeTitle = { fg = theme.ui.special, bold = true },
-          TelescopePromptNormal = { bg = theme.ui.bg_p1 },
-          TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-          TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
-          TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
-          TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-          TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-        }
-      end,
-    },
-  },
   {
     "EdenEast/nightfox.nvim",
     opts = {
       options = {
-        transparent = true,
-        styles = {
+        transparent = is_transparent,
+        styles = is_transparent and {
           comments = "italic",
           keywords = "bold",
           types = "italic,bold",
-        },
+        } or {},
       },
     },
     lazy = true,
@@ -79,8 +47,8 @@ return {
     name = "rose-pine",
     opts = {
       variant = "moon",
-      disable_background = true,
-      disable_float_background = true,
+      disable_background = is_transparent,
+      disable_float_background = is_transparent,
     },
     lazy = true,
   },
@@ -89,9 +57,10 @@ return {
     lazy = true,
     name = "catppuccin",
     opts = {
-      transparent_background = true,
+      transparent_background = is_transparent,
     },
   },
+  -- NOTE: Will revisit Cobalt2 later
   {
     "lalitmee/cobalt2.nvim",
     lazy = true,
@@ -102,16 +71,45 @@ return {
       vim.o.spell = false
     end,
   },
+  {
+    "sainnhe/everforest",
+    config = function()
+      -- " Available values: 'hard', 'medium'(default), 'soft'
+      vim.g.everforest_background = "soft"
+      vim.g.everforest_transparent_background = 1
+      -- For better performance
+      vim.g.everforest_better_performance = 1
+      -- Enable italic
+      vim.g.everforest_enable_italic = 1
+    end,
+    lazy = true,
+  },
+  {
+    "Mofiqul/dracula.nvim",
+    opts = {
+      transparent_bg = is_transparent,
+      show_end_of_buffer = true,
+      -- set italic comment
+      italic_comment = true,
+    },
+    config = function(_, opts)
+      local dracula = require("dracula")
+      dracula.setup(opts)
+      -- Disable spell check as it's too red
+      vim.o.spell = false
+    end,
+    lazy = true,
+  },
   -- default is tokyonight in moon style
   {
     "folke/tokyonight.nvim",
     opts = {
       style = "moon",
-      transparent = true,
-      styles = {
+      transparent = is_transparent,
+      styles = is_transparent and {
         sidebars = "transparent",
         floats = "transparent",
-      },
+      } or {},
     },
   },
 
