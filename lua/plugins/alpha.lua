@@ -24,6 +24,7 @@ return {
       dashboard.button("m", " " .. " Open Mark", ":Telescope harpoon marks <CR>"),
       dashboard.button("s", " " .. " Last Session", [[:lua require("persistence").load({ last = true }) <cr>]]),
       dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
+      dashboard.button("e", " " .. " LazyExtras", ":LazyExtras<CR>"),
       dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
     }
