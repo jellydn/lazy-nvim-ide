@@ -54,7 +54,7 @@ return {
           return ok and #clients > 0
         end,
         color = function()
-          return Util.fg("Special")
+          return Util.ui.fg("Special")
         end,
       })
     end,
