@@ -33,11 +33,11 @@ return {
     opts = {
       options = {
         transparent = is_transparent,
-        styles = is_transparent and {
+        styles = {
           comments = "italic",
           keywords = "bold",
           types = "italic,bold",
-        } or {},
+        },
       },
     },
     lazy = true,
@@ -75,8 +75,10 @@ return {
     "sainnhe/everforest",
     config = function()
       -- " Available values: 'hard', 'medium'(default), 'soft'
-      vim.g.everforest_background = "soft"
-      vim.g.everforest_transparent_background = 1
+      if is_transparent then
+        vim.g.everforest_background = "soft"
+        vim.g.everforest_transparent_background = 1
+      end
       -- For better performance
       vim.g.everforest_better_performance = 1
       -- Enable italic
