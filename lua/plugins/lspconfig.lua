@@ -72,7 +72,11 @@ return {
         single_file_support = false,
         -- refer https://github.com/jose-elias-alvarez/null-ls.nvim/discussions/274#discussioncomment-1515526
         on_attach = function(client)
-          client.resolved_capabilities.document_formatting = false -- disable formatting in tsserver in favor of null-ls
+          -- Only run below for nvim < 0.10
+          if vim.fn.has("nvim-0.9") == 0 then
+            -- disable tsserver formatting if you plan on formatting via null-ls
+            client.resolved_capabilities.document_formatting = false
+          end
         end,
         handlers = {
           -- format error code with better error message
