@@ -12,6 +12,7 @@ return {
         -- code spell
         "codespell",
         "misspell",
+        "cspell",
         -- rustywind for tailwindcss
         "rustywind",
         -- php
