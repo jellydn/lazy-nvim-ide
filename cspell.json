@@ -5,13 +5,16 @@
   "globRoot": ".",
   "dictionaryDefinitions": [
     {
-      "name": "neovim",
-      "path": "./custom-dictionary.txt",
+      "name": "nvim",
+      "path": "./nvim.txt",
       "addWords": true
     }
   ],
   "dictionaries": [
-    "neovim"
+    "nvim"
   ],
-  "words": []
+  "ignorePaths": [
+    "node_modules",
+    "/nvim.txt"
+  ]
 }
