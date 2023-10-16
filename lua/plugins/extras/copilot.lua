@@ -1,10 +1,3 @@
-local enable_copilot_cmp = true
-
-if enable_copilot_cmp then
-  -- Use Copilot Extra from LazyVim
-  return {}
-end
-
 return {
   -- Disable default <tab> and <s-tab> behavior in LuaSnip
   {

@@ -12,7 +12,7 @@ return {
     config = function()
       local ctactions = require("cheatsheet.telescope.actions")
       require("cheatsheet").setup({
-        bundled_cheetsheets = {
+        bundled_cheatsheets = {
           enabled = { "default", "lua", "markdown", "regex", "netrw", "unicode" },
           disabled = { "nerd-fonts" },
         },
