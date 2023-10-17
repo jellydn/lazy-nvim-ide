@@ -17,6 +17,11 @@ return {
       restriction_mode = "hint", -- block or hint
       -- default values is disabled the arrow keys
       disabled_keys = { ["<Left>"] = {}, ["<Right>"] = {} },
+      -- Allow j k but restrict gj gk
+      restricted_keys = {
+        ["j"] = {},
+        ["k"] = {},
+      },
       disabled_filetypes = {
         "qf",
         "netrw",
