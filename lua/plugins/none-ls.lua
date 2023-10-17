@@ -134,6 +134,9 @@ return {
       -- proto buf
       b.diagnostics.protolint, -- brew tap yoheimuta/protolint && brew install protolint
 
+      -- Markdown
+      b.diagnostics.markdownlint,
+
       -- Php - comment out as I don't use php much
       -- b.formatting.pint,
     }

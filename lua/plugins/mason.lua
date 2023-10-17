@@ -13,6 +13,8 @@ return {
         "codespell",
         "misspell",
         "cspell",
+        -- markdown
+        "markdownlint",
         -- rustywind for tailwindcss
         "rustywind",
         -- php
