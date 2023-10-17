@@ -58,7 +58,6 @@ return {
         { title = "Neotest Summary", ft = "neotest-summary" },
         {
           ft = "Outline",
-          pinned = true,
           open = "SymbolsOutlineOpen",
         },
         "aerial",
