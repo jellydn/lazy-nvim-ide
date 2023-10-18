@@ -1,21 +1,29 @@
 return {
   {
     "ray-x/web-tools.nvim",
-    -- dependencies = { { "ray-x/guihua.lua", build = "cd lua/fzy && make" } },
+    ft = "hurl",
     cmd = { "HurlRun", "TagRename" },
+    dependencies = {
+      { "ray-x/guihua.lua", build = "cd lua/fzy && make", opts = { maps = {
+        close_view = "q",
+      } } },
+    },
     opts = {
-      hurl = { -- hurl default
-        show_headers = false, -- do not show http headers
-        floating = false, -- use floating windows (need guihua.lua)
-        formatters = { -- format the result by filetype
+      -- debug = true,
+      hurl = {
+        floating = true,
+        show_headers = false, -- Formatter does not work with well with headers
+        formatters = { -- format the result by file type
           json = { "jq" },
           html = { "prettier", "--parser", "html" },
         },
       },
     },
     keys = {
-      { "<leader>cRa", "<cmd>HurlRun<CR>", desc = "Run API request" },
+      { "<leader>cRa", "<cmd>HurlRun<CR>", desc = "Run API requests" },
       { "<leader>cRt", "<cmd>TagRename<CR>", desc = "Rename HTML tag" },
+      -- Run API request in visual mode
+      { "<leader>cr", ":HurlRun<CR>", desc = "Run API request", mode = "v" },
     },
   },
 }
