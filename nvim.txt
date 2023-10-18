@@ -30,6 +30,7 @@ toggleterm
 tokyonight
 undotree
 startuptime
+zenmode
 Autocmds
 autocmds
 Keymaps
@@ -130,13 +131,11 @@ deno
 lukas
 reineke
 norg
-williamboman
-markdownlint
-nvimtools
-builtins
 Previm
 cmdline
+williamboman
 codespell
+markdownlint
 rustywind
 tailwindcss
 astro
@@ -147,6 +146,8 @@ marilari
 vitest
 markemmons
 theutz
+builtins
+nvimtools
 davidmh
 postprocess
 proto

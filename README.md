@@ -27,7 +27,7 @@ Run `nvim` and wait for the plugins to be installed
 
 Open `nvim` and enter the following:
 
-```
+```lua
 :checkhealth
 ```
 
@@ -39,7 +39,7 @@ I recommend using the following repo to get a "Nerd Font" (Font that supports ic
 
 ## Try with Docker
 
-```
+```sh
 docker run -w /root -it --rm alpine:latest sh -uelic '
   apk add git nodejs npm neovim ripgrep build-base make musl-dev go --update
   go install github.com/jesseduffield/lazygit@latest
@@ -75,10 +75,14 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 14
 To enable key-repeating, execute the following in your Terminal, log out and back in, and then restart VS Code:
 
 ```sh
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false              # For VS Code
-defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false      # For VS Code Insider
-defaults delete -g ApplePressAndHoldEnabled                                           # If necessary, reset global default
-defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool false     # For Cursor
+# For VS Code
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+# For VS Code Insider
+defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false
+# If necessary, reset global default
+defaults delete -g ApplePressAndHoldEnabled
+# For Cursor
+defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool false
 ```
 
 Also increasing Key Repeat and Delay Until Repeat settings in System Preferences -> Keyboard.
