@@ -98,4 +98,24 @@ return {
       { "glh", "<cmd>Lspsaga hover_doc<CR>", desc = "Hover Doc" },
     },
   },
+  {
+    -- Displaying references and definition infos upon functions
+    "VidocqH/lsp-lens.nvim",
+    -- Pin to commit due to some breaking changes
+    commit = "13d25ad8bd55aa34cc0aa3082e78a4157c401346",
+    event = "BufRead",
+    -- Disable lsp lens if that is nightly version
+    enabled = is_stable_version,
+    opts = {
+      enable = true,
+    },
+    keys = {
+      {
+        -- LspLensToggle
+        "<leader>uL",
+        "<cmd>LspLensToggle<CR>",
+        desc = "LSP Len Toggle",
+      },
+    },
+  },
 }

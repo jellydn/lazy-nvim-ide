@@ -7,6 +7,7 @@ codeium
 colorbuddy
 everforest
 gitsigns
+guihua
 hardtime
 keymap
 inlayhints
@@ -30,7 +31,6 @@ toggleterm
 tokyonight
 undotree
 startuptime
-zenmode
 Autocmds
 autocmds
 Keymaps
@@ -103,7 +103,6 @@ jellydn
 Tobin
 rayso
 Rayso
-guihua
 dmmulroy
 gbprod
 Yanky
@@ -181,3 +180,4 @@ uelic
 jesseduffield
 lazygit
 todesktop
+Vidocq
