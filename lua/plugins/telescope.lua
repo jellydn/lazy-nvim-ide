@@ -1,3 +1,4 @@
+--- Live grep from project git root
 local function live_grep_from_project_git_root()
   local function is_git_repo()
     vim.fn.system("git rev-parse --is-inside-work-tree")
@@ -21,6 +22,7 @@ local function live_grep_from_project_git_root()
   require("telescope.builtin").live_grep(opts)
 end
 
+--- Fallback to find_files if not in git repo
 local function fallback_to_find_files_if_not_git()
   local opts = {} -- define here if you want to define something
   vim.fn.system("git rev-parse --is-inside-work-tree")
@@ -29,6 +31,13 @@ local function fallback_to_find_files_if_not_git()
   else
     require("telescope.builtin").find_files(opts)
   end
+end
+
+--- Open selected file in vertical split
+local function open_selected_file_in_vertical()
+  local entry = require("telescope.actions.state").get_selected_entry()
+  require("telescope.actions").close(entry)
+  vim.cmd("vsplit " .. entry.path)
 end
 
 return {
@@ -87,6 +96,11 @@ return {
         "<leader>fa",
         "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>",
         desc = "Find All Files (including hidden)",
+      },
+    },
+    mapping = {
+      i = {
+        ["C-v"] = open_selected_file_in_vertical,
       },
     },
   },
