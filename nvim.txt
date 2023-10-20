@@ -5,6 +5,7 @@ tabnine
 luasnip
 codeium
 colorbuddy
+diffview
 everforest
 gitsigns
 guihua
@@ -31,6 +32,7 @@ toggleterm
 tokyonight
 undotree
 startuptime
+zenmode
 Autocmds
 autocmds
 Keymaps
@@ -92,7 +94,6 @@ isdirectory
 akinsho
 Quicklist
 sindrets
-diffview
 Diffview
 adalessa
 laravel
@@ -119,6 +120,7 @@ rmagatti
 nnoremap
 glepnir
 Lspsaga
+Vidocq
 fnamemodify
 getcwd
 filereadable
@@ -163,6 +165,7 @@ uffer
 tructural
 earch
 eplace
+vsplit
 Vitest
 tterm
 denotest
@@ -180,4 +183,3 @@ uelic
 jesseduffield
 lazygit
 todesktop
-Vidocq
