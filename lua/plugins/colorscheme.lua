@@ -1,23 +1,35 @@
+local function is_weekend()
+  local day = tonumber(os.date("%w"))
+  return day == 0 or day == 6
+end
+
 local function is_day_time()
   local hour = tonumber(os.date("%H"))
   return hour >= 9 and hour < 19
 end
+
+local is_transparent = is_day_time() and not is_weekend()
+local colorscheme = "tokyonight"
+
 -- Select colorscheme based on the time, and load it with LazyVim
--- day time: tokyonight (moon)
--- night time: random from {nightfox, rose-pine, catppuccin-frappe, everforest, dracula}
+-- day time on weekday: tokyonight (moon)
+-- night time or weekend: random from {nightfox, rose-pine, catppuccin-frappe, everforest, dracula}
 local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
     return "tokyonight"
   end
 
-  local colorscheme
-
-  if is_day_time() then
+  if is_transparent then
     colorscheme = "tokyonight"
   else
     local night_themes = { "nightfox", "rose-pine", "catppuccin-frappe", "everforest", "dracula" }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
+    if colorscheme == night_themes[idx] then
+      -- if the same theme is selected, select the next one
+      idx = idx % #night_themes + 1
+    end
+
     colorscheme = night_themes[idx]
   end
 
@@ -25,7 +37,15 @@ local function selectColorSchemeByTime()
   return colorscheme
 end
 
-local is_transparent = is_day_time()
+local function randomize_theme()
+  colorscheme = selectColorSchemeByTime()
+  vim.cmd.colorscheme(colorscheme)
+end
+
+-- Define a keymap to randomize colorscheme
+vim.keymap.set("n", "<leader>tc", randomize_theme, {
+  desc = "Randomize colorscheme",
+})
 
 return {
   {
@@ -114,7 +134,6 @@ return {
       } or {},
     },
   },
-
   -- set LazyVim to load colorscheme
   {
     "LazyVim/LazyVim",
