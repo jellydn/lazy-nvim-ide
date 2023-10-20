@@ -121,7 +121,7 @@ vim.keymap.set("n", "<leader>tb", function()
 
   vim.cmd("colorscheme " .. colorscheme)
 end, {
-  desc = "Toggle transparent background",
+  desc = "Toggle background",
 })
 
 return {
