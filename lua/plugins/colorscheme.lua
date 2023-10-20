@@ -37,7 +37,9 @@ local function selectColorSchemeByTime()
   return colorscheme
 end
 
+--- Set random colorscheme with turning off transparent background
 local function randomize_theme()
+  is_transparent = false
   colorscheme = selectColorSchemeByTime()
   vim.cmd.colorscheme(colorscheme)
 end
@@ -45,6 +47,81 @@ end
 -- Define a keymap to randomize colorscheme
 vim.keymap.set("n", "<leader>tc", randomize_theme, {
   desc = "Randomize colorscheme",
+})
+
+--- Set color theme with transparent background
+local function theme_maker()
+  if colorscheme == "everforest" then
+    vim.g.everforest_transparent_background = is_transparent and 1 or 0
+  end
+
+  if colorscheme == "dracula" then
+    local dracula = require("dracula")
+    local opts = {
+      transparent_bg = is_transparent,
+      show_end_of_buffer = true,
+      -- set italic comment
+      italic_comment = true,
+    }
+    dracula.setup(opts)
+  end
+
+  if colorscheme == "catppuccin-frappe" then
+    local opts = {
+      transparent_background = is_transparent,
+    }
+    local catppuccin = require("catppuccin")
+    catppuccin.setup(opts)
+  end
+
+  if colorscheme == "rose-pine" then
+    local opts = {
+      variant = "moon",
+      disable_background = is_transparent,
+      disable_float_background = is_transparent,
+    }
+
+    local rose_pine = require("rose-pine")
+    rose_pine.setup(opts)
+  end
+
+  if colorscheme == "nightfox" then
+    local opts = {
+      transparent = is_transparent,
+      styles = {
+        comments = "italic",
+        keywords = "bold",
+        types = "italic,bold",
+      },
+    }
+    local nightfox = require("nightfox")
+    nightfox.setup(opts)
+  end
+
+  if colorscheme == "tokyonight" then
+    local opts = {
+      style = "moon",
+      transparent = is_transparent,
+      styles = is_transparent and {
+        sidebars = "transparent",
+        floats = "transparent",
+      } or {},
+    }
+    local tokyonight = require("tokyonight")
+    tokyonight.setup(opts)
+  end
+end
+
+-- Define a keymap to toggle transparent background for nightfox
+vim.keymap.set("n", "<leader>tb", function()
+  is_transparent = not is_transparent
+  vim.notify("Transparent: " .. tostring(is_transparent))
+
+  theme_maker()
+
+  vim.cmd("colorscheme " .. colorscheme)
+end, {
+  desc = "Toggle transparent background",
 })
 
 return {
