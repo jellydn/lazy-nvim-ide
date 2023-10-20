@@ -20,8 +20,8 @@ return {
       },
     },
     keys = {
-      { "<leader>cRa", "<cmd>HurlRun<CR>", desc = "Run API requests" },
-      { "<leader>cRt", "<cmd>TagRename<CR>", desc = "Rename HTML tag" },
+      { "<leader>ra", "<cmd>HurlRun<CR>", desc = "Run API requests" },
+      { "<leader>rt", "<cmd>TagRename<CR>", desc = "Rename HTML tag" },
       -- Run API request in visual mode
       { "<leader>cr", ":HurlRun<CR>", desc = "Run API request", mode = "v" },
     },
