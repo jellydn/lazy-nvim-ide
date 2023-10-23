@@ -101,11 +101,14 @@ return {
   {
     -- Displaying references and definition infos upon functions
     "VidocqH/lsp-lens.nvim",
-    -- Pin to commit due to some breaking changes
-    commit = "13d25ad8bd55aa34cc0aa3082e78a4157c401346",
     event = "BufRead",
     opts = {
-      enable = true,
+      include_declaration = false, -- Reference include declaration
+      sections = { -- Enable / Disable specific request, formatter example looks 'Format Requests'
+        definition = false,
+        references = true,
+        implements = false,
+      },
     },
     keys = {
       {
