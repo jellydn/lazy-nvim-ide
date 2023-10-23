@@ -1,6 +1,6 @@
 return {
   {
-    dir = "jellydn/hurl.nvim",
+    "jellydn/hurl.nvim",
     ft = "hurl",
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = { "HurlRun" },
