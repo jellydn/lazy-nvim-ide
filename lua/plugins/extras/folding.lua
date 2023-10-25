@@ -1,5 +1,4 @@
 return {
-  -- Disable ufo folding with treesitter from LazyVim
   {
     "kevinhwang91/nvim-ufo",
     dependencies = {
