@@ -2,6 +2,7 @@ local neogeo_opts = {}
 
 if not vim.g.vscode then
   neogeo_opts = {
+    enabled = true,
     -- Only use luasnip as snippet engine if that is not vscode
     snippet_engine = "luasnip",
   }
@@ -28,7 +29,7 @@ return {
     opts = neogeo_opts,
     cmd = "Neogen",
     keys = {
-      { "<leader>ng", "<cmd>Neogen<cr>", desc = "Neogen - Annotation generator" },
+      { "<leader>cc", "<cmd>Neogen<cr>", desc = "Neogen - Annotation generator" },
     },
   },
 }
