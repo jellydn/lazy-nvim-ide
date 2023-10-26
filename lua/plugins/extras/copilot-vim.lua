@@ -1,3 +1,4 @@
+-- NOTE: Only enable either copilot-vim or codeium-vim at the same time
 return {
   -- Disable default <tab> and <s-tab> behavior in LuaSnip
   {
@@ -21,18 +22,14 @@ return {
         let g:copilot_assume_mapped = v:true
       ]])
 
-      -- setup keymap
       local keymap = vim.keymap.set
-      -- Silent keymap option
       local opts = { silent = true }
-
-      -- Copilot
       keymap("i", "<C-j>", "<Plug>(copilot-next)", opts)
       keymap("i", "<C-k>", "<Plug>(copilot-previous)", opts)
       keymap("i", "<C-l>", "<Plug>(copilot-suggest)", opts)
     end,
   },
-  -- add status line icon for copilot
+  -- Add status line icon for copilot
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
