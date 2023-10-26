@@ -183,3 +183,9 @@ uelic
 jesseduffield
 lazygit
 todesktop
+strdisplaywidth
+virt
+foldcolumn
+foldlevel
+foldlevelstart
+foldenable
