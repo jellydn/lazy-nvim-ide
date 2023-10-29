@@ -190,3 +190,6 @@ foldlevel
 foldlevelstart
 foldenable
 Exafunction
+codota
+cterm
+pwsh
