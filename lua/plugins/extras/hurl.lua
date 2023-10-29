@@ -5,7 +5,7 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = { "HurlRunner" },
     opts = {
-      mode = "popup",
+      mode = "split",
     },
     keys = {
       -- Run API request
