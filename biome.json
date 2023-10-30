@@ -9,6 +9,9 @@
         "noCommentText": "warn",
         "noShadowRestrictedNames": "warn"
       },
+      "complexity": {
+        "noForEach": "warn"
+      },
       "style": {
         "noUnusedTemplateLiteral": "warn"
       }
