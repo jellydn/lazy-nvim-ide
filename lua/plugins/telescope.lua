@@ -5,6 +5,47 @@ local function open_selected_file_in_vertical()
   vim.cmd("vsplit " .. entry.path)
 end
 
+function vim.find_files_from_project_git_root()
+  local function is_git_repo()
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+    return vim.v.shell_error == 0
+  end
+  local function get_git_root()
+    local dot_git_path = vim.fn.finddir(".git", ".;")
+    return vim.fn.fnamemodify(dot_git_path, ":h")
+  end
+  local opts = {}
+  if is_git_repo() then
+    opts = {
+      cwd = get_git_root(),
+    }
+  end
+  require("telescope.builtin").find_files(opts)
+end
+
+function live_grep_from_project_git_root()
+  local function is_git_repo()
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+
+    return vim.v.shell_error == 0
+  end
+
+  local function get_git_root()
+    local dot_git_path = vim.fn.finddir(".git", ".;")
+    return vim.fn.fnamemodify(dot_git_path, ":h")
+  end
+
+  local opts = {}
+
+  if is_git_repo() then
+    opts = {
+      cwd = get_git_root(),
+    }
+  end
+
+  require("telescope.builtin").live_grep(opts)
+end
+
 return {
   {
     "telescope.nvim",
@@ -37,6 +78,22 @@ return {
         "<leader>fa",
         "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>",
         desc = "Find All Files (including hidden)",
+      },
+      -- add <leader>fl to live grep from git root
+      {
+        "<leader>fl",
+        function()
+          live_grep_from_project_git_root()
+        end,
+        desc = "Live Grep From Project Git Root",
+      },
+      -- add <leader>fg to find files from project git root
+      {
+        "<leader>fg",
+        function()
+          vim.find_files_from_project_git_root()
+        end,
+        desc = "Find Files From Project Git Root",
       },
     },
     mapping = {
