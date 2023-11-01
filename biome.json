@@ -12,6 +12,9 @@
       "complexity": {
         "noForEach": "warn"
       },
+      "correctness": {
+        "useExhaustiveDependencies": "warn"
+      },
       "style": {
         "noUnusedTemplateLiteral": "warn"
       }
