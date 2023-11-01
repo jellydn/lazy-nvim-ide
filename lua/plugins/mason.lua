@@ -21,6 +21,8 @@ return {
         "pint",
         -- astro
         "astro-language-server",
+        -- Solidity
+        "solidity",
       },
     },
   },
