@@ -3,15 +3,17 @@ return {
     "jellydn/hurl.nvim",
     ft = "hurl",
     dependencies = { "MunifTanjim/nui.nvim" },
-    cmd = { "HurlRunner" },
+    cmd = { "HurlRunner", "HurlRunnerAt" },
     opts = {
-      mode = "split",
+      mode = "popup",
+      debug = true,
     },
     keys = {
       -- Run API request
-      { "<leader>ra", "<cmd>HurlRunner<CR>", desc = "Run API requests" },
-      -- Run API request in visual mode
-      { "<leader>cr", ":HurlRunner<CR>", desc = "Run API request", mode = "v" },
+      { "<leader>A", "<cmd>HurlRunner<CR>", desc = "Run All requests" },
+      { "<leader>a", "<cmd>HurlRunnerAt<CR>", desc = "Run Api request" },
+      -- Run Hurl request in visual mode
+      { "<leader>h", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
     },
   },
 }

@@ -4,7 +4,7 @@ local opts = { silent = true }
 return {
   "stevearc/aerial.nvim",
   keys = {
-    { "<leader>a", "<cmd>AerialToggle<cr>", desc = "AerialToggle" },
+    { "<leader>ta", "<cmd>AerialToggle<cr>", desc = "AerialToggle" },
     {
       "<leader>fi",
       "<cmd>Telescope aerial<cr>",
