@@ -6,7 +6,7 @@ return {
     cmd = { "HurlRunner", "HurlRunnerAt" },
     opts = {
       mode = "popup",
-      debug = true,
+      debug = false, -- Enable debug for troubleshooting
     },
     keys = {
       -- Run API request
