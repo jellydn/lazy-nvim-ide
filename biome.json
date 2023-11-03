@@ -17,6 +17,9 @@
       },
       "style": {
         "noUnusedTemplateLiteral": "warn"
+      },
+      "performance": {
+        "noAccumulatingSpread": "warn"
       }
     }
   },
