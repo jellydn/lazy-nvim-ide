@@ -60,6 +60,7 @@ return {
           ft = "Outline",
           open = "SymbolsOutlineOpen",
         },
+        { title = "hurl.nvim", ft = "hurl-nvim" },
         "aerial",
         "lspsagaoutline",
       },
