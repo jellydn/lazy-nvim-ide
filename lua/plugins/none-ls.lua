@@ -1,10 +1,3 @@
-local ok, none_ls = pcall(require, "null-ls")
-if not ok then
-  return
-end
-
-local b = none_ls.builtins
-
 local function deno_config_exists()
   local current_dir = vim.fn.getcwd()
   local config_file = current_dir .. "/deno.json"
@@ -80,71 +73,76 @@ end
 
 -- formatters
 return {
-  "nvimtools/none-ls.nvim",
-  keys = {
-    { "<leader>cn", "<cmd>NullLsInfo<cr>", desc = "NullLs Info" },
+  { import = "lazyvim.plugins.extras.lsp.none-ls" },
+  {
+    "nvimtools/none-ls.nvim",
+    keys = {
+      { "<leader>cn", "<cmd>NullLsInfo<cr>", desc = "NullLs Info" },
+    },
+    dependencies = { "mason.nvim", "davidmh/cspell.nvim" },
+    event = { "BufReadPre", "BufNewFile" },
+    opts = function()
+      local cspell = require("cspell")
+      local none_ls = require("null-ls")
+      local b = none_ls.builtins
+      local sources = {
+
+        -- spell check
+        b.diagnostics.codespell,
+        b.diagnostics.misspell,
+        -- cspell
+        cspell.diagnostics.with({
+          -- Set the severity to HINT for unknown words
+          diagnostics_postprocess = function(diagnostic)
+            diagnostic.severity = vim.diagnostic.severity["HINT"]
+          end,
+        }),
+        cspell.code_actions,
+
+        -- tailwind
+        b.formatting.rustywind.with({
+          filetypes = { "html", "css", "javascriptreact", "typescriptreact", "svelte" },
+        }),
+
+        -- deno
+        b.formatting.deno_fmt.with({
+          filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact" },
+          condition = function()
+            return deno_config_exists()
+          end,
+        }),
+        -- prettier
+        b.formatting.prettier.with({
+          condition = function()
+            return not deno_config_exists() and not biome_config_exists() and prettier_config_dir()
+          end,
+        }),
+
+        -- biome
+        b.formatting.biome.with({
+          condition = function()
+            return biome_config_exists() and not prettier_config_dir() and not deno_config_exists()
+          end,
+        }),
+
+        -- Lua
+        b.formatting.stylua,
+
+        -- proto buf
+        b.diagnostics.protolint, -- brew tap yoheimuta/protolint && brew install protolint
+
+        -- Markdown
+        b.diagnostics.markdownlint,
+
+        -- Php - comment out as I don't use php much
+        -- b.formatting.pint,
+      }
+
+      return {
+        sources = sources,
+        debounce = 200,
+        debug = true,
+      }
+    end,
   },
-  dependencies = { "mason.nvim", "davidmh/cspell.nvim" },
-  event = { "BufReadPre", "BufNewFile" },
-  opts = function()
-    local cspell = require("cspell")
-    local sources = {
-
-      -- spell check
-      b.diagnostics.codespell,
-      b.diagnostics.misspell,
-      -- cspell
-      cspell.diagnostics.with({
-        -- Set the severity to HINT for unknown words
-        diagnostics_postprocess = function(diagnostic)
-          diagnostic.severity = vim.diagnostic.severity["HINT"]
-        end,
-      }),
-      cspell.code_actions,
-
-      -- tailwind
-      b.formatting.rustywind.with({
-        filetypes = { "html", "css", "javascriptreact", "typescriptreact", "svelte" },
-      }),
-
-      -- deno
-      b.formatting.deno_fmt.with({
-        filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact" },
-        condition = function()
-          return deno_config_exists()
-        end,
-      }),
-      -- prettier
-      b.formatting.prettier.with({
-        condition = function()
-          return not deno_config_exists() and not biome_config_exists() and prettier_config_dir()
-        end,
-      }),
-
-      -- biome
-      b.formatting.biome.with({
-        condition = function()
-          return biome_config_exists() and not prettier_config_dir() and not deno_config_exists()
-        end,
-      }),
-
-      -- Lua
-      b.formatting.stylua,
-
-      -- proto buf
-      b.diagnostics.protolint, -- brew tap yoheimuta/protolint && brew install protolint
-
-      -- Markdown
-      b.diagnostics.markdownlint,
-
-      -- Php - comment out as I don't use php much
-      -- b.formatting.pint,
-    }
-
-    return {
-      sources = sources,
-      debounce = 200,
-      debug = true,
-    }
-  end,
 }
