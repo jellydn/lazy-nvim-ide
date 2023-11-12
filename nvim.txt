@@ -194,3 +194,5 @@ codota
 cterm
 pwsh
 mfussenegger
+nvimdev
+productsway

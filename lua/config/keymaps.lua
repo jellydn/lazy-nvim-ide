@@ -86,6 +86,8 @@ keymap("n", "<leader>;", function()
 
   if Util.has("alpha-nvim") then
     require("alpha").start(true)
+  elseif Util.has("dashboard-nvim") then
+    -- TODO: Will do this when Dashboard plugin support this feature
   end
 end, opts)
 
