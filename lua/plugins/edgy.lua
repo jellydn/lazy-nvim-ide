@@ -1,4 +1,5 @@
 return {
+  { import = "lazyvim.plugins.extras.ui.edgy" },
   {
     "folke/edgy.nvim",
     keys = {
