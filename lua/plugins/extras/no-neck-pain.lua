@@ -10,7 +10,7 @@ return {
       {
         "<leader>cz",
         "<cmd>NoNeckPain<cr>",
-        desc = "No Neck Pain",
+        desc = "Distraction Free Mode",
       },
     },
   },

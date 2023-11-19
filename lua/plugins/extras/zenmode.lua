@@ -4,7 +4,7 @@ return {
     cmd = { "ZenMode" },
     opts = {
       window = {
-        width = 0.85, -- width will be 85% of the editor width
+        width = 0.70, -- width will be 70% of the editor width
       },
     },
     config = true,
@@ -13,7 +13,7 @@ return {
       {
         "<leader>cz",
         "<cmd>ZenMode<cr>",
-        desc = "Zen Mode",
+        desc = "Distraction Free Mode",
       },
     },
   },
