@@ -5,7 +5,7 @@ local function open_selected_file_in_vertical()
   vim.cmd("vsplit " .. entry.path)
 end
 
-function vim.find_files_from_project_git_root()
+local function find_files_from_project_git_root()
   local function is_git_repo()
     vim.fn.system("git rev-parse --is-inside-work-tree")
     return vim.v.shell_error == 0
@@ -23,7 +23,7 @@ function vim.find_files_from_project_git_root()
   require("telescope.builtin").find_files(opts)
 end
 
-function live_grep_from_project_git_root()
+local function live_grep_from_project_git_root()
   local function is_git_repo()
     vim.fn.system("git rev-parse --is-inside-work-tree")
 
@@ -91,7 +91,7 @@ return {
       {
         "<leader>fg",
         function()
-          vim.find_files_from_project_git_root()
+          find_files_from_project_git_root()
         end,
         desc = "Find Files From Project Git Root",
       },
