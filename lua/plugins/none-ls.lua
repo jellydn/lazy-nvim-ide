@@ -79,7 +79,10 @@ return {
     keys = {
       { "<leader>cn", "<cmd>NullLsInfo<cr>", desc = "NullLs Info" },
     },
-    dependencies = { "mason.nvim", { commit = "335080bafbcf0c94d6b16b229ce7c2cf6bf5043f", "davidmh/cspell.nvim" } },
+    dependencies = {
+      "mason.nvim",
+      { "davidmh/cspell.nvim" },
+    },
     event = { "BufReadPre", "BufNewFile" },
     opts = function()
       local cspell = require("cspell")
