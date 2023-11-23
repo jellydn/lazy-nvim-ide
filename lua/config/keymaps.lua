@@ -72,6 +72,15 @@ keymap(
   { noremap = true, silent = true, desc = "Toggle Diagnostics Level" }
 )
 
+local function open_dashboard()
+  if Util.has("alpha-nvim") then
+    require("alpha").start(true)
+  elseif Util.has("dashboard-nvim") then
+    -- TODO: Will do this when Dashboard plugin support this feature
+    vim.notify("Dashboard plugin does not support this feature yet", "warn", { title = "Dashboard" })
+  end
+end
+
 -- Dashboard
 -- Add keymap to open alpha dashboard
 keymap("n", "<leader>;", function()
@@ -84,11 +93,7 @@ keymap("n", "<leader>;", function()
     end
   end
 
-  if Util.has("alpha-nvim") then
-    require("alpha").start(true)
-  elseif Util.has("dashboard-nvim") then
-    -- TODO: Will do this when Dashboard plugin support this feature
-  end
+  open_dashboard()
 end, opts)
 
 -- Close buffers
@@ -97,8 +102,8 @@ if Util.has("mini.bufremove") then
     require("mini.bufremove").delete(0, false)
     local bufs = vim.fn.getbufinfo({ buflisted = true })
     -- open alpha if no buffers are left
-    if not bufs[2] and Util.has("alpha-nvim") then
-      require("alpha").start(true)
+    if bufs ~= nil and not bufs[2] and Util.has("alpha-nvim") then
+      open_dashboard()
     end
   end, opts)
 else
@@ -116,6 +121,16 @@ keymap("n", "<C-c>", ":%y+<CR>", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+
+-- Easier access to beginning and end of lines
+keymap("n", "<A-h>", "^", {
+  desc = "Go to start of line",
+  silent = true,
+})
+keymap("n", "<A-l>", "$", {
+  desc = "Go to end of line",
+  silent = true,
+})
 
 -- Move live up or down
 -- moving
