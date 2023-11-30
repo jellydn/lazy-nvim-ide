@@ -8,6 +8,7 @@ return {
         -- formatters
         "eslint_d",
         "prettier",
+        "prettierd",
         "biome",
         -- code spell
         "codespell",

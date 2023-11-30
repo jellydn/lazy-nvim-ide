@@ -1,17 +1,21 @@
 return {
   {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "typos_lsp" })
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Ensure typos_lsp is installed, refer https://github.com/tekumara/typos-vscode
         typos_lsp = {
-          cmd = {
-            "typos-lsp",
+          settings = {
+            diagnosticSeverity = "Warning",
           },
-          init_options = {},
         },
       },
-      setup = {},
     },
   },
 }
