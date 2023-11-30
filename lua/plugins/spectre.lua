@@ -47,6 +47,20 @@ return {
         end,
         desc = "Replace current word (Root dir)",
       },
+      -- Open search with select word in visual mode
+      {
+        "<leader>sr",
+        function()
+          local opts = {}
+          if is_git_repo() then
+            opts.cwd = get_git_root()
+          end
+          require("spectre").open_visual(opts)
+        end,
+        mode = "v",
+        silent = true,
+        desc = "Replace current word (Root dir)",
+      },
     },
   },
 }
