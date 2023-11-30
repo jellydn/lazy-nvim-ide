@@ -1,1 +1,22 @@
-{"ignorePaths":["node_modules","dist","build","\/nvim.txt"],"version":"0.2","language":"en","$schema":"https:\/\/raw.githubusercontent.com\/streetsidesoftware\/cspell\/main\/cspell.schema.json","words":["sysname"],"globRoot":".","dictionaryDefinitions":[{"addWords":true,"path":".\/nvim.txt","name":"nvim"}],"dictionaries":["nvim"]}
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en",
+  "globRoot": ".",
+  "dictionaryDefinitions": [
+    {
+      "name": "cspell-tool",
+      "path": "./cspell-tool.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": [
+    "cspell-tool"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    "build",
+    "/cspell-tool.txt"
+  ]
+}
