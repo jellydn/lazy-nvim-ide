@@ -6,6 +6,14 @@ return {
     opts = {
       mode = "popup",
       debug = false, -- Enable debug for troubleshooting
+      formatters = {
+        json = { "jq" },
+        html = {
+          "prettier",
+          "--parser",
+          "html",
+        },
+      },
     },
     keys = {
       -- Run API request
