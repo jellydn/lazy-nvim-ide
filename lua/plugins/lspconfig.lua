@@ -1,15 +1,14 @@
+-- TODO: Move those to common util functions
+local function is_git_repo()
+  vim.fn.system("git rev-parse --is-inside-work-tree")
+
+  return vim.v.shell_error == 0
+end
+local function get_git_root()
+  local dot_git_path = vim.fn.finddir(".git", ".;")
+  return vim.fn.fnamemodify(dot_git_path, ":h")
+end
 local function biome_config_exists()
-  local function is_git_repo()
-    vim.fn.system("git rev-parse --is-inside-work-tree")
-
-    return vim.v.shell_error == 0
-  end
-
-  local function get_git_root()
-    local dot_git_path = vim.fn.finddir(".git", ".;")
-    return vim.fn.fnamemodify(dot_git_path, ":h")
-  end
-
   local current_dir = vim.fn.getcwd()
   local config_file = current_dir .. "/biome.json"
   if vim.fn.filereadable(config_file) == 1 then
@@ -21,6 +20,25 @@ local function biome_config_exists()
   local git_root = get_git_root()
   if is_git_repo() and git_root ~= current_dir then
     config_file = git_root .. "/biome.json"
+    if vim.fn.filereadable(config_file) == 1 then
+      return true
+    end
+  end
+
+  return false
+end
+local function deno_config_exist()
+  local current_dir = vim.fn.getcwd()
+  local config_file = current_dir .. "/deno.json"
+  if vim.fn.filereadable(config_file) == 1 then
+    return true
+  end
+
+  -- If the current directory is a git repo, check if the root of the repo
+  -- contains a deno.json file
+  local git_root = get_git_root()
+  if is_git_repo() and git_root ~= current_dir then
+    config_file = git_root .. "/deno.json"
     if vim.fn.filereadable(config_file) == 1 then
       return true
     end
@@ -68,16 +86,8 @@ return {
     ---@type lspconfig.options
     servers = {
       tsserver = {
-        root_dir = require("lspconfig").util.root_pattern("package.json"),
+        root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json"),
         single_file_support = false,
-        -- refer https://github.com/jose-elias-alvarez/null-ls.nvim/discussions/274#discussioncomment-1515526
-        on_attach = function(client)
-          -- Only run below for nvim < 0.10
-          if vim.fn.has("nvim-0.9") == 0 then
-            -- disable tsserver formatting if you plan on formatting via null-ls
-            client.resolved_capabilities.document_formatting = false
-          end
-        end,
         handlers = {
           -- format error code with better error message
           ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
@@ -115,6 +125,19 @@ return {
             end,
             desc = "Organize Imports",
           },
+          {
+            "<leader>cR",
+            function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                  only = { "source.removeUnused.ts" },
+                  diagnostics = {},
+                },
+              })
+            end,
+            desc = "Remove Unused Imports",
+          },
         },
         -- inlay hints
         settings = {
@@ -130,12 +153,17 @@ return {
               includeInlayFunctionLikeReturnTypeHints = true,
               includeInlayEnumMemberValueHints = true,
             },
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
           },
           javascript = {
             inlayHints = {
               -- You can set this to 'all' or 'literals' to enable more hints
-              includeInlayParameterNameHints = "literals", -- 'none' | 'literals' | 'all'
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayParameterNameHints = "literals", -- 'none' | 'literals' | 'all'
               includeInlayVariableTypeHints = false,
               includeInlayFunctionParameterTypeHints = false,
               includeInlayVariableTypeHintsWhenTypeMatchesName = false,
@@ -143,22 +171,28 @@ return {
               includeInlayFunctionLikeReturnTypeHints = true,
               includeInlayEnumMemberValueHints = true,
             },
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
+          },
+          completions = {
+            completeFunctionCalls = true,
           },
         },
       },
       denols = {
-        root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+        root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc", "deno.lock"),
       },
       biome = {
         -- root_dir = require("lspconfig").util.root_pattern("biome.json"),
         -- Fallback to nvim config dir if biome.json is not found
         root_dir = function()
           if biome_config_exists() then
-            vim.notify("Use project biome.json", "info", { title = "Biome LSP" })
             return require("lspconfig").util.root_pattern("biome.json")()
           end
 
-          vim.notify("Use global biome.json", "info", { title = "Biome LSP" })
           return vim.fn.stdpath("config")
         end,
       },
@@ -173,10 +207,13 @@ return {
       timeout_ms = 10000, -- 10 seconds
     },
     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-    -- setup = {
-    --   tsserver = function(_, opts)
-    --     return true
-    --   end,
-    -- },
+    setup = {
+      tsserver = function(_, opts)
+        -- Disable tsserver if denols is present
+        if deno_config_exist() then
+          return true
+        end
+      end,
+    },
   },
 }
