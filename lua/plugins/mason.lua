@@ -24,6 +24,9 @@ return {
         "astro-language-server",
         -- Solidity
         "solidity",
+        -- Python
+        "ruff",
+        "isort",
       },
     },
   },

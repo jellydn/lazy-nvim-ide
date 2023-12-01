@@ -1,4 +1,5 @@
 return {
+  -- Setup config for formatter
   {
     "stevearc/conform.nvim",
     optional = true,
@@ -11,13 +12,19 @@ return {
         fish = {},
         -- Conform will run multiple formatters sequentially
         go = { "goimports", "gofmt" },
+        python = { "isort", "ruff_fix", "ruff_format" },
+        php = { "pint" },
+        rust = { "rustfmt" },
+        -- Use a sub-list to run only the first available formatter
         ["markdown"] = { { "biome", "prettier" } },
         ["markdown.mdx"] = { { "biome", "prettier" } },
-        -- Use a sub-list to run only the first available formatter
-        ["javascript"] = { { "biome", "prettier" } },
-        ["javascriptreact"] = { "rustywind", { "biome", "prettier" } },
-        ["typescript"] = { { "biome", "prettier" } },
-        ["typescriptreact"] = { "rustywind", { "biome", "prettier" } },
+        ["javascript"] = { { "biome", "deno_fmt", "prettier" } },
+        ["javascriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
+        ["typescript"] = { { "biome", "deno_fmt", "prettier" } },
+        ["typescriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
+
+        -- Auto fix typo with codespell
+        ["*"] = { "codespell" },
       },
       formatters = {
         biome = {
@@ -25,14 +32,15 @@ return {
             return vim.fs.find({ "biome.json" }, { path = ctx.filename, upward = true })[1]
           end,
         },
-        prettierd = {
+        deno_fmt = {
           condition = function(ctx)
-            return not vim.fs.find({ "biome.json" }, { path = ctx.filename, upward = true })[1]
+            return vim.fs.find({ "deno.json" }, { path = ctx.filename, upward = true })[1]
           end,
         },
         prettier = {
           condition = function(ctx)
             return not vim.fs.find({ "biome.json" }, { path = ctx.filename, upward = true })[1]
+              and not vim.fs.find({ "deno.json" }, { path = ctx.filename, upward = true })[1]
           end,
         },
       },
