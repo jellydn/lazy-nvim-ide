@@ -1,12 +1,4 @@
-local function get_git_root()
-  local dot_git_path = vim.fn.finddir(".git", ".;")
-  return vim.fn.fnamemodify(dot_git_path, ":h")
-end
-
-local function is_git_repo()
-  vim.fn.system("git rev-parse --is-inside-work-tree")
-  return vim.v.shell_error == 0
-end
+local Path = require("utils.path")
 
 return {
   {
@@ -26,8 +18,8 @@ return {
         "<leader>sp",
         function()
           local opts = {}
-          if is_git_repo() then
-            opts.cwd = get_git_root()
+          if Path.is_git_repo() then
+            opts.cwd = Path.get_git_root()
           end
           require("spectre").open(opts)
         end,
@@ -40,8 +32,8 @@ return {
           local opts = {
             select_word = true,
           }
-          if is_git_repo() then
-            opts.cwd = get_git_root()
+          if Path.is_git_repo() then
+            opts.cwd = Path.get_git_root()
           end
           require("spectre").open_visual(opts)
         end,
@@ -52,8 +44,8 @@ return {
         "<leader>sr",
         function()
           local opts = {}
-          if is_git_repo() then
-            opts.cwd = get_git_root()
+          if Path.is_git_repo() then
+            opts.cwd = Path.get_git_root()
           end
           require("spectre").open_visual(opts)
         end,

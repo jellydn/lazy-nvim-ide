@@ -9,6 +9,26 @@ return {
       animate = {
         enabled = false,
       },
+      bottom = {
+        {
+          ft = "lazyterm",
+          title = "LazyTerm",
+          size = { height = 0.4 },
+          filter = function(buf)
+            return not vim.b[buf].lazyterm_cmd
+          end,
+        },
+        "Trouble",
+        { ft = "qf", title = "QuickFix" },
+        {
+          ft = "help",
+          size = { height = 20 },
+          -- only show help buffers
+          filter = function(buf)
+            return vim.bo[buf].buftype == "help"
+          end,
+        },
+      },
       left = {
         "neo-tree",
         { ft = "spectre_panel", size = { width = 0.3 } },
@@ -20,7 +40,7 @@ return {
           ft = "Outline",
           open = "SymbolsOutlineOpen",
         },
-        { title = "hurl.nvim", ft = "hurl-nvim", size = { 0.4 } },
+        { title = "hurl.nvim", ft = "hurl-nvim", size = { width = 0.4 } },
         "aerial",
         "lspsagaoutline",
       },
