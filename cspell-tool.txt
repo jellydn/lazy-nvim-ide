@@ -204,3 +204,4 @@ uelic
 jesseduffield
 lazygit
 todesktop
+cword
