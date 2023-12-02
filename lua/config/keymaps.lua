@@ -206,11 +206,18 @@ function _G.add_word_to_c_spell_dictionary()
   local dictionary_path = Path.get_root_directory() .. "/cspell-tool.txt"
 
   -- Append the word to the dictionary file
-  local file = io.open(dictionary_path, "a") -- Open the file in append mode
+  local file = io.open(dictionary_path, "a")
   if file then
-    file:write("\n" .. word .. "\n")
+    -- Detect new line at the end of the file or not
+    local last_char = file:seek("end", -1)
+    if last_char ~= nil and last_char ~= "\n" then
+      word = "\n" .. word
+    end
+
+    file:write(word .. "")
     file:close()
-    vim.notify('Added "' .. word .. '" to cSpell dictionary', "info", { title = "cSpell" })
+    -- Reload buffer to update the dictionary
+    vim.cmd("e!")
   else
     vim.notify("Could not open cSpell dictionary", "error", { title = "cSpell" })
   end
