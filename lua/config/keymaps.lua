@@ -3,7 +3,6 @@
 -- Add any additional keymaps here
 --
 local Util = require("lazyvim.util")
-local Path = require("utils.path")
 local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
@@ -199,33 +198,9 @@ keymap("n", "<leader>fI", "<cmd>LazyFormatInfo<CR>", {
   desc = "Lazy Format Info",
 })
 
--- TODO: Read from the cspell.json from root of the project and add the word to the dictionary
--- Add unknown word to dictionary
-function _G.add_word_to_c_spell_dictionary()
-  local word = vim.fn.expand("<cword>")
-  local dictionary_path = Path.get_root_directory() .. "/cspell-tool.txt"
-
-  -- Append the word to the dictionary file
-  local file = io.open(dictionary_path, "a")
-  if file then
-    -- Detect new line at the end of the file or not
-    local last_char = file:seek("end", -1)
-    if last_char ~= nil and last_char ~= "\n" then
-      word = "\n" .. word
-    end
-
-    file:write(word .. "")
-    file:close()
-    -- Reload buffer to update the dictionary
-    vim.cmd("e!")
-  else
-    vim.notify("Could not open cSpell dictionary", "error", { title = "cSpell" })
-  end
-end
-
 keymap(
   "n",
   "<leader>cs",
-  "<cmd>lua _G.add_word_to_c_spell_dictionary()<CR>",
+  "<cmd>lua require('utils.cspell').add_word_to_c_spell_dictionary()<CR>",
   { noremap = true, silent = true, desc = "Add unknown to cspell dictionary" }
 )

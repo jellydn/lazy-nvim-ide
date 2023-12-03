@@ -7,6 +7,5 @@ return {
         ["*"] = { "cspell", "codespell" },
       },
     },
-    linters = {},
   },
 }
