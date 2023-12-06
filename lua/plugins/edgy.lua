@@ -31,8 +31,8 @@ return {
       },
       left = {
         "neo-tree",
-        { ft = "spectre_panel", size = { width = 0.3 } },
-        { ft = "undotree", title = "UndoTree" },
+        { title = "Spectre", ft = "spectre_panel", size = { width = 0.3 } },
+        { title = "UndoTree", ft = "undotree" },
       },
       right = {
         { title = "Neotest Summary", ft = "neotest-summary" },
