@@ -22,6 +22,7 @@ return {
         ["javascriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
         ["typescript"] = { { "biome", "deno_fmt", "prettier" } },
         ["typescriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
+        ["svelte"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
 
         -- Auto fix typo with codespell
         ["*"] = { "codespell" },
