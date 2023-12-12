@@ -9,11 +9,11 @@ local function is_day_time()
 end
 
 local is_transparent = is_day_time() and not is_weekend()
-local colorscheme = "tokyonight"
+
+-- Default colorscheme
+local default_color_scheme = "kanagawa"
 
 -- Select colorscheme based on the time, and load it with LazyVim
--- day time on weekday: tokyonight (moon)
--- night time or weekend: random from {nightfox, rose-pine, catppuccin-frappe, everforest, dracula}
 local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
@@ -21,26 +21,30 @@ local function selectColorSchemeByTime()
   end
 
   if is_transparent then
-    colorscheme = "tokyonight"
+    return default_color_scheme
   else
-    local night_themes = { "nightfox", "rose-pine", "catppuccin-frappe", "everforest", "dracula" }
+    local night_themes = {
+      "tokyonight",
+      "nightfox",
+      "rose-pine",
+      "catppuccin-frappe",
+      "everforest",
+      "dracula",
+      "cobalt2",
+      "kanagawa",
+    }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
-    if colorscheme == night_themes[idx] then
-      -- if the same theme is selected, select the next one
-      idx = idx % #night_themes + 1
-    end
 
-    colorscheme = night_themes[idx]
+    local colorscheme = night_themes[idx]
+    vim.notify("Selected colorscheme: " .. colorscheme)
+    return colorscheme
   end
-
-  vim.notify("Selected colorscheme: " .. colorscheme)
-  return colorscheme
 end
 
 --- Set random colorscheme with turning off transparent background
 local function randomize_theme()
   is_transparent = false
-  colorscheme = selectColorSchemeByTime()
+  local colorscheme = selectColorSchemeByTime()
   vim.cmd.colorscheme(colorscheme)
 end
 
@@ -50,7 +54,7 @@ vim.keymap.set("n", "<leader>tc", randomize_theme, {
 })
 
 --- Set color theme with transparent background
-local function theme_maker()
+local function theme_maker(colorscheme)
   if colorscheme == "everforest" then
     vim.g.everforest_transparent_background = is_transparent and 1 or 0
   end
@@ -112,13 +116,11 @@ local function theme_maker()
   end
 end
 
--- Define a keymap to toggle transparent background for nightfox
+-- Toggle background with <leader>tb
 vim.keymap.set("n", "<leader>tb", function()
   is_transparent = not is_transparent
-  vim.notify("Transparent: " .. tostring(is_transparent))
-
-  theme_maker()
-
+  local colorscheme = selectColorSchemeByTime()
+  theme_maker(colorscheme)
   vim.cmd("colorscheme " .. colorscheme)
 end, {
   desc = "Toggle background",
@@ -157,7 +159,6 @@ return {
       transparent_background = is_transparent,
     },
   },
-  -- NOTE: Will revisit Cobalt2 later
   {
     "lalitmee/cobalt2.nvim",
     lazy = true,
@@ -199,9 +200,43 @@ return {
     end,
     lazy = true,
   },
-  -- default is tokyonight in moon style
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = true,
+    opts = {
+      -- Remove gutter background
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none",
+            },
+          },
+        },
+      },
+      overrides = function(colors)
+        local theme = colors.theme
+        return {
+          -- Transparent background
+          NormalFloat = { bg = "none" },
+          FloatBorder = { bg = "none" },
+          FloatTitle = { bg = "none" },
+
+          -- Borderless telescope
+          TelescopeTitle = { fg = theme.ui.special, bold = true },
+          TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+          TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+          TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+          TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+          TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+          TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+        }
+      end,
+    },
+  },
   {
     "folke/tokyonight.nvim",
+    lazy = true,
     opts = {
       style = "moon",
       transparent = is_transparent,
