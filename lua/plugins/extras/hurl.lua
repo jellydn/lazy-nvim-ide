@@ -4,8 +4,9 @@ return {
     ft = "hurl",
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {
-      mode = "popup",
-      debug = false, -- Enable debug for troubleshooting
+      mode = "split",
+      auto_close = false,
+      debug = false,
       formatters = {
         json = { "jq" },
         html = {
