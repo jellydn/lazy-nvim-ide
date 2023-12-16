@@ -13,14 +13,11 @@ return {
       local copilot_chat_dir = vim.fn.stdpath("data") .. "/lazy/CopilotChat.nvim"
       -- Copy remote plugin to config folder
       vim.fn.system({ "cp", "-r", copilot_chat_dir .. "/rplugin", vim.fn.stdpath("config") })
+      vim.fn.system({ "pip", "install", "-r", copilot_chat_dir .. "/requirements.txt" })
 
       -- Notify the user about manual steps
-      send_to_quickfix("Please run 'pip install -r " .. copilot_chat_dir .. "/requirements.txt'.")
+      send_to_quickfix("Please run 'pip install -r " .. copilot_chat_dir .. "/requirements.txt' if needed.")
       send_to_quickfix("Afterwards, open Neovim and run ':UpdateRemotePlugins', then restart Neovim.")
-
-      -- NOTE: add below to plugin.py if you want to change wrap and filetype
-      -- self.nvim.command("setlocal filetype=markdown")
-      -- self.nvim.command("setlocal wrap")
     end,
   },
 }
