@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 --
 local Util = require("lazyvim.util")
+local Diagnostics = require("utils.diagnostics")
 local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
@@ -32,45 +33,9 @@ keymap(
 )
 keymap("n", "q", "<Nop>", { noremap = true })
 
--- Set initial state for diagnostic level
-vim.g.diagnostics_level = "all"
-
--- Function to toggle diagnostic level
-function _G.toggle_diagnostics_level()
-  if vim.g.diagnostics_level == "all" then
-    vim.notify("Diagnostics level: error", "info", { title = "Diagnostics" })
-    vim.g.diagnostics_level = "error"
-    vim.diagnostic.config({
-      severity_sort = true,
-      underline = { severity = vim.diagnostic.severity.ERROR },
-      signs = { severity = vim.diagnostic.severity.ERROR },
-      virtual_text = {
-        prefix = "●",
-        spacing = 2,
-        severity = vim.diagnostic.severity.ERROR,
-      },
-    })
-  else
-    vim.notify("Diagnostics level: all", "info", { title = "Diagnostics" })
-    vim.g.diagnostics_level = "all"
-    vim.diagnostic.config({
-      severity_sort = true,
-      underline = true,
-      signs = true,
-      virtual_text = {
-        prefix = "●",
-        spacing = 2,
-      },
-    })
-  end
-end
-
-keymap(
-  "n",
-  "<leader>uD",
-  "<cmd>lua toggle_diagnostics_level()<CR>",
-  { noremap = true, silent = true, desc = "Toggle Diagnostics Level" }
-)
+keymap("n", "<leader>uD", function()
+  Diagnostics.toggle_diagnostics_level()
+end, { noremap = true, silent = true, desc = "Toggle Diagnostics Level" })
 
 local function open_dashboard()
   if Util.has("alpha-nvim") then
