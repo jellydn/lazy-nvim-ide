@@ -29,7 +29,7 @@ return {
     opts = neogeo_opts,
     cmd = "Neogen",
     keys = {
-      { "<leader>cc", "<cmd>Neogen<cr>", desc = "Neogen - Annotation generator" },
+      { "<leader>ci", "<cmd>Neogen<cr>", desc = "Neogen - Annotation generator" },
     },
   },
 }

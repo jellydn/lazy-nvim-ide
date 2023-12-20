@@ -2,10 +2,12 @@ nvim
 bufferline
 catppuccin
 luasnip
+codeium
 colorbuddy
 everforest
 gitsigns
 hardtime
+kanagawa
 keymap
 lualine
 lspconfig
@@ -47,7 +49,6 @@ lspsaga
 Gitsigns
 lazypath
 stdpath
-stylua
 yanky
 Neovim
 matchit
@@ -69,6 +70,8 @@ lalitmee
 tjdevries
 sainnhe
 Mofiqul
+rebelot
+Borderless
 folke
 goimports
 gofmt
@@ -76,11 +79,8 @@ isort
 rustfmt
 deno
 rustywind
-codespell
 rcarriga
 neoconf
-laststatus
-splitkeep
 lazyterm
 Neotest
 lspsagaoutline
@@ -96,9 +96,14 @@ cheatsheet
 Cheatsheet
 ctactions
 cheatsheets
-codeium
 Codeium
 Exafunction
+quickfix
+setqflist
+lnum
+jellydn
+rplugin
+laststatus
 statusline
 strdisplaywidth
 kevinhwang
@@ -111,7 +116,6 @@ Quicklist
 sindrets
 diffview
 Diffview
-jellydn
 Munif
 Tanjim
 adalessa
@@ -123,6 +127,7 @@ fnamemodify
 nvimtools
 davidmh
 builtins
+codespell
 postprocess
 proto
 protolint
@@ -155,7 +160,6 @@ rmagatti
 nnoremap
 glepnir
 Lspsaga
-Vidocq
 davidosomething
 phpstan
 phpunit
@@ -196,6 +200,7 @@ mbbill
 Undotree
 undodir
 undofile
+cword
 Mordechai
 Hadad
 checkhealth
@@ -204,10 +209,3 @@ uelic
 jesseduffield
 lazygit
 todesktop
-cword
-quickfix
-Borderless
-kanagawa
-rebelot
-mchat
-gsuuon
