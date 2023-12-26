@@ -1,8 +1,17 @@
 # My 💤 LazyVim IDE config for Neovim
+## TOC
 
-[![IT Man - Talk #33 NeoVim as IDE [Vietnamese]](https://i.ytimg.com/vi/dFi8CzvqkNE/hqdefault.jpg)](https://www.youtube.com/watch?v=dFi8CzvqkNE)
-
-[![IT Man - Talk #35 #Neovim IDE for Web Developer](https://i.ytimg.com/vi/3EbgMJ-RcWY/hqdefault.jpg)](https://www.youtube.com/watch?v=3EbgMJ-RcWY)
+<!--toc:start-->
+- [Install Neovim](#install-neovim)
+- [Install the config](#install-the-config)
+- [Get healthy](#get-healthy)
+- [Fonts](#fonts)
+- [Try with Docker](#try-with-docker)
+- [Uninstall](#uninstall)
+- [Screenshots](#screenshots)
+- [Tips](#tips)
+- [Resources](#resources)
+<!--toc:end-->
 
 ## Install Neovim
 
@@ -88,3 +97,12 @@ defaults write com.todesktop.230313mzl4w4u92 ApplePressAndHoldEnabled -bool fals
 Also increasing Key Repeat and Delay Until Repeat settings in System Preferences -> Keyboard.
 
 [![Key repeat rate](https://i.gyazo.com/e58be996275fe50bee31412ea5930017.png)](https://gyazo.com/e58be996275fe50bee31412ea5930017)
+
+## Resources
+
+[![IT Man - Talk #33 NeoVim as IDE [Vietnamese]](https://i.ytimg.com/vi/dFi8CzvqkNE/hqdefault.jpg)](https://www.youtube.com/watch?v=dFi8CzvqkNE)
+
+[![IT Man - Talk #35 #Neovim IDE for Web Developer](https://i.ytimg.com/vi/3EbgMJ-RcWY/hqdefault.jpg)](https://www.youtube.com/watch?v=3EbgMJ-RcWY)
+
+[![IT Man - Step-by-Step Guide: Integrating Copilot Chat with Neovim [Vietnamese]](https://i.ytimg.com/vi/By_CCai62JE/hqdefault.jpg)](https://www.youtube.com/watch?v=By_CCai62JE)
+
