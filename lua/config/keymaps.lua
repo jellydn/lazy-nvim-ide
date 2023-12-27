@@ -142,17 +142,6 @@ if Util.has("gitsigns.nvim") then
   })
 end
 
--- Harpoon
-if Util.has("harpoon") then
-  keymap("n", "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", {
-    desc = "Toggle Harpoon menu",
-  })
-
-  keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<CR>", {
-    desc = "Add file to Harpoon",
-  })
-end
-
 -- Fix Spell checking
 keymap("n", "z0", "1z=", {
   desc = "Fix world under cursor",

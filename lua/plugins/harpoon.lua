@@ -2,6 +2,7 @@ return {
   {
     "ThePrimeagen/harpoon",
     event = "BufRead",
+    branch = "harpoon2",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
@@ -10,6 +11,22 @@ return {
         "<leader>fm",
         "<cmd>Telescope harpoon marks<cr>",
         desc = "Telescope Harpoon Marks",
+      },
+      {
+        "<leader>hh",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "Harpoon toggle menu",
+      },
+      {
+        "<leader>ha",
+        function()
+          local harpoon = require("harpoon")
+          harpoon:list():append()
+        end,
+        desc = "Harpoon Add File",
       },
     },
     opts = {},
