@@ -14,3 +14,10 @@ vim.o.conceallevel = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
+
+-- Setup options for Neovide
+if vim.g.neovide then
+  vim.o.guifont = "OperatorMonoLig Nerd Font:h20"
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.g.neovide_cursor_antialiasing = true
+end
