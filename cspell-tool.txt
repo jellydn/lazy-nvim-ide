@@ -56,6 +56,10 @@ matchparen
 netrw
 tohtml
 conceallevel
+Neovide
+neovide
+guifont
+antialiasing
 stevearc
 tele
 chrisgrieser
@@ -73,6 +77,7 @@ Mofiqul
 rebelot
 Borderless
 folke
+oxfist
 goimports
 gofmt
 isort
@@ -98,20 +103,16 @@ ctactions
 cheatsheets
 Codeium
 Exafunction
-quickfix
-setqflist
-lnum
 jellydn
-rplugin
 laststatus
 statusline
+akinsho
 strdisplaywidth
 kevinhwang
 virt
 anuvyklack
 finddir
 isdirectory
-akinsho
 Quicklist
 sindrets
 diffview
@@ -133,6 +134,7 @@ proto
 protolint
 yoheimuta
 markdownlint
+vuki
 ahmedkhalf
 Tobin
 rayso
@@ -160,6 +162,7 @@ rmagatti
 nnoremap
 glepnir
 Lspsaga
+impls
 davidosomething
 phpstan
 phpunit
@@ -180,6 +183,8 @@ vitest
 markemmons
 theutz
 mfussenegger
+golangci
+golangcilint
 simrat
 autofold
 olimorris

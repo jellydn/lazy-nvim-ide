@@ -1,8 +1,12 @@
+--- Check if it's weekend
+---@return boolean
 local function is_weekend()
   local day = tonumber(os.date("%w"))
   return day == 0 or day == 6
 end
 
+--- Check if it's day time
+---@return boolean
 local function is_day_time()
   local hour = tonumber(os.date("%H"))
   return hour >= 9 and hour < 19
@@ -32,6 +36,7 @@ local function selectColorSchemeByTime()
       "dracula",
       "cobalt2",
       "kanagawa",
+      "edge",
     }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
 
@@ -181,6 +186,21 @@ return {
       vim.g.everforest_better_performance = 1
       -- Enable italic
       vim.g.everforest_enable_italic = 1
+    end,
+    lazy = true,
+  },
+  {
+    "sainnhe/edge",
+    config = function()
+      -- " Available values: 'hard', 'medium'(default), 'soft'
+      if is_transparent then
+        vim.g.edge_background = "soft"
+        vim.g.edge_transparent_background = 1
+      end
+      -- For better performance
+      vim.g.edge_better_performance = 1
+      -- Enable italic
+      vim.g.edge_enable_italic = 1
     end,
     lazy = true,
   },
