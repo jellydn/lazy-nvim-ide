@@ -1,32 +1,32 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
-	"organizeImports": {
-		"enabled": false
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true,
-			"suspicious": {
-				"noExplicitAny": "off",
-				"noCommentText": "warn",
-				"noShadowRestrictedNames": "warn"
-			},
-			"complexity": {
-				"noForEach": "warn"
-			},
-			"correctness": {
-				"useExhaustiveDependencies": "warn"
-			},
-			"style": {
-				"noUnusedTemplateLiteral": "warn"
-			},
-			"performance": {
-				"noAccumulatingSpread": "warn"
-			}
-		}
-	},
-	"formatter": {
-		"enabled": false
-	}
+  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "organizeImports": {
+    "enabled": false
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noCommentText": "warn",
+        "noShadowRestrictedNames": "warn"
+      },
+      "complexity": {
+        "noForEach": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "warn"
+      },
+      "style": {
+        "noUnusedTemplateLiteral": "warn"
+      },
+      "performance": {
+        "noAccumulatingSpread": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": false
+  }
 }
