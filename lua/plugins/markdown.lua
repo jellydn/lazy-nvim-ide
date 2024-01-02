@@ -10,6 +10,8 @@ return {
   -- Markdown preview
   {
     "lukas-reineke/headlines.nvim",
+    -- Not enabled if neovide
+    enabled = not vim.g.neovide,
     opts = function()
       local opts = {}
       for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
