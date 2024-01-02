@@ -19,5 +19,6 @@ vim.g.loaded_node_provider = 0
 if vim.g.neovide then
   vim.o.guifont = "OperatorMonoLig Nerd Font:h20"
   vim.g.neovide_hide_mouse_when_typing = true
-  vim.g.neovide_cursor_antialiasing = true
+  vim.g.neovide_cursor_antialiasing = false
+  vim.g.neovide_fullscreen = true
 end
