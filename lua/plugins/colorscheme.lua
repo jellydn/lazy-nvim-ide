@@ -21,7 +21,7 @@ local default_color_scheme = "kanagawa"
 local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
-    return "tokyonight"
+    return "kanagawa"
   end
 
   if is_transparent then
@@ -34,9 +34,9 @@ local function selectColorSchemeByTime()
       "catppuccin-frappe",
       "everforest",
       "dracula",
-      "cobalt2",
       "kanagawa",
-      "edge",
+      "nord",
+      "cobalt2",
     }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
 
@@ -56,79 +56,6 @@ end
 -- Define a keymap to randomize colorscheme
 vim.keymap.set("n", "<leader>tc", randomize_theme, {
   desc = "Randomize colorscheme",
-})
-
---- Set color theme with transparent background
-local function theme_maker(colorscheme)
-  if colorscheme == "everforest" then
-    vim.g.everforest_transparent_background = is_transparent and 1 or 0
-  end
-
-  if colorscheme == "dracula" then
-    local dracula = require("dracula")
-    local opts = {
-      transparent_bg = is_transparent,
-      show_end_of_buffer = true,
-      -- set italic comment
-      italic_comment = true,
-    }
-    dracula.setup(opts)
-  end
-
-  if colorscheme == "catppuccin-frappe" then
-    local opts = {
-      transparent_background = is_transparent,
-    }
-    local catppuccin = require("catppuccin")
-    catppuccin.setup(opts)
-  end
-
-  if colorscheme == "rose-pine" then
-    local opts = {
-      variant = "moon",
-      disable_background = is_transparent,
-      disable_float_background = is_transparent,
-    }
-
-    local rose_pine = require("rose-pine")
-    rose_pine.setup(opts)
-  end
-
-  if colorscheme == "nightfox" then
-    local opts = {
-      transparent = is_transparent,
-      styles = {
-        comments = "italic",
-        keywords = "bold",
-        types = "italic,bold",
-      },
-    }
-    local nightfox = require("nightfox")
-    nightfox.setup(opts)
-  end
-
-  if colorscheme == "tokyonight" then
-    local opts = {
-      style = "moon",
-      transparent = is_transparent,
-      styles = is_transparent and {
-        sidebars = "transparent",
-        floats = "transparent",
-      } or {},
-    }
-    local tokyonight = require("tokyonight")
-    tokyonight.setup(opts)
-  end
-end
-
--- Toggle background with <leader>tb
-vim.keymap.set("n", "<leader>tb", function()
-  is_transparent = not is_transparent
-  local colorscheme = selectColorSchemeByTime()
-  theme_maker(colorscheme)
-  vim.cmd("colorscheme " .. colorscheme)
-end, {
-  desc = "Toggle background",
 })
 
 return {
@@ -190,21 +117,6 @@ return {
     lazy = true,
   },
   {
-    "sainnhe/edge",
-    config = function()
-      -- " Available values: 'hard', 'medium'(default), 'soft'
-      if is_transparent then
-        vim.g.edge_background = "soft"
-        vim.g.edge_transparent_background = 1
-      end
-      -- For better performance
-      vim.g.edge_better_performance = 1
-      -- Enable italic
-      vim.g.edge_enable_italic = 1
-    end,
-    lazy = true,
-  },
-  {
     "Mofiqul/dracula.nvim",
     opts = {
       transparent_bg = is_transparent,
@@ -253,6 +165,33 @@ return {
         }
       end,
     },
+  },
+  {
+    "shaunsingh/nord.nvim",
+    opts = {
+      markdown = {
+        headline_highlights = {
+          "Headline1",
+          "Headline2",
+          "Headline3",
+          "Headline4",
+          "Headline5",
+          "Headline6",
+        },
+        codeblock_highlight = "CodeBlock",
+        dash_highlight = "Dash",
+        quote_highlight = "Quote",
+      },
+    },
+    config = function()
+      vim.g.nord_contrast = true
+      vim.g.nord_borders = false
+      vim.g.nord_disable_background = is_transparent
+      vim.g.nord_italic = true
+      vim.g.nord_uniform_diff_background = true
+      vim.g.nord_bold = false
+    end,
+    lazy = true,
   },
   {
     "folke/tokyonight.nvim",
