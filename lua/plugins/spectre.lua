@@ -1,4 +1,16 @@
-local Path = require("utils.path")
+--- General configuration for spectre base on current git repo
+---@param default_opts table | nil
+---@return table
+function _G.get_spectre_options(default_opts)
+  local Path = require("utils.path")
+  local opts = default_opts or {}
+
+  if Path.is_git_repo() then
+    opts.cwd = Path.get_git_root()
+  end
+
+  return opts
+end
 
 return {
   {
@@ -16,39 +28,19 @@ return {
       },
       {
         "<leader>sp",
-        function()
-          local opts = {}
-          if Path.is_git_repo() then
-            opts.cwd = Path.get_git_root()
-          end
-          require("spectre").open(opts)
-        end,
+        ":lua require('spectre').open(_G.get_spectre_options())<CR>",
         desc = "Replace in files (Root dir)",
       },
       -- Search current word
       {
         "<leader>sP",
-        function()
-          local opts = {
-            select_word = true,
-          }
-          if Path.is_git_repo() then
-            opts.cwd = Path.get_git_root()
-          end
-          require("spectre").open_visual(opts)
-        end,
+        ":lua require('spectre').open_visual(_G.get_spectre_options({ select_word = true }))<CR>",
         desc = "Replace current word (Root dir)",
       },
       -- Open search with select word in visual mode
       {
         "<leader>sr",
-        function()
-          local opts = {}
-          if Path.is_git_repo() then
-            opts.cwd = Path.get_git_root()
-          end
-          require("spectre").open_visual(opts)
-        end,
+        ":lua require('spectre').open_visual(_G.get_spectre_options())<CR>",
         mode = "v",
         silent = true,
         desc = "Replace current word (Root dir)",
