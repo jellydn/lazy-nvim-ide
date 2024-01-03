@@ -3,7 +3,10 @@ return {
   { import = "lazyvim.plugins.extras.coding.copilot" },
   {
     "jellydn/CopilotChat.nvim",
-    opts = {},
+    branch = "canary",
+    opts = {
+      mode = "split",
+    },
     build = function()
       vim.defer_fn(function()
         vim.cmd("UpdateRemotePlugins")
