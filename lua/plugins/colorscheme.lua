@@ -14,6 +14,12 @@ end
 
 local is_transparent = is_day_time() and not is_weekend()
 
+--- Check if it's WarpTerminal
+---@return boolean
+local function is_warp_terminal()
+  return os.getenv("TERM_PROGRAM") == "WarpTerminal"
+end
+
 -- Default colorscheme
 local default_color_scheme = "kanagawa"
 
@@ -22,6 +28,10 @@ local function selectColorSchemeByTime()
   -- skip if running in vscode
   if vim.g.vscode then
     return "kanagawa"
+  end
+
+  if is_warp_terminal() then
+    return "cobalt2"
   end
 
   if is_transparent then
