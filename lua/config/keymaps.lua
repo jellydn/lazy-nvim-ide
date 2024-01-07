@@ -91,6 +91,9 @@ keymap("v", "p", '"_dP', opts)
 -- Copy whole file content to clipboard with C-c
 keymap("n", "<C-c>", ":%y+<CR>", opts)
 
+-- Select all text in buffer with Alt-a
+keymap("n", "<A-a>", "ggVG", { noremap = true, silent = true, desc = "Select all" })
+
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
