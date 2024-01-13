@@ -38,6 +38,7 @@ return {
       vim.g.previm_open_cmd = "open -a Arc"
     end,
     ft = { "markdown" },
+    vscode = true,
     keys = {
       -- add <leader>m to open markdown preview
       {
