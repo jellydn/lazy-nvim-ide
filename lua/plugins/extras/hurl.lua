@@ -1,6 +1,9 @@
+local IS_DEV = false
+
 return {
   {
     "jellydn/hurl.nvim",
+    dir = IS_DEV and "~/Projects/research/hurl.nvim" or nil,
     ft = "hurl",
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {

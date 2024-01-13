@@ -1,7 +1,10 @@
+local IS_DEV = false
+
 return {
   -- Import the copilot plugin
   { import = "lazyvim.plugins.extras.coding.copilot" },
   {
+    dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "jellydn/CopilotChat.nvim",
     branch = "canary",
     opts = {
