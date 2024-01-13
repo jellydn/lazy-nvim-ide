@@ -19,10 +19,12 @@ neogen
 neotest
 nightfox
 noice
+nord
 textobjects
 autotag
 commentstring
 devicons
+pantran
 phpactor
 previm
 toggleterm
@@ -31,6 +33,7 @@ treesj
 typecheck
 undotree
 startuptime
+wakatime
 lazyvim
 zenmode
 Autocmds
@@ -39,6 +42,8 @@ augroup
 autocmd
 Keymaps
 keymaps
+Neovide
+neovide
 noremap
 bufnr
 bufs
@@ -56,10 +61,9 @@ matchparen
 netrw
 tohtml
 conceallevel
-Neovide
-neovide
 guifont
 antialiasing
+fullscreen
 stevearc
 tele
 chrisgrieser
@@ -76,8 +80,8 @@ sainnhe
 Mofiqul
 rebelot
 Borderless
+shaunsingh
 folke
-oxfist
 goimports
 gofmt
 isort
@@ -96,6 +100,9 @@ startinsert
 oldfiles
 MYVIMRC
 productsway
+Munif
+Tanjim
+huggingface
 doctorfree
 cheatsheet
 Cheatsheet
@@ -117,11 +124,14 @@ Quicklist
 sindrets
 diffview
 Diffview
-Munif
-Tanjim
 adalessa
 laravel
 Laravel
+Kunz
+ollama
+gsuuon
+Mchat
+mchat
 getcwd
 filereadable
 fnamemodify
@@ -135,6 +145,8 @@ protolint
 yoheimuta
 markdownlint
 vuki
+Pantran
+potamides
 ahmedkhalf
 Tobin
 rayso
@@ -162,7 +174,6 @@ rmagatti
 nnoremap
 glepnir
 Lspsaga
-impls
 davidosomething
 phpstan
 phpunit
