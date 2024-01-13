@@ -90,6 +90,11 @@ return {
       variant = "moon",
       disable_background = is_transparent,
       disable_float_background = is_transparent,
+      styles = {
+        bold = true,
+        italic = true,
+        transparency = is_transparent,
+      },
     },
     lazy = true,
   },
