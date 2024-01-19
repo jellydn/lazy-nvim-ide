@@ -6,7 +6,6 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "jellydn/CopilotChat.nvim",
-    branch = "canary",
     opts = {
       mode = "split",
     },
