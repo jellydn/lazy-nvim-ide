@@ -89,7 +89,7 @@
   "previm": { "branch": "master", "commit": "86d4dc0d28e7fdc0685a7a6e37eb3811dcff93a1" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "promise-async": { "branch": "main", "commit": "94f6f03c6c1e2aab551aacdf0c1e597a7269abb6" },
-  "quick-code-runner.nvim": { "branch": "main", "commit": "b6bf02e14e64fda8ba093853a051927be345c507" },
+  "quick-code-runner.nvim": { "branch": "main", "commit": "6fc5cc2e0841e7d6e8c03e4c28be4ffaaffc6398" },
   "refactoring.nvim": { "branch": "master", "commit": "c067e44b8171494fc1b5206ab4c267cd74c043b1" },
   "rose-pine": { "branch": "main", "commit": "2a4aad89a803c84d7d1555d136639cd48ade1d64" },
   "ssr.nvim": { "branch": "main", "commit": "bb323ba621ac647b4ac5638b47666e3ef3c279e1" },
