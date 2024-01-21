@@ -1,6 +1,8 @@
 return {
   {
     "jackMort/ChatGPT.nvim",
+    -- Not enabled if neovide
+    enabled = not vim.g.neovide,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
