@@ -53,6 +53,17 @@ return {
         mode = "x",
         desc = "CopilotChat - Run in-place code",
       },
+      -- Custom input for CopilotChat
+      {
+        "<leader>cci",
+        function()
+          local input = vim.fn.input("Ask Copilot: ")
+          if input ~= "" then
+            vim.cmd("CopilotChat " .. input)
+          end
+        end,
+        desc = "CopilotChat - Ask input",
+      },
     },
   },
 }
