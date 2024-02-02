@@ -23,8 +23,6 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "jellydn/CopilotChat.nvim",
-    -- Will be merged to main branch soon
-    branch = "canary",
     opts = {
       mode = "split",
       show_help = "yes",
@@ -54,10 +52,10 @@ return {
       { "<leader>ccS", "<cmd>CopilotChatSpelling<cr>", desc = "CopilotChat - Correct spelling" },
       { "<leader>ccw", "<cmd>CopilotChatWording<cr>", desc = "CopilotChat - Improve wording" },
       { "<leader>ccc", "<cmd>CopilotChatConcise<cr>", desc = "CopilotChat - Make text concise" },
-      -- Those commands only available on canary branch
+      -- Chat with Copilot in visual mode
       {
         "<leader>ccv",
-        ":CopilotChatVsplitVisual",
+        ":CopilotChatVisual",
         mode = "x",
         desc = "CopilotChat - Open in vertical split",
       },
