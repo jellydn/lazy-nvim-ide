@@ -24,7 +24,6 @@ return {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "jellydn/CopilotChat.nvim",
     opts = {
-      mode = "split",
       show_help = "yes",
       prompts = prompts,
       debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
@@ -76,6 +75,8 @@ return {
         end,
         desc = "CopilotChat - Ask input",
       },
+      -- Debug
+      { "<leader>ccD", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
     },
   },
 }
