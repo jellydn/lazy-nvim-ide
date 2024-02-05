@@ -7,6 +7,7 @@ local prompts = {
   Tests = "Please explain how the selected code works, then generate unit tests for it.",
   Refactor = "Please refactor the following code to improve its clarity and readability.",
   FixCode = "Please fix the following code to make it work as intended.",
+  BetterNamings = "Please provide better names for the following variables and functions.",
   Documentation = "Please provide documentation for the following code.",
   SwaggerApiDocs = "Please provide documentation for the following API using Swagger.",
   SwaggerJsDocs = "Please write JSDoc for the following API using Swagger.",
@@ -22,7 +23,7 @@ return {
   { import = "lazyvim.plugins.extras.coding.copilot" },
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
-    "jellydn/CopilotChat.nvim",
+    "CopilotC-Nvim/CopilotChat.nvim",
     opts = {
       show_help = "yes",
       prompts = prompts,
@@ -40,6 +41,7 @@ return {
       { "<leader>ccr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
       { "<leader>ccR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
       { "<leader>ccf", "<cmd>CopilotChatFixCode<cr>", desc = "CopilotChat - Fix code" },
+      { "<leader>ccb", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Name" },
       { "<leader>ccd", "<cmd>CopilotChatDocumentation<cr>", desc = "CopilotChat - Add documentation for code" },
       { "<leader>cca", "<cmd>CopilotChatSwaggerApiDocs<cr>", desc = "CopilotChat - Add Swagger API documentation" },
       {
