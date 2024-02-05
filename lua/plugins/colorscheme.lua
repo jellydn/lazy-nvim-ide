@@ -30,6 +30,10 @@ local function selectColorSchemeByTime()
     return "kanagawa"
   end
 
+  if vim.g.neovide then
+    return "nightfox"
+  end
+
   if is_warp_terminal() then
     return "cobalt2"
   end
