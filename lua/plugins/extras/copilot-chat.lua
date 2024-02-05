@@ -27,6 +27,7 @@ return {
       show_help = "yes",
       prompts = prompts,
       debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
+      disable_extra_info = "no", -- Disable extra information (e.g: system prompt, token count) in the response.
     },
     build = function()
       vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
