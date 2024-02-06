@@ -1,4 +1,14 @@
 local IS_DEV = false
+local function get_git_diff()
+  local handle = io.popen("git diff")
+  if not handle then
+    return ""
+  end
+
+  local result = handle:read("*a")
+  handle:close()
+  return result
+end
 
 local prompts = {
   -- Code related prompts
@@ -78,6 +88,19 @@ return {
         end,
         desc = "CopilotChat - Ask input",
       },
+      -- Generate commit message base on the git diff
+      {
+        "<leader>ccm",
+        function()
+          local diff = get_git_diff()
+          if diff ~= "" then
+            vim.fn.setreg('"', diff)
+            vim.cmd("CopilotChat Write commit message for the change with commit-zen convention.")
+          end
+        end,
+        desc = "CopilotChat - Generate commit message",
+      },
+
       -- Debug
       { "<leader>ccD", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
     },
