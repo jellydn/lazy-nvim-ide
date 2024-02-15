@@ -1,4 +1,5 @@
-local IS_DEV = false
+local IS_DEV = true
+
 --- Get all the changes in the git repository
 ---@param staged? boolean
 ---@return string
@@ -132,6 +133,8 @@ return {
       { "<leader>ccD", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
       -- Fix the issue with diagnostic
       { "<leader>ccF", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
+      -- Clear buffer and chat history
+      { "<leader>ccl", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
     },
   },
 }
