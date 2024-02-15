@@ -35,6 +35,11 @@ return {
         { title = "UndoTree", ft = "undotree" },
       },
       right = {
+        {
+          title = "CopilotChat.nvim",
+          ft = "copilot-chat",
+          size = { width = 0.4 },
+        },
         { title = "Neotest Summary", ft = "neotest-summary" },
         {
           ft = "Outline",
