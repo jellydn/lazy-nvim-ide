@@ -16,8 +16,8 @@ return {
         php = { "pint" },
         rust = { "rustfmt" },
         -- Use a sub-list to run only the first available formatter
-        ["markdown"] = { { "biome", "prettier" } },
-        ["markdown.mdx"] = { { "biome", "prettier" } },
+        ["markdown"] = { { "prettier" } },
+        ["markdown.mdx"] = { { "prettier" } },
         ["javascript"] = { { "biome", "deno_fmt", "prettier" } },
         ["javascriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
         ["typescript"] = { { "biome", "deno_fmt", "prettier" } },
