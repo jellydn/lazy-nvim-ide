@@ -92,7 +92,7 @@ return {
         end,
         desc = "CopilotChat - Ask input",
       },
-      -- Generate commit message base on the git diff
+      -- Generate commit message based on the git diff
       {
         "<leader>ccm",
         function()
@@ -130,6 +130,8 @@ return {
       },
       -- Debug
       { "<leader>ccD", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
+      -- Fix the issue with diagnostic
+      { "<leader>ccF", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
     },
   },
 }
