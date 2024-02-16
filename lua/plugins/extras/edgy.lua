@@ -38,7 +38,7 @@ return {
         {
           title = "CopilotChat.nvim",
           ft = "copilot-chat",
-          size = { width = 0.4 },
+          size = { width = 0.5 },
         },
         { title = "Neotest Summary", ft = "neotest-summary" },
         {
