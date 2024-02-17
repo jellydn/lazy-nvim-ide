@@ -39,36 +39,45 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
+      { "nvim-lua/plenary.nvim" },
+    },
     opts = {
       show_help = "yes",
       prompts = prompts,
       debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
       disable_extra_info = "no", -- Disable extra information (e.g: system prompt, token count) in the response.
+      hide_system_prompt = "yes", -- Show user prompts only and hide system prompts.
+      proxy = "", -- Proxies requests via https or socks
     },
     build = function()
       vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
     end,
     event = "VeryLazy",
     keys = {
+      -- Show help actions with telescope
+      {
+        "<leader>cch",
+        function()
+          require("CopilotChat.code_actions").show_help_actions()
+        end,
+        desc = "CopilotChat - Help actions",
+      },
+      -- Show prompts actions with telescope
+      {
+        "<leader>ccp",
+        function()
+          require("CopilotChat.code_actions").show_prompt_actions()
+        end,
+        desc = "CopilotChat - Help actions",
+      },
       -- Code related commands
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
       { "<leader>ccr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
       { "<leader>ccR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-      { "<leader>ccf", "<cmd>CopilotChatFixCode<cr>", desc = "CopilotChat - Fix code" },
-      { "<leader>ccb", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Name" },
-      { "<leader>ccd", "<cmd>CopilotChatDocumentation<cr>", desc = "CopilotChat - Add documentation for code" },
-      { "<leader>cca", "<cmd>CopilotChatSwaggerApiDocs<cr>", desc = "CopilotChat - Add Swagger API documentation" },
-      {
-        "<leader>ccA",
-        "<cmd>CopilotChatSwaggerJsDocs<cr>",
-        desc = "CopilotChat - Add Swagger API with Js Documentation",
-      },
-      -- Text related commands
-      { "<leader>ccs", "<cmd>CopilotChatSummarize<cr>", desc = "CopilotChat - Summarize text" },
-      { "<leader>ccS", "<cmd>CopilotChatSpelling<cr>", desc = "CopilotChat - Correct spelling" },
-      { "<leader>ccw", "<cmd>CopilotChatWording<cr>", desc = "CopilotChat - Improve wording" },
-      { "<leader>ccc", "<cmd>CopilotChatConcise<cr>", desc = "CopilotChat - Make text concise" },
+      { "<leader>ccn", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
       -- Chat with Copilot in visual mode
       {
         "<leader>ccv",
@@ -130,13 +139,13 @@ return {
         desc = "CopilotChat - Quick chat",
       },
       -- Debug
-      { "<leader>ccD", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
+      { "<leader>ccd", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
       -- Fix the issue with diagnostic
-      { "<leader>ccF", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
+      { "<leader>ccf", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
       -- Clear buffer and chat history
       { "<leader>ccl", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
       -- Toggle Copilot Chat Vsplit
-      { "<leader>ccV", "<cmd>CopilotChatVsplitToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
+      { "<leader>ccv", "<cmd>CopilotChatVsplitToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
     },
   },
 }
