@@ -1,4 +1,4 @@
-local IS_DEV = false
+local IS_DEV = true
 
 --- Get all the changes in the git repository
 ---@param staged? boolean
@@ -70,7 +70,13 @@ return {
         function()
           require("CopilotChat.code_actions").show_prompt_actions()
         end,
-        desc = "CopilotChat - Help actions",
+        desc = "CopilotChat - Prompt actions",
+      },
+      {
+        "<leader>ccp",
+        ":lua require('CopilotChat.code_actions').show_prompt_actions(true)<CR>",
+        mode = "x",
+        desc = "CopilotChat - Prompt actions",
       },
       -- Code related commands
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
