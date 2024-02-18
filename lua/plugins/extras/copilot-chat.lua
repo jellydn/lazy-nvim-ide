@@ -1,4 +1,4 @@
-local IS_DEV = true
+local IS_DEV = false
 
 --- Get all the changes in the git repository
 ---@param staged? boolean
