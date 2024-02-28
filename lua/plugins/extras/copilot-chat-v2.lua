@@ -47,23 +47,24 @@ return {
     },
     opts = {
       prompts = prompts,
-      debug = true, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
+      debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
+      disable_extra_info = true, -- Show extra information about system prompt and code selection
     },
     config = function(_, opts)
       local chat = require("CopilotChat")
       local select = require("CopilotChat.select")
-      opts.select = select.unnamed
+      opts.selection = select.unnamed
 
       chat.setup(opts)
 
-      -- Restore CopilotChatVisual
-      vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
-        chat.ask(args.args, { selection = select.visual })
+      -- FIXME: Not working yet
+      vim.api.nvim_create_user_command("CopilotChatVisual", function()
+        vim.notify("Visual mode is not supported yet")
       end, { nargs = "*", range = true })
 
-      -- Restore CopilotChatInPlace (sort of)
-      vim.api.nvim_create_user_command("CopilotChatInPlace", function(args)
-        chat.ask(args.args, { selection = select.visual, window = { layout = "float" } })
+      -- FIXME: Not working yet
+      vim.api.nvim_create_user_command("CopilotChatInPlace", function()
+        vim.notify("In-place code is not supported yet")
       end, { nargs = "*", range = true })
 
       -- Restore CopilotChatBuffer
