@@ -32,6 +32,7 @@ return {
     },
     opts = {
       prompts = prompts,
+      auto_follow_cursor = false, -- Don't follow the cursor after getting response
       mappings = {
         close = "q", -- Close chat
         reset = "<C-l>", -- Clear the chat buffer
