@@ -1,20 +1,5 @@
 local IS_DEV = true
 
---- Get all the changes in the git repository
----@param staged? boolean
----@return string
-local function get_git_diff(staged)
-  local cmd = staged and "git diff --staged" or "git diff"
-  local handle = io.popen(cmd)
-  if not handle then
-    return ""
-  end
-
-  local result = handle:read("*a")
-  handle:close()
-  return result
-end
-
 local prompts = {
   -- Code related prompts
   Explain = "Please explain how the following code works.",
@@ -137,24 +122,12 @@ return {
       -- Generate commit message based on the git diff
       {
         "<leader>ccm",
-        function()
-          local diff = get_git_diff()
-          if diff ~= "" then
-            vim.fn.setreg('"', diff)
-            vim.cmd("CopilotChat Write commit message for the change with commitizen convention.")
-          end
-        end,
+        "<cmd>CopilotChatCommit<cr>",
         desc = "CopilotChat - Generate commit message for all changes",
       },
       {
         "<leader>ccM",
-        function()
-          local diff = get_git_diff(true)
-          if diff ~= "" then
-            vim.fn.setreg('"', diff)
-            vim.cmd("CopilotChat Write commit message for the change with commitizen convention.")
-          end
-        end,
+        "<cmd>CopilotChatCommitStaged<cr>",
         desc = "CopilotChat - Generate commit message for staged changes",
       },
       -- Quick chat with Copilot
