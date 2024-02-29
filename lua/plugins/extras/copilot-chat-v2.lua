@@ -47,8 +47,6 @@ return {
     },
     opts = {
       prompts = prompts,
-      debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
-      disable_extra_info = true, -- Show extra information about system prompt and code selection
     },
     config = function(_, opts)
       local chat = require("CopilotChat")
@@ -57,14 +55,22 @@ return {
 
       chat.setup(opts)
 
-      -- FIXME: Not working yet
-      vim.api.nvim_create_user_command("CopilotChatVisual", function()
-        vim.notify("Visual mode is not supported yet")
+      vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+        chat.ask(args.args, { selection = select.visual })
       end, { nargs = "*", range = true })
 
-      -- FIXME: Not working yet
-      vim.api.nvim_create_user_command("CopilotChatInPlace", function()
-        vim.notify("In-place code is not supported yet")
+      -- Inline chat with Copilot
+      vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+        chat.ask(args.args, {
+          selection = select.visual,
+          window = {
+            layout = "float",
+            relative = "cursor",
+            width = 1,
+            height = 0.4,
+            row = 1,
+          },
+        })
       end, { nargs = "*", range = true })
 
       -- Restore CopilotChatBuffer
@@ -78,7 +84,9 @@ return {
       {
         "<leader>cch",
         function()
-          require("CopilotChat.code_actions").show_help_actions()
+          require("CopilotChat.code_actions").show_help_actions({
+            selection = require("CopilotChat.select").line,
+          })
         end,
         desc = "CopilotChat - Help actions",
       },
@@ -92,7 +100,7 @@ return {
       },
       {
         "<leader>ccp",
-        ":lua require('CopilotChat.code_actions').show_prompt_actions(true)<CR>",
+        ":lua require('CopilotChat.code_actions').show_prompt_actions({ selection = require('CopilotChat.select').visual })<CR>",
         mode = "x",
         desc = "CopilotChat - Prompt actions",
       },
@@ -111,9 +119,9 @@ return {
       },
       {
         "<leader>ccx",
-        ":CopilotChatInPlace<cr>",
+        ":CopilotChatInline<cr>",
         mode = "x",
-        desc = "CopilotChat - Run in-place code",
+        desc = "CopilotChat - Inline chat",
       },
       -- Custom input for CopilotChat
       {
@@ -167,7 +175,7 @@ return {
       -- Clear buffer and chat history
       { "<leader>ccl", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
       -- Toggle Copilot Chat Vsplit
-      { "<leader>ccv", "<cmd>CopilotChatVsplitToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
+      { "<leader>ccv", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
     },
   },
 }
