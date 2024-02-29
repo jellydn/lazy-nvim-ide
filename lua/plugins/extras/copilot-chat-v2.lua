@@ -25,13 +25,16 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    branch = "canary", -- It's working nicely on Neovim nightly
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
       { "nvim-lua/plenary.nvim" },
     },
     opts = {
       prompts = prompts,
+      window = {
+        layout = "float", -- "vertical", "horizontal", "float"
+      },
     },
     config = function(_, opts)
       local chat = require("CopilotChat")
