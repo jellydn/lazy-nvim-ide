@@ -72,33 +72,6 @@ return {
       vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
         chat.ask(args.args, { selection = select.buffer })
       end, { nargs = "*", range = true })
-
-      -- NOTE: Migrate the old usage with CopilotChat v1
-      local legacy_cmd = "CChat"
-      local items = {}
-      for prompt, _ in pairs(prompts) do
-        table.insert(items, prompt)
-      end
-
-      -- Create a command to select the legacy prompt
-      vim.api.nvim_create_user_command("CChatActions", function()
-        -- Show list of clients with ui select
-        vim.ui.select(items, {
-          prompt = "Select Copilot prompt",
-        }, function(choice)
-          if choice ~= nil then
-            local msg = ""
-            -- Find the prompt message base on the choice
-            for prompt, message in pairs(prompts) do
-              if prompt == choice then
-                msg = message
-                break
-              end
-            end
-            vim.cmd(legacy_cmd .. " " .. msg)
-          end
-        end)
-      end, { nargs = "*", range = true })
     end,
     event = "VeryLazy",
     keys = {
@@ -184,9 +157,6 @@ return {
       { "<leader>ccl", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
       -- Toggle Copilot Chat Vsplit
       { "<leader>ccv", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
-
-      -- Legacy Command
-      { "<leader>cC", "<cmd>CChatActions<cr>", desc = "CopilotChat - Legacy Actions" },
     },
   },
 }
