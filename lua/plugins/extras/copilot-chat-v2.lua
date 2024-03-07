@@ -79,7 +79,8 @@ return {
       {
         "<leader>cch",
         function()
-          require("CopilotChat.code_actions").show_help_actions()
+          local actions = require("CopilotChat.actions")
+          require("CopilotChat.integrations.telescope").pick(actions.help_actions())
         end,
         desc = "CopilotChat - Help actions",
       },
@@ -87,13 +88,14 @@ return {
       {
         "<leader>ccp",
         function()
-          require("CopilotChat.code_actions").show_prompt_actions()
+          local actions = require("CopilotChat.actions")
+          require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
         end,
         desc = "CopilotChat - Prompt actions",
       },
       {
         "<leader>ccp",
-        ":lua require('CopilotChat.code_actions').show_prompt_actions({ selection = require('CopilotChat.select').visual })<CR>",
+        ":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions())<CR>",
         mode = "x",
         desc = "CopilotChat - Prompt actions",
       },
