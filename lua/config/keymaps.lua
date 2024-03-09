@@ -8,6 +8,28 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
+local Lsp = require("utils.lsp")
+local Cmd = require("utils.cmd")
+
+-- Create command to stop LSP client
+Cmd.create_cmd("StopLspClient", function()
+  -- List all active clients
+  local clients = vim.lsp.get_active_clients()
+  local items = {}
+  for _, client in ipairs(clients) do
+    table.insert(items, client.name)
+  end
+
+  -- Show list of clients with ui select
+  vim.ui.select(items, {
+    prompt = "Select LSP client to stop",
+  }, function(choice)
+    if choice ~= nil then
+      Lsp.stop_lsp_client_by_name(choice)
+    end
+  end)
+end, { nargs = 0 })
+
 -- Refer [FAQ - Neovide](https://neovide.dev/faq.html#how-can-i-use-cmd-ccmd-v-to-copy-and-paste)
 if vim.g.neovide then
   vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
