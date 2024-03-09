@@ -48,6 +48,18 @@ return {
       -- Use unnamed register for the selection
       opts.selection = select.unnamed
 
+      -- Override the git prompts message
+      opts.prompts.Commit = {
+        prompt = "Write commit message for the change with commitizen convention",
+        selection = select.gitdiff,
+      }
+      opts.prompts.CommitStaged = {
+        prompt = "Write commit message for the change with commitizen convention",
+        selection = function(source)
+          return select.gitdiff(source, true)
+        end,
+      }
+
       chat.setup(opts)
 
       vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
