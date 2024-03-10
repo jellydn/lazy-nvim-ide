@@ -1,4 +1,4 @@
-local IS_DEV = true
+local IS_DEV = false
 
 local prompts = {
   -- Code related prompts
@@ -25,7 +25,8 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary", -- It's working nicely on Neovim nightly
+    -- branch = "canary", -- It's working nicely on Neovim nightly
+    version = "2.0.0-1",
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
       { "nvim-lua/plenary.nvim" },
