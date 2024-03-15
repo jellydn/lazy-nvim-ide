@@ -5,11 +5,12 @@ return {
     "jellydn/hurl.nvim",
     dir = IS_DEV and "~/Projects/research/hurl.nvim" or nil,
     ft = "hurl",
-    dependencies = { "MunifTanjim/nui.nvim" },
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-treesitter/nvim-treesitter" },
     opts = {
       mode = "split",
       auto_close = false,
       debug = false,
+      show_notification = false,
       formatters = {
         json = { "jq" },
         html = {
