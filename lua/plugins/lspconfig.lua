@@ -44,7 +44,7 @@ return {
   dependencies = {
     -- Typescript formatter
     {
-      "davidosomething/format-ts-errors.nvim",
+      "dmmulroy/ts-error-translator.nvim",
       ft = "javascript,typescript,typescriptreact,svelte",
     },
     -- Php
@@ -82,24 +82,9 @@ return {
         single_file_support = false,
         handlers = {
           -- format error code with better error message
-          ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
-            if result.diagnostics == nil then
-              return
-            end
-
-            local idx = 1
-
-            while idx <= #result.diagnostics do
-              local entry = result.diagnostics[idx]
-              local formatter = require("format-ts-errors")[entry.code]
-              entry.message = formatter and formatter(entry.message) or entry.message
-              if entry.code == 80001 then
-                table.remove(result.diagnostics, idx)
-              else
-                idx = idx + 1
-              end
-            end
-            vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+          ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+            require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
+            vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
           end,
         },
         -- add keymap
