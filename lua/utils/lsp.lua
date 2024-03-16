@@ -1,4 +1,6 @@
-local function stop_lsp_client_by_name(name)
+local M = {}
+
+M.stop_lsp_client_by_name = function(name)
   local clients = vim.lsp.get_active_clients()
   for _, client in ipairs(clients) do
     if client.name == name then
@@ -10,6 +12,4 @@ local function stop_lsp_client_by_name(name)
   vim.notify("No active LSP client with name: " .. name)
 end
 
-return {
-  stop_lsp_client_by_name = stop_lsp_client_by_name,
-}
+return M
