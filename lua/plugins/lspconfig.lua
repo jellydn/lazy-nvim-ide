@@ -116,9 +116,10 @@ return {
             desc = "Remove Unused Imports",
           },
         },
-        -- inlay hints
+        -- inlay hints & code lens, refer to https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md/#workspacedidchangeconfiguration
         settings = {
           typescript = {
+            -- Inlay Hints preferences
             inlayHints = {
               -- You can set this to 'all' or 'literals' to enable more hints
               includeInlayParameterNameHints = "literals", -- 'none' | 'literals' | 'all'
@@ -137,6 +138,7 @@ return {
             },
           },
           javascript = {
+            -- Inlay Hints preferences
             inlayHints = {
               -- You can set this to 'all' or 'literals' to enable more hints
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -179,6 +181,12 @@ return {
     -- provide the inlay hints.
     inlay_hints = {
       enabled = true,
+    },
+    -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
+    -- Be aware that you also will need to properly configure your LSP server to
+    -- provide the code lenses.
+    codelens = {
+      enabled = false,
     },
     format = {
       timeout_ms = 10000, -- 10 seconds
