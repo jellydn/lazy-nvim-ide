@@ -35,8 +35,7 @@ local prompts = {
 }
 
 return {
-  -- Import the copilot plugin
-  { import = "lazyvim.plugins.extras.coding.copilot" },
+  { import = "plugins.extras.copilot-vim" }, -- Or use { import = "lazyvim.plugins.extras.coding.copilot" },
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
@@ -46,7 +45,7 @@ return {
       { "nvim-lua/plenary.nvim" },
     },
     opts = {
-      show_help = "yes",
+      show_help = "no",
       prompts = prompts,
       debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
       disable_extra_info = "no", -- Disable extra information (e.g: system prompt, token count) in the response.
@@ -60,7 +59,7 @@ return {
     keys = {
       -- Show help actions with telescope
       {
-        "<leader>cch",
+        "<leader>ah",
         function()
           require("CopilotChat.code_actions").show_help_actions()
         end,
@@ -68,40 +67,40 @@ return {
       },
       -- Show prompts actions with telescope
       {
-        "<leader>ccp",
+        "<leader>ap",
         function()
           require("CopilotChat.code_actions").show_prompt_actions()
         end,
         desc = "CopilotChat - Prompt actions",
       },
       {
-        "<leader>ccp",
+        "<leader>ap",
         ":lua require('CopilotChat.code_actions').show_prompt_actions(true)<CR>",
         mode = "x",
         desc = "CopilotChat - Prompt actions",
       },
       -- Code related commands
-      { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-      { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-      { "<leader>ccr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-      { "<leader>ccR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-      { "<leader>ccn", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
+      { "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+      { "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+      { "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
+      { "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
+      { "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
       -- Chat with Copilot in visual mode
       {
-        "<leader>ccv",
+        "<leader>av",
         ":CopilotChatVisual",
         mode = "x",
         desc = "CopilotChat - Open in vertical split",
       },
       {
-        "<leader>ccx",
+        "<leader>ax",
         ":CopilotChatInPlace<cr>",
         mode = "x",
         desc = "CopilotChat - Run in-place code",
       },
       -- Custom input for CopilotChat
       {
-        "<leader>cci",
+        "<leader>ai",
         function()
           local input = vim.fn.input("Ask Copilot: ")
           if input ~= "" then
@@ -112,7 +111,7 @@ return {
       },
       -- Generate commit message based on the git diff
       {
-        "<leader>ccm",
+        "<leader>am",
         function()
           local diff = get_git_diff()
           if diff ~= "" then
@@ -123,7 +122,7 @@ return {
         desc = "CopilotChat - Generate commit message for all changes",
       },
       {
-        "<leader>ccM",
+        "<leader>aM",
         function()
           local diff = get_git_diff(true)
           if diff ~= "" then
@@ -135,7 +134,7 @@ return {
       },
       -- Quick chat with Copilot
       {
-        "<leader>ccq",
+        "<leader>aq",
         function()
           local input = vim.fn.input("Quick Chat: ")
           if input ~= "" then
@@ -145,14 +144,14 @@ return {
         desc = "CopilotChat - Quick chat",
       },
       -- Debug
-      { "<leader>ccd", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
+      { "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
       -- Fix the issue with diagnostic
-      { "<leader>ccf", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
-      { "<leader>ccF", "<cmd>CopilotChatFixError<cr>", desc = "CopilotChat - Fix Error" },
+      { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
+      { "<leader>aF", "<cmd>CopilotChatFixError<cr>", desc = "CopilotChat - Fix Error" },
       -- Clear buffer and chat history
-      { "<leader>ccl", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
+      { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
       -- Toggle Copilot Chat Vsplit
-      { "<leader>ccv", "<cmd>CopilotChatVsplitToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
+      { "<leader>av", "<cmd>CopilotChatVsplitToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
     },
   },
 }
