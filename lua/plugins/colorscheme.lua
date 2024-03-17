@@ -113,7 +113,7 @@ return {
   {
     "lalitmee/cobalt2.nvim",
     lazy = true,
-    dependencies = { "tjdevries/colorbuddy.nvim" },
+    dependencies = { { commit = "cdb5b0654d3cafe61d2a845e15b2b4b0e78e752a", "tjdevries/colorbuddy.nvim" } },
     config = function()
       require("colorbuddy").colorscheme("cobalt2")
       -- Disable spell checking as it is not readable
