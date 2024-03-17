@@ -39,6 +39,8 @@ return {
         submit_prompt = "<CR>", -- Submit question to Copilot Chat
         accept_diff = "<C-a>", -- Accept the diff
         show_diff = "<C-s>", -- Show the diff
+        show_system_prompt = "gup", -- Show system prompt
+        show_user_selection = "gus", -- Show user selection
       },
     },
     config = function(_, opts)
