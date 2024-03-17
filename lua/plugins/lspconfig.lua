@@ -131,6 +131,14 @@ return {
               includeInlayFunctionLikeReturnTypeHints = true,
               includeInlayEnumMemberValueHints = true,
             },
+            -- Code Lens preferences
+            implementationsCodeLens = {
+              enabled = true,
+            },
+            referencesCodeLens = {
+              enabled = true,
+              showOnAllFunctions = true,
+            },
             format = {
               indentSize = vim.o.shiftwidth,
               convertTabsToSpaces = vim.o.expandtab,
@@ -149,6 +157,14 @@ return {
               includeInlayPropertyDeclarationTypeHints = false,
               includeInlayFunctionLikeReturnTypeHints = true,
               includeInlayEnumMemberValueHints = true,
+            },
+            -- Code Lens preferences
+            implementationsCodeLens = {
+              enabled = true,
+            },
+            referencesCodeLens = {
+              enabled = true,
+              showOnAllFunctions = true,
             },
             format = {
               indentSize = vim.o.shiftwidth,
@@ -186,7 +202,7 @@ return {
     -- Be aware that you also will need to properly configure your LSP server to
     -- provide the code lenses.
     codelens = {
-      enabled = false,
+      enabled = false, -- Run `lua vim.lsp.codelens.refresh({ bufnr = 0 })` for refreshing code lens
     },
     format = {
       timeout_ms = 10000, -- 10 seconds
