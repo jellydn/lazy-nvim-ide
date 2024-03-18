@@ -15,18 +15,11 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
-local is_stable_version = true
-if vim.fn.has("nvim-0.10.0") == 1 then
-  is_stable_version = false
-end
-
-if is_stable_version then
-  -- Set filetype for .hurl files
-  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    group = augroup("env_filetype"),
-    pattern = { "*.hurl" },
-    callback = function()
-      vim.opt_local.filetype = "sh"
-    end,
-  })
-end
+-- Set filetype for .hurl files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup("env_filetype"),
+  pattern = { "*.hurl" },
+  callback = function()
+    vim.opt_local.filetype = "hurl"
+  end,
+})
