@@ -32,6 +32,7 @@ return {
     opts = {
       prompts = prompts,
       auto_follow_cursor = false, -- Don't follow the cursor after getting response
+      show_help = true, -- Show help in virtual text
       mappings = {
         close = "q", -- Close chat
         reset = "<C-l>", -- Clear the chat buffer
@@ -39,8 +40,8 @@ return {
         submit_prompt = "<CR>", -- Submit question to Copilot Chat
         accept_diff = "<C-a>", -- Accept the diff
         show_diff = "<C-s>", -- Show the diff
-        show_system_prompt = "gup", -- Show system prompt
-        show_user_selection = "gus", -- Show user selection
+        show_system_prompt = "gmp", -- Show system prompt
+        show_user_selection = "gms", -- Show user selection
       },
     },
     config = function(_, opts)
@@ -85,6 +86,15 @@ return {
       vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
         chat.ask(args.args, { selection = select.buffer })
       end, { nargs = "*", range = true })
+
+      -- Custom buffer for CopilotChat
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = "copilot-*",
+        callback = function()
+          vim.opt_local.relativenumber = true
+          vim.opt_local.number = true
+        end,
+      })
     end,
     event = "VeryLazy",
     keys = {
