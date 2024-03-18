@@ -12,7 +12,7 @@ return {
         fish = {},
         -- Conform will run multiple formatters sequentially
         go = { "goimports", "gofmt" },
-        python = { "isort", "ruff_fix", "ruff_format" },
+        python = { "ruff_fix", "ruff_format" },
         php = { "pint" },
         rust = { "rustfmt" },
         -- Use a sub-list to run only the first available formatter

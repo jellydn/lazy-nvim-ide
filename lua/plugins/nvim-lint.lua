@@ -7,6 +7,7 @@ return {
         -- Need to install golangci-lint
         -- e.g: brew install golangci-lint
         go = { "golangcilint" },
+        python = { "ruff" },
         ["*"] = { "cspell", "codespell" },
       },
     },
