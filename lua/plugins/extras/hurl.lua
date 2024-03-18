@@ -22,13 +22,16 @@ return {
     },
     keys = {
       -- Run API request
-      { "<leader>tA", "<cmd>HurlRunner<CR>", desc = "Run All requests" },
-      { "<leader>ta", "<cmd>HurlRunnerAt<CR>", desc = "Run Api request" },
-      { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "Run Api request to entry" },
-      { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "Hurl Toggle Mode" },
-      { "<leader>tv", "<cmd>HurlVerbose<CR>", desc = "Run Api in verbose mode" },
+      { "<leader>rA", "<cmd>HurlRunner<CR>", desc = "Hurl - Run All requests" },
+      { "<leader>ra", "<cmd>HurlRunnerAt<CR>", desc = "Hurl - Run Api request" },
+      { "<leader>re", "<cmd>HurlRunnerToEntry<CR>", desc = "Hurl -Run Api request to entry" },
+      { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "Hurl - Toggle Mode" },
+      { "<leader>rv", "<cmd>HurlVerbose<CR>", desc = "Hurl - Run Api in verbose mode" },
       -- Run Hurl request in visual mode
-      { "<leader>h", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
+      { "<leader>rh", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
+      -- Manage variable
+      { "<leader>rg", ":HurlSetVariable", desc = "Hurl - Set global variable" },
+      { "<leader>rG", "<cmd>HurlManageVariable<CR>", desc = "Hurl - Manage global variable" },
     },
   },
 }
