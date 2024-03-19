@@ -24,7 +24,8 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    version = "v2.0.0",
+    -- branch = "canary", -- Use the canary branch if you want to test the latest features
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
       { "nvim-lua/plenary.nvim" },
