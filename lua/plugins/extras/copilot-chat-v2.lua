@@ -24,7 +24,7 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    version = "v2.0.0",
+    version = "v2.1.0",
     -- branch = "canary", -- Use the canary branch if you want to test the latest features
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
@@ -33,7 +33,7 @@ return {
     opts = {
       prompts = prompts,
       auto_follow_cursor = false, -- Don't follow the cursor after getting response
-      show_help = true, -- Show help in virtual text
+      show_help = false, -- Show help in virtual text, set to true if that's 1st time using Copilot Chat
       mappings = {
         -- Use tab for completion
         complete = {
