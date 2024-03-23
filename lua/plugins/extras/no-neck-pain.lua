@@ -5,12 +5,24 @@ return {
     cmd = "NoNeckPain",
     opts = {
       width = 120,
+      integrations = {
+        NeoTree = {
+          position = "left",
+          reopen = true,
+        },
+      },
     },
     keys = {
       {
         "<leader>cz",
         "<cmd>NoNeckPain<cr>",
-        desc = "Distraction Free Mode",
+        desc = "NoNeckPain - Distraction Free Mode",
+      },
+      -- Resize the window
+      {
+        "<leader>cZ",
+        ":NoNeckPainResize ",
+        desc = "NoNeckPain - Resize the window",
       },
     },
   },
