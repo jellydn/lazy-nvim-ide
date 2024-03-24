@@ -39,6 +39,10 @@ return {
           title = "CopilotChat.nvim",
           ft = "copilot-chat",
           size = { width = 0.5 },
+          -- exclude floating windows
+          filter = function(buf, win)
+            return vim.api.nvim_win_get_config(win).relative == ""
+          end,
         },
         { title = "Neotest Summary", ft = "neotest-summary" },
         {
