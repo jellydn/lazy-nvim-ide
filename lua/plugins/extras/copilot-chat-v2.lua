@@ -25,7 +25,8 @@ return {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
     version = "v2.2.0",
-    -- branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstablechat
+    -- branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
+    -- Do not use branch and version together, either use branch or version
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
       { "nvim-lua/plenary.nvim" },
@@ -211,7 +212,7 @@ return {
       -- Clear buffer and chat history
       { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
       -- Toggle Copilot Chat Vsplit
-      { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle Vsplit" },
+      { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
     },
   },
 }
