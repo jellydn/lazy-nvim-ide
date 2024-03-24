@@ -35,7 +35,7 @@ local function selectColorSchemeByTime()
   end
 
   if is_warp_terminal() then
-    return "cobalt2"
+    return "catppuccin-mocha"
   end
 
   if is_transparent then
@@ -45,7 +45,7 @@ local function selectColorSchemeByTime()
       "tokyonight",
       "nightfox",
       "rose-pine",
-      "catppuccin-frappe",
+      "catppuccin-mocha",
       "everforest",
       "dracula",
       "kanagawa",
