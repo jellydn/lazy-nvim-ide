@@ -47,6 +47,19 @@ return {
       "dmmulroy/ts-error-translator.nvim",
       ft = "javascript,typescript,typescriptreact,svelte",
     },
+    {
+      "marilari88/twoslash-queries.nvim",
+      ft = "javascript,typescript,typescriptreact,svelte",
+      opts = {
+        is_enabled = false, -- Use :TwoslashQueriesEnable to enable
+        multi_line = true, -- to print types in multi line mode
+        highlight = "Type", -- to set up a highlight group for the virtual text
+      },
+      keys = {
+        { "<leader>dt", ":TwoslashQueriesEnable<cr>", desc = "Enable twoslash queries" },
+        { "<leader>dd", ":TwoslashQueriesInspect<cr>", desc = "Inspect twoslash queries" },
+      },
+    },
     -- Php
     {
       "gbprod/phpactor.nvim",
@@ -150,11 +163,11 @@ return {
             inlayHints = {
               -- You can set this to 'all' or 'literals' to enable more hints
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayParameterNameHints = "literals", -- 'none' | 'literals' | 'all'
-              includeInlayVariableTypeHints = false,
-              includeInlayFunctionParameterTypeHints = false,
-              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-              includeInlayPropertyDeclarationTypeHints = false,
+              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+              includeInlayVariableTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
               includeInlayFunctionLikeReturnTypeHints = true,
               includeInlayEnumMemberValueHints = true,
             },
@@ -214,6 +227,13 @@ return {
         if deno_config_exist() then
           return true
         end
+
+        require("lazyvim.util").lsp.on_attach(function(client, bufnr)
+          if client.name == "tsserver" then
+            -- Attach twoslash queries
+            require("twoslash-queries").attach(client, bufnr)
+          end
+        end)
       end,
     },
   },
