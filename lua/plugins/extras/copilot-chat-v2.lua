@@ -65,6 +65,10 @@ return {
           normal = "<C-y>",
           insert = "<C-y>",
         },
+        -- Yank the diff in the response to register
+        yank_diff = {
+          normal = "gmy",
+        },
         -- Show the diff
         show_diff = {
           normal = "gmd",
@@ -135,6 +139,20 @@ return {
             vim.bo.filetype = "markdown"
           end
         end,
+      })
+
+      -- Add which-key mappings
+      local wk = require("which-key")
+      wk.register({
+        g = {
+          m = {
+            name = "+Copilot Chat",
+            d = "Show diff",
+            p = "System prompt",
+            s = "Show selection",
+            y = "Yank diff",
+          },
+        },
       })
     end,
     event = "VeryLazy",
