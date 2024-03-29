@@ -142,31 +142,6 @@ keymap("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
 -- Show Lsp info
 keymap("n", "<leader>cl", "<cmd>LspInfo<CR>", opts)
 
--- Show references on telescope
-if Util.has("telescope.nvim") then
-  keymap("n", "gr", "<cmd>Telescope lsp_references<CR>")
-end
-
--- LspSaga
-if Util.has("lspsaga.nvim") then
-  -- Diagnostic jump with filters such as only jumping to an error
-  keymap("n", "[E", function()
-    require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
-  end)
-  keymap("n", "]E", function()
-    require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
-  end)
-end
-
--- Trouble
--- Add keymap only show FIXME
-if Util.has("todo-comments.nvim") then
-  -- show fixme on telescope
-  keymap("n", "<leader>xf", "<cmd>TodoTelescope keywords=FIX,FIXME<CR>", {
-    desc = "Show FIXME",
-  })
-end
-
 -- Gitsigns
 -- Add toggle gitsigns blame line
 if Util.has("gitsigns.nvim") then
@@ -191,3 +166,6 @@ keymap(
   "<cmd>lua require('utils.cspell').add_word_to_c_spell_dictionary()<CR>",
   { noremap = true, silent = true, desc = "Add unknown to cspell dictionary" }
 )
+
+-- Change to current file directory with <leader>cD
+keymap("n", "<leader>cD", "<cmd>cd %:p:h<CR>", { noremap = true, silent = true, desc = "Change to current directory" })
