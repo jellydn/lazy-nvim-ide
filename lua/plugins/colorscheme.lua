@@ -20,22 +20,22 @@ local function is_warp_terminal()
   return os.getenv("TERM_PROGRAM") == "WarpTerminal"
 end
 
+local function is_tmux()
+  return os.getenv("TMUX") ~= nil
+end
+
 -- Default colorscheme
 local default_color_scheme = "kanagawa"
 
 -- Select colorscheme based on the time, and load it with LazyVim
 local function selectColorSchemeByTime()
   -- skip if running in vscode
-  if vim.g.vscode then
+  if vim.g.vscode or is_warp_terminal() or is_tmux() then
     return "kanagawa"
   end
 
   if vim.g.neovide then
     return "nightfox"
-  end
-
-  if is_warp_terminal() then
-    return "catppuccin-mocha"
   end
 
   if is_transparent then
@@ -50,7 +50,7 @@ local function selectColorSchemeByTime()
       "dracula",
       "kanagawa",
       "nord",
-      "cobalt2",
+      -- "cobalt2", -- too bright
     }
     local idx = tonumber(os.date("%S")) % #night_themes + 1
 
@@ -155,6 +155,7 @@ return {
     "rebelot/kanagawa.nvim",
     lazy = true,
     opts = {
+      dimInactive = true, -- dim inactive window `:h hl-NormalNC`
       -- Remove gutter background
       colors = {
         theme = {
