@@ -1,4 +1,4 @@
--- disable lsp-inlayhints and lsp lenf if that is nightly version, will remove when 0.10.0 is stable
+-- disable lsp-inlayhints and lsp lens if that is nightly version, will remove when 0.10.0 is stable
 local is_stable_version = true
 if vim.fn.has("nvim-0.10.0") == 1 then
   is_stable_version = false
@@ -35,68 +35,6 @@ return {
         { noremap = true, silent = true, desc = "Toggle Inlay Hints" }
       )
     end,
-  },
-  {
-    "rmagatti/goto-preview",
-    opts = {
-      default_mappings = false,
-      -- default_mappings = false, and then you can map preview window with your favorite keymap
-      -- nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
-      -- nnoremap gpD <cmd>lua require('goto-preview').goto_preview_declaration()<CR>
-      -- nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
-      -- nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
-      -- nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
-      -- nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
-    },
-    keys = {
-      -- Preview definition
-      { "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", desc = "Preview Definition" },
-      -- Preview declaration
-      { "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", desc = "Preview Declaration" },
-      -- Preview type definition
-      {
-        "gpt",
-        "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
-        desc = "Preview Type Definition",
-      },
-      -- Preview implementation
-      {
-        "gpi",
-        "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
-        desc = "Preview Implementation",
-      },
-      -- Close all preview windows
-      { "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", desc = "Close All Preview Windows" },
-      -- Hover doc with native lsp
-      { "gh", vim.lsp.buf.hover, desc = "Hover Doc" },
-    },
-  },
-  {
-    "glepnir/lspsaga.nvim",
-    event = "LspAttach",
-    opts = {},
-    config = true,
-    enabled = false, -- Disable lspsaga, use goto-preview instead
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-      -- Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" },
-    },
-    -- Group LspSaga keymap with prefix "gl"
-    keys = {
-      -- LSP finder - Find the symbol's definition
-      { "glf", "<cmd>Lspsaga finder<CR>", desc = "LSP Finder" },
-      -- Go to definition
-      { "gld", "<cmd>Lspsaga goto_definition<CR>", desc = "Go to Definition" },
-      -- Go to type definition
-      { "glt", "<cmd>Lspsaga goto_type_definition<CR>", desc = "Go to Type Definition" },
-      -- Toggle Outline
-      { "glo", "<cmd>Lspsaga outline<CR>", desc = "Toggle Outline" },
-      -- Peek definition
-      { "glp", "<cmd>Lspsaga peek_definition<CR>", desc = "Peek Definition" },
-      -- Hover Doc
-      { "glh", "<cmd>Lspsaga hover_doc<CR>", desc = "Hover Doc" },
-    },
   },
   {
     "Wansmer/symbol-usage.nvim",
