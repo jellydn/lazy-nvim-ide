@@ -5,11 +5,6 @@ return {
   "stevearc/aerial.nvim",
   keys = {
     { "<leader>ta", "<cmd>AerialToggle<cr>", desc = "AerialToggle" },
-    {
-      "<leader>fi",
-      "<cmd>Telescope aerial<cr>",
-      desc = "Telescope Aerial",
-    },
   },
   config = function()
     local status_ok, aerial = pcall(require, "aerial")
@@ -32,6 +27,11 @@ return {
     if not tele_status_ok then
       return
     end
+
+    -- Define a custom command to open aerial with telescope
+    vim.keymap.set("n", "<leader>fi", "<cmd>Telescope aerial<CR>", {
+      desc = "Telescope Aerial",
+    })
 
     telescope.load_extension("aerial")
   end,

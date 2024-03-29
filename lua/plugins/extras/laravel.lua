@@ -22,7 +22,12 @@ return {
     },
     config = function()
       require("laravel").setup()
-      require("telescope").load_extension("laravel")
+      local tele_status_ok, telescope = pcall(require, "telescope")
+      if not tele_status_ok then
+        return
+      end
+
+      telescope.load_extension("laravel")
     end,
   },
 }

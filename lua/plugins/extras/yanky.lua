@@ -5,7 +5,12 @@ return {
     {
       "<leader>p",
       function()
-        require("telescope").extensions.yank_history.yank_history({})
+        local tele_status_ok, telescope = pcall(require, "telescope")
+        if not tele_status_ok then
+          return
+        end
+
+        telescope.extensions.yank_history.yank_history({})
       end,
       desc = "Open Yank History",
     },

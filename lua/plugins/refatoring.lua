@@ -9,7 +9,7 @@ return {
       {
         "<leader>rm",
         function()
-          require("telescope").extensions.refactoring.refactors()
+          require("refactoring").select_refactor()
         end,
         mode = { "v" },
         desc = "Refactoring menu",
@@ -62,7 +62,13 @@ return {
     },
     config = function(_, options)
       require("refactoring").setup(options)
-      require("telescope").load_extension("refactoring")
+
+      local tele_status_ok, telescope = pcall(require, "telescope")
+      if not tele_status_ok then
+        return
+      end
+
+      telescope.load_extension("refactoring")
     end,
   },
 }

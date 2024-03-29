@@ -31,7 +31,7 @@ end
 
 return {
   {
-    "telescope.nvim",
+    "nvim-telescope/telescope.nvim",
     opts = {
       defaults = {
         prompt_prefix = "   ",
