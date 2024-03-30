@@ -1,7 +1,12 @@
 local Util = require("lazyvim.util")
 
 function _G.switch_projects()
-  local fzf_lua = require("fzf-lua")
+  local ok, fzf_lua = pcall(require, "fzf-lua")
+
+  if not ok then
+    return
+  end
+
   local history = require("project_nvim.utils.history")
   local results = history.get_recent_projects()
   fzf_lua.fzf_exec(results, {
@@ -68,7 +73,7 @@ return {
       config = {
         -- Center the dashboard
         header = vim.split(logo, "\n"),
-        center = Util.has("telescope") and telescope_actions or fzf_actions,
+        center = Util.has("telescope.nvim") and telescope_actions or fzf_actions,
         footer = function()
           return { "productsway.com" }
         end,

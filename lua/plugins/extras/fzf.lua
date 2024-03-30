@@ -1,36 +1,155 @@
+local logo = [[
+      ██╗████████╗    ███╗   ███╗ █████╗ ███╗   ██╗
+      ██║╚══██╔══╝    ████╗ ████║██╔══██╗████╗  ██║
+      ██║   ██║       ██╔████╔██║███████║██╔██╗ ██║
+      ██║   ██║       ██║╚██╔╝██║██╔══██║██║╚██╗██║
+      ██║   ██║       ██║ ╚═╝ ██║██║  ██║██║ ╚████║
+      ╚═╝   ╚═╝       ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+]]
+
+logo = string.rep("\n", 4) .. logo .. "\n\n"
+
+--- Set the limit of most recent files based on the window height
+local function mru_limit_by_win_height()
+  local height = vim.fn.winheight(0)
+  if height >= 40 then
+    return 15
+  elseif height >= 30 then
+    return 10
+  else
+    return 5
+  end
+end
+
 return {
   -- Disable telescope
-  { "nvim-telescope/telescope.nvim", enabled = false },
+  {
+    "nvim-telescope/telescope.nvim",
+    enabled = false,
+  },
+  -- Change dashboard
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    opts = {
+      theme = "hyper",
+      config = {
+        packages = { enable = false },
+        header = vim.split(logo, "\n"),
+        shortcut = {
+          { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
+          {
+            icon = " ",
+            icon_hl = "@variable",
+            desc = "Files",
+            group = "Label",
+            action = [[lua require('fzf-lua').files({cwd_prompt = false})]],
+            key = "f",
+          },
+          {
+            desc = " Text",
+            group = "DiagnosticHint",
+            action = [[lua require('fzf-lua').live_grep({cwd_prompt = false})]],
+            key = "g",
+          },
+          {
+            desc = " Session",
+            group = "Label",
+            action = [[lua require("persistence").load()]],
+            key = "s",
+          },
+          {
+            desc = " Config",
+            group = "Number",
+            action = [[lua require('fzf-lua').files({ cwd = '~/.config/nvim' })]],
+            key = "c",
+          },
+          {
+            desc = " Extras",
+            group = "Label",
+            action = "LazyExtras",
+            icon = " ",
+            key = "x",
+          },
+        },
+        footer = function()
+          return { "productsway.com" }
+        end,
+        project = { enable = false },
+        mru = { limit = mru_limit_by_win_height(), cwd_only = true },
+      },
+    },
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
+  -- Setup fzf-lua
   {
     "ibhagwan/fzf-lua", -- NOTE: The github repo is removed, use the gitlab repo
     url = "https://gitlab.com/ibhagwan/fzf-lua",
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {},
-    event = "VeryLazy",
-    config = function()
+    opts = {
+      hls = {
+        border = "FloatBorder",
+        cursorline = "Visual",
+        cursorlinenr = "Visual",
+      },
+      -- History file
+      fzf_opts = {
+        ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-history",
+        ["--info"] = false,
+        ["--border"] = false,
+        ["--preview-window"] = false,
+      },
+      winopts = {
+        height = 0.85,
+        width = 0.80,
+        row = 0.35,
+        col = 0.55,
+        preview = {
+          layout = "flex",
+          flip_columns = 130,
+          scrollbar = "float",
+        },
+      },
+      files = {
+        git_icons = false,
+        file_icons = false,
+      },
+      grep = {
+        debug = false,
+      },
+      git = {
+        status = {
+          winopts = {
+            preview = { vertical = "down:70%", horizontal = "right:70%" },
+          },
+        },
+        commits = { winopts = { preview = { vertical = "down:60%" } } },
+        bcommits = { winopts = { preview = { vertical = "down:60%" } } },
+        branches = {
+          winopts = {
+            preview = { vertical = "down:75%", horizontal = "right:75%" },
+          },
+        },
+      },
+      lsp = {
+        symbols = {
+          path_shorten = 1,
+        },
+        code_actions = {
+          winopts = {
+            relative = "cursor",
+            row = 1,
+            col = 0,
+            height = 0.4,
+            preview = { vertical = "down:70%" },
+          },
+        },
+      },
+    },
+    config = function(_, options)
       local fzf_lua = require("fzf-lua")
-      fzf_lua.setup({
-        "fzf-native", -- max-perf
-        hls = {
-          border = "FloatBorder",
-        },
-        -- History file
-        fzf_opts = {
-          ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-history",
-          ["--info"] = false,
-          ["--border"] = false,
-          ["--preview-window"] = false,
-        },
-        -- Max performance
-        winopts = {
-          preview = { default = "bat_native" },
-        },
-        files = {
-          git_icons = false,
-          file_icons = false,
-        },
-      })
+      fzf_lua.setup(options)
 
       -- Automatic sizing of height/width of vim.ui.select
       fzf_lua.register_ui_select(function(_, items)
@@ -57,6 +176,7 @@ return {
       vim.lsp.handlers["callHierarchy/outgoingCalls"] = fzf_lua.lsp_outgoing_calls
     end,
     keys = {
+      -- Files keymaps
       {
         "<leader>fg",
         "<cmd> :FzfLua grep_project<CR>",
@@ -80,26 +200,11 @@ return {
         desc = "Find Git Files",
       },
       {
-        "<leader>fa",
-        "<cmd> :FzfLua commands<CR>",
-        desc = "Find Actions",
-      },
-      {
-        "<leader>f;",
-        "<cmd> :FzfLua command_history<CR>",
-        desc = "Find Command History",
-      },
-      {
         "<leader>fc",
         function()
           require("fzf-lua").files({ cwd = "~/.config/nvim" })
         end,
         desc = "Find Neovim Configs",
-      },
-      {
-        "<leader>fC",
-        "<cmd> :FzfLua git_bcommits<CR>",
-        desc = "Find Commits",
       },
       {
         "<leader>fb",
@@ -111,71 +216,50 @@ return {
         "<cmd> :FzfLua oldfiles<CR>",
         desc = "Find Recent Files",
       },
-      {
-        "<leader>fk",
-        "<cmd> :FzfLua keymaps<CR>",
-        desc = "Find Keymaps",
-      },
-      {
-        "<leader>fm",
-        "<cmd> :FzfLua marks<CR>",
-        desc = "Find Marks",
-      },
-      {
-        "<leader>fl",
-        "<cmd> :FzfLua live_grep<CR>",
-        desc = "Find Live Grep",
-      },
-      {
-        "<leader>ft",
-        "<cmd> :FzfLua tmux_buffers<CR>",
-        desc = "Find Tmux buffers",
-      },
-      {
-        "<leader>fT",
-        "<cmd> :FzfLua colorschemes<CR>",
-        desc = "Find Theme",
-      },
-      {
-        "<leader>fh",
-        "<cmd> :FzfLua help_tags<CR>",
-        desc = "Find Help",
-      },
-      {
-        "<leader>fq",
-        "<cmd> :FzfLua quickfix<CR>",
-        desc = "Find Quickfix",
-      },
-      {
-        "<leader>fw",
-        "<cmd> :FzfLua grep_cword<CR>",
-        desc = "Find word under cursor",
-      },
-      {
-        "<leader>fW",
-        "<cmd> :FzfLua grep_cWORD<CR>",
-        desc = "Find WORD under cursor",
-      },
       -- Resume last fzf command
       {
         "<leader>fR",
         "<cmd> :FzfLua resume<CR>",
         desc = "Resume Fzf",
       },
+      -- Live Grep, better for large projects
+      {
+        "<leader>fl",
+        "<cmd> :FzfLua live_grep<CR>",
+        desc = "Find Live Grep",
+      },
       -- Open files at the current working directory
       {
-        "<leader><leader>",
+        "<leader><space>",
         function()
           local cwd = vim.uv.cwd()
-          require("fzf-lua").files({ cwd = cwd, cwd_prompt = false })
+          require("fzf-lua").files({ cwd = cwd })
         end,
-        desc = "Find Files at CWD",
+        desc = "Find Files at project directory",
       },
-      -- Search in current buffer
+      {
+        "<leader>/",
+        function()
+          local cwd = vim.fn.expand("%:p:h")
+          require("fzf-lua").live_grep({ cwd = cwd })
+        end,
+        desc = "Grep Files at current buffer directory",
+      },
+      -- Search in current buffer with grep
       {
         "<leader>sb",
         "<cmd> :FzfLua grep_curbuf<CR>",
         desc = "Search Current Buffer",
+      },
+      {
+        "<leader>sw",
+        "<cmd> :FzfLua grep_cword<CR>",
+        desc = "Find word under cursor",
+      },
+      {
+        "<leader>fW",
+        "<cmd> :FzfLua grep_cWORD<CR>",
+        desc = "Search WORD under cursor",
       },
       -- Search in git status
       {
@@ -184,25 +268,83 @@ return {
         desc = "Git Status",
       },
       {
+        "<leader>gc",
+        "<cmd> :FzfLua git_commits<CR>",
+        desc = "Git Commits",
+      },
+      {
+        "<leader>gb",
+        "<cmd> :FzfLua git_branches<CR>",
+        desc = "Git Branches",
+      },
+      {
+        "<leader>gB",
+        "<cmd> :FzfLua git_bcommits<CR>",
+        desc = "Git Buffer Commits",
+      },
+      -- Search keymaps
+      {
+        "<leader>sa",
+        "<cmd> :FzfLua commands<CR>",
+        desc = "Find Actions",
+      },
+      {
+        "<leader>s:",
+        "<cmd> :FzfLua command_history<CR>",
+        desc = "Find Command History",
+      },
+      {
         "<leader>ss",
         "<cmd> :FzfLua lsp_document_symbols<CR>",
         desc = "LSP Document Symbols",
       },
       {
-        "<leader>sw",
+        "<leader>sS",
         "<cmd> :FzfLua lsp_workspace_symbols<CR>",
         desc = "LSP Workspace Symbols",
       },
       {
+        "<leader>sk",
+        "<cmd> :FzfLua keymaps<CR>",
+        desc = "Search Keymaps",
+      },
+      {
+        "<leader>sm",
+        "<cmd> :FzfLua marks<CR>",
+        desc = "Search Marks",
+      },
+      {
+        "<leader>st",
+        "<cmd> :FzfLua tmux_buffers<CR>",
+        desc = "Search Tmux buffers",
+      },
+      {
         "<leader>sc",
-        "<cmd> :FzfLua lsp_code_actions<CR>",
-        desc = "LSP Code Actions",
+        "<cmd> :FzfLua colorschemes<CR>",
+        desc = "Search colorschemes",
+      },
+      {
+        "<leader>sh",
+        "<cmd> :FzfLua help_tags<CR>",
+        desc = "Search Help",
+      },
+      {
+        "<leader>sq",
+        "<cmd> :FzfLua quickfix<CR>",
+        desc = "Search Quickfix",
       },
       -- Search in recent projects
       {
         "<leader>fp",
         function()
           local fzf_lua = require("fzf-lua")
+
+          local ok, _ = pcall(require, "project_nvim")
+          if not ok then
+            vim.notify("Project.nvim is not installed", vim.log.levels.ERROR, { title = "Fzf Lua" })
+            return
+          end
+
           local history = require("project_nvim.utils.history")
           local results = history.get_recent_projects()
           fzf_lua.fzf_exec(results, {

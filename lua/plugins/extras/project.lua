@@ -12,7 +12,12 @@ return {
       end
 
       telescope.load_extension("projects")
-      vim.keymap.nnoremap({ "<leader>fp", "<Cmd>Telescope projects<CR>", desc = "Projects" })
+
+      vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects<CR>", {
+        noremap = true,
+        silent = true,
+        desc = "Switch to project",
+      })
     end,
   },
 }
