@@ -1,3 +1,14 @@
+local function max_height()
+  local height = vim.fn.winheight(0)
+  if height >= 40 then
+    return 30
+  elseif height >= 30 then
+    return 20
+  else
+    return 10
+  end
+end
+
 return {
   -- Disable neo-tree and use oil.nvim instead, simple and fast
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
@@ -16,6 +27,16 @@ return {
           local ignore_folders = { "node_modules", "dist", "build" }
           return vim.startswith(name, ".") or vim.tbl_contains(ignore_folders, name)
         end,
+      },
+      -- Configuration for the floating window in oil.open_float
+      float = {
+        padding = 2,
+        max_width = 120,
+        max_height = max_height(),
+        border = "rounded",
+        win_options = {
+          winblend = 0,
+        },
       },
     },
     -- Optional dependencies
