@@ -1,14 +1,18 @@
---- Get the root directory of the project by using git command
---- If the git command fails then use the current working directory
----@return string | nil
+local root_dir_cache = nil
+
+--- Get the git root directory
+---@return string|nil The git root directory
 local function get_root_dir()
-  local cwd = vim.loop.cwd()
-  local root = vim.fn.system("git rev-parse --show-toplevel")
-  if vim.v.shell_error == 0 and root ~= nil then
-    local path = string.gsub(root, "\n", "")
-    return path
+  if root_dir_cache == nil then
+    local root_dir =
+      require("plenary.job"):new({ command = "git", args = { "rev-parse", "--show-toplevel" } }):sync()[1]
+    if root_dir == nil then
+      return vim.uv.cwd()
+    end
+    root_dir_cache = root_dir
   end
-  return cwd
+
+  return root_dir_cache
 end
 
 return {
@@ -35,45 +39,12 @@ return {
         end,
         desc = "Harpoon Add File",
       },
-      {
-        "<leader>1",
-        function()
-          require("harpoon"):list():select(1)
-        end,
-        desc = "Harpoon to file 1",
-      },
-      {
-        "<leader>2",
-        function()
-          require("harpoon"):list():select(2)
-        end,
-        desc = "Harpoon to file 2",
-      },
-      {
-        "<leader>3",
-        function()
-          require("harpoon"):list():select(3)
-        end,
-        desc = "Harpoon to file 3",
-      },
-      {
-        "<leader>4",
-        function()
-          require("harpoon"):list():select(4)
-        end,
-        desc = "Harpoon to file 4",
-      },
     },
     opts = {
-      default = {
-        get_root_dir = get_root_dir,
-      },
       settings = {
         save_on_toggle = false,
         sync_on_ui_close = false,
-        key = function()
-          return get_root_dir()
-        end,
+        key = get_root_dir,
       },
     },
     config = function(_, options)
@@ -84,6 +55,17 @@ return {
 
       ---@diagnostic disable-next-line: missing-parameter
       harpoon.setup(options)
+      for i = 1, 4 do
+        vim.keymap.set("n", "<leader>" .. i, function()
+          require("harpoon"):list():select(i)
+        end, { noremap = true, silent = true, desc = "Harpoon select " .. i })
+      end
+
+      -- Change to current file directory with <leader>cD and reset the root directory cache
+      vim.keymap.set("n", "<leader>cD", function()
+        root_dir_cache = nil
+        vim.cmd("cd " .. get_root_dir())
+      end, { noremap = true, silent = true, desc = "Change to current directory" })
 
       -- Telescope integration
       local tele_status_ok, _ = pcall(require, "telescope")

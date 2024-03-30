@@ -166,6 +166,3 @@ keymap(
   "<cmd>lua require('utils.cspell').add_word_to_c_spell_dictionary()<CR>",
   { noremap = true, silent = true, desc = "Add unknown to cspell dictionary" }
 )
-
--- Change to current file directory with <leader>cD
-keymap("n", "<leader>cD", "<cmd>cd %:p:h<CR>", { noremap = true, silent = true, desc = "Change to current directory" })
