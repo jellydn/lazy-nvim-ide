@@ -83,8 +83,7 @@ return {
   },
   -- Setup fzf-lua
   {
-    "ibhagwan/fzf-lua", -- NOTE: The github repo is removed, use the gitlab repo
-    url = "https://gitlab.com/ibhagwan/fzf-lua",
+    "ibhagwan/fzf-lua",
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
