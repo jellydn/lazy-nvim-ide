@@ -9,18 +9,6 @@ local logo = [[
 
 logo = string.rep("\n", 4) .. logo .. "\n\n"
 
---- Set the limit of most recent files based on the window height
-local function mru_limit_by_win_height()
-  local height = vim.fn.winheight(0)
-  if height >= 40 then
-    return 15
-  elseif height >= 30 then
-    return 10
-  else
-    return 5
-  end
-end
-
 return {
   -- Disable telescope
   {
@@ -37,9 +25,15 @@ return {
         packages = { enable = false },
         header = vim.split(logo, "\n"),
         shortcut = {
-          { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
           {
-            icon = " ",
+            icon = "󰊳 ",
+            desc = "Update",
+            group = "@property",
+            action = "Lazy update",
+            key = "u",
+          },
+          {
+            icon = " ",
             icon_hl = "@variable",
             desc = "Files",
             group = "Label",
@@ -47,36 +41,53 @@ return {
             key = "f",
           },
           {
-            desc = " Text",
-            group = "DiagnosticHint",
+            icon = " ",
+            desc = "Grep",
+            group = "Number",
             action = [[lua require('fzf-lua').live_grep({cwd_prompt = false})]],
             key = "g",
           },
           {
-            desc = " Session",
+            icon = " ",
+            desc = "Session",
             group = "Label",
             action = [[lua require("persistence").load()]],
             key = "s",
           },
           {
-            desc = " Config",
+            icon = " ",
+            desc = "Config",
             group = "Number",
             action = [[lua require('fzf-lua').files({ cwd = '~/.config/nvim' })]],
             key = "c",
           },
           {
+            icon = " ",
             desc = " Extras",
             group = "Label",
             action = "LazyExtras",
-            icon = " ",
             key = "x",
+          },
+          {
+            icon = "󰒲 ",
+            desc = " Lazy",
+            group = "Number",
+            action = "Lazy",
+            key = "l",
+          },
+          {
+            icon = " ",
+            desc = " Quit",
+            group = "Number",
+            action = "qa",
+            key = "q",
           },
         },
         footer = function()
           return { "productsway.com" }
         end,
         project = { enable = false },
-        mru = { limit = mru_limit_by_win_height(), cwd_only = true },
+        mru = { limit = 5, cwd_only = true },
       },
     },
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
