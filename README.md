@@ -1,4 +1,7 @@
 # My 💤 LazyVim IDE config for Neovim
+
+[![IT Man - LazyVim Power User Guide](https://i.ytimg.com/vi/jveM3hZs_oI/hqdefault.jpg)](https://www.youtube.com/watch?v=jveM3hZs_oI)
+
 ## TOC
 
 <!--toc:start-->
