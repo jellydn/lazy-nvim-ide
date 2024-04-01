@@ -26,7 +26,7 @@ return {
         show_hidden = false,
         -- This function defines what is considered a "hidden" file
         is_hidden_file = function(name)
-          local ignore_folders = { "node_modules", "dist", "build" }
+          local ignore_folders = { "node_modules", "dist", "build", "coverage" }
           return vim.startswith(name, ".") or vim.tbl_contains(ignore_folders, name)
         end,
       },
@@ -39,6 +39,13 @@ return {
         win_options = {
           winblend = 0,
         },
+      },
+      -- Custom Keymap
+      keymaps = {
+        ["<C-c>"] = false,
+        ["<C-s>"] = "actions.save",
+        ["q"] = "actions.close",
+        ["<C-y>"] = "actions.copy_entry_path",
       },
     },
     -- Optional dependencies
