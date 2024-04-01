@@ -166,3 +166,7 @@ keymap(
   "<cmd>lua require('utils.cspell').add_word_to_c_spell_dictionary()<CR>",
   { noremap = true, silent = true, desc = "Add unknown to cspell dictionary" }
 )
+
+-- Disable lazyterm keymaps, use toggleterm keymaps instead
+vim.api.nvim_del_keymap("n", "<leader>ft")
+vim.api.nvim_del_keymap("n", "<leader>fT")
