@@ -1,3 +1,5 @@
+local Path = require("utils.path")
+
 local M = {}
 
 M.stop_lsp_client_by_name = function(name)
@@ -10,6 +12,46 @@ M.stop_lsp_client_by_name = function(name)
     end
   end
   vim.notify("No active LSP client with name: " .. name)
+end
+
+M.biome_config_exists = function()
+  local current_dir = vim.fn.getcwd()
+  local config_file = current_dir .. "/biome.json"
+  if vim.fn.filereadable(config_file) == 1 then
+    return true
+  end
+
+  -- If the current directory is a git repo, check if the root of the repo
+  -- contains a biome.json file
+  local git_root = Path.get_git_root()
+  if Path.is_git_repo() and git_root ~= current_dir then
+    config_file = git_root .. "/biome.json"
+    if vim.fn.filereadable(config_file) == 1 then
+      return true
+    end
+  end
+
+  return false
+end
+
+M.deno_config_exist = function()
+  local current_dir = vim.fn.getcwd()
+  local config_file = current_dir .. "/deno.json"
+  if vim.fn.filereadable(config_file) == 1 then
+    return true
+  end
+
+  -- If the current directory is a git repo, check if the root of the repo
+  -- contains a deno.json file
+  local git_root = Path.get_git_root()
+  if Path.is_git_repo() and git_root ~= current_dir then
+    config_file = git_root .. "/deno.json"
+    if vim.fn.filereadable(config_file) == 1 then
+      return true
+    end
+  end
+
+  return false
 end
 
 return M

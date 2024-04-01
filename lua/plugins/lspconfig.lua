@@ -1,43 +1,4 @@
-local Path = require("utils.path")
-
-local function biome_config_exists()
-  local current_dir = vim.fn.getcwd()
-  local config_file = current_dir .. "/biome.json"
-  if vim.fn.filereadable(config_file) == 1 then
-    return true
-  end
-
-  -- If the current directory is a git repo, check if the root of the repo
-  -- contains a biome.json file
-  local git_root = Path.get_git_root()
-  if Path.is_git_repo() and git_root ~= current_dir then
-    config_file = git_root .. "/biome.json"
-    if vim.fn.filereadable(config_file) == 1 then
-      return true
-    end
-  end
-
-  return false
-end
-local function deno_config_exist()
-  local current_dir = vim.fn.getcwd()
-  local config_file = current_dir .. "/deno.json"
-  if vim.fn.filereadable(config_file) == 1 then
-    return true
-  end
-
-  -- If the current directory is a git repo, check if the root of the repo
-  -- contains a deno.json file
-  local git_root = Path.get_git_root()
-  if Path.is_git_repo() and git_root ~= current_dir then
-    config_file = git_root .. "/deno.json"
-    if vim.fn.filereadable(config_file) == 1 then
-      return true
-    end
-  end
-
-  return false
-end
+local Lsp = require("utils.lsp")
 
 return {
   "neovim/nvim-lspconfig",
@@ -88,7 +49,6 @@ return {
   },
   ---@class PluginLspOpts
   opts = {
-    ---@type lspconfig.options
     servers = {
       tsserver = {
         root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json"),
@@ -108,7 +68,7 @@ return {
               vim.lsp.buf.code_action({
                 apply = true,
                 context = {
-                  only = { "source.organizeImports.ts" },
+                  only = { "source.organizeImports" },
                   diagnostics = {},
                 },
               })
@@ -121,7 +81,7 @@ return {
               vim.lsp.buf.code_action({
                 apply = true,
                 context = {
-                  only = { "source.removeUnused.ts" },
+                  only = { "source.removeUnused" },
                   diagnostics = {},
                 },
               })
@@ -197,7 +157,7 @@ return {
         -- root_dir = require("lspconfig").util.root_pattern("biome.json"),
         -- Fallback to nvim config dir if biome.json is not found
         root_dir = function()
-          if biome_config_exists() then
+          if Lsp.biome_config_exists() then
             return require("lspconfig").util.root_pattern("biome.json")()
           end
 
@@ -220,11 +180,10 @@ return {
     format = {
       timeout_ms = 10000, -- 10 seconds
     },
-    ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
     setup = {
-      tsserver = function(_, opts)
+      tsserver = function()
         -- Disable tsserver if denols is present
-        if deno_config_exist() then
+        if Lsp.deno_config_exist() then
           return true
         end
 
