@@ -17,6 +17,8 @@ return {
     opts = {
       -- Set to false if you still want to use netrw.
       default_file_explorer = true,
+      -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
+      skip_confirm_for_simple_edits = true,
       -- Set to false to disable all of the above keymaps
       use_default_keymaps = true,
       view_options = {
