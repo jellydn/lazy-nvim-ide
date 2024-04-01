@@ -9,6 +9,22 @@ local logo = [[
 
 logo = string.rep("\n", 4) .. logo .. "\n\n"
 
+local root_dir_cache = nil
+--- Get the git root directory
+---@return string|nil The git root directory
+local function get_root_dir()
+  if root_dir_cache == nil then
+    local root_dir =
+      require("plenary.job"):new({ command = "git", args = { "rev-parse", "--show-toplevel" } }):sync()[1]
+    if root_dir == nil then
+      return vim.uv.cwd()
+    end
+    root_dir_cache = root_dir
+  end
+
+  return root_dir_cache
+end
+
 return {
   -- Disable telescope
   {
@@ -148,11 +164,7 @@ return {
         },
         code_actions = {
           winopts = {
-            relative = "cursor",
-            row = 1,
-            col = 0,
-            height = 0.4,
-            preview = { vertical = "down:70%" },
+            preview = { layout = "reverse-list", horizontal = "right:75%" },
           },
         },
       },
@@ -242,8 +254,8 @@ return {
       {
         "<leader><space>",
         function()
-          local cwd = vim.uv.cwd()
-          require("fzf-lua").files({ cwd = cwd })
+          local root_dir = get_root_dir()
+          require("fzf-lua").files({ cwd = root_dir, cwd_prompt = false })
         end,
         desc = "Find Files at project directory",
       },
@@ -264,17 +276,36 @@ return {
       {
         "<leader>sw",
         "<cmd> :FzfLua grep_cword<CR>",
-        desc = "Find word under cursor",
+        desc = "Search word under cursor",
+      },
+      {
+        "<leader>sW",
+        "<cmd> :FzfLua grep_cWORD<CR>",
+        desc = "Search WORD under cursor",
+      },
+      {
+        "<leader>fw",
+        function()
+          local root_dir = get_root_dir()
+          require("fzf-lua").grep_cword({ cwd = root_dir })
+        end,
+        desc = "Find word under cursor (git root)",
       },
       {
         "<leader>fW",
-        "<cmd> :FzfLua grep_cWORD<CR>",
-        desc = "Search WORD under cursor",
+        function()
+          local root_dir = get_root_dir()
+          require("fzf-lua").grep_cWORD({ cwd = root_dir })
+        end,
+        desc = "Find WORD under cursor (git root)",
       },
       -- Search in git status
       {
         "<leader>gs",
-        "<cmd> :FzfLua git_status<CR>",
+        function()
+          local root_dir = get_root_dir()
+          require("fzf-lua").git_status({ cwd = root_dir })
+        end,
         desc = "Git Status",
       },
       {
