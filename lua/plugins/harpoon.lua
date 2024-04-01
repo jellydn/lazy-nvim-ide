@@ -1,20 +1,3 @@
-local root_dir_cache = nil
-
---- Get the git root directory
----@return string|nil The git root directory
-local function get_root_dir()
-  if root_dir_cache == nil then
-    local root_dir =
-      require("plenary.job"):new({ command = "git", args = { "rev-parse", "--show-toplevel" } }):sync()[1]
-    if root_dir == nil then
-      return vim.uv.cwd()
-    end
-    root_dir_cache = root_dir
-  end
-
-  return root_dir_cache
-end
-
 return {
   {
     "ThePrimeagen/harpoon",
@@ -44,7 +27,9 @@ return {
       settings = {
         save_on_toggle = false,
         sync_on_ui_close = false,
-        key = get_root_dir,
+        key = function()
+          return require("lazyvim.util").root()
+        end,
       },
     },
     config = function(_, options)
@@ -60,12 +45,6 @@ return {
           require("harpoon"):list():select(i)
         end, { noremap = true, silent = true, desc = "Harpoon select " .. i })
       end
-
-      -- Change to current file directory with <leader>cD and reset the root directory cache
-      vim.keymap.set("n", "<leader>cD", function()
-        root_dir_cache = nil
-        vim.cmd("cd " .. get_root_dir())
-      end, { noremap = true, silent = true, desc = "Change to current directory" })
 
       -- Telescope integration
       local tele_status_ok, _ = pcall(require, "telescope")
