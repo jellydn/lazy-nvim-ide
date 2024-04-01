@@ -51,7 +51,7 @@ return {
             icon = " ",
             desc = "Session",
             group = "Label",
-            action = [[lua require("persistence").load()]],
+            action = [[lua require('persisted').load()]],
             key = "s",
           },
           {
