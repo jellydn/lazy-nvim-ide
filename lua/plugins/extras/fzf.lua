@@ -204,7 +204,7 @@ return {
       {
         "<leader>fF",
         function()
-          local root_dir = require("lazyvim.util").root()
+          local root_dir = require("lazyvim.util").root.git()
           require("fzf-lua").git_files({ cwd = root_dir })
         end,
         desc = "Find Git Files",
@@ -223,7 +223,10 @@ return {
       },
       {
         "<leader>fr",
-        "<cmd> :FzfLua oldfiles<CR>",
+        function()
+          local root_dir = require("lazyvim.util").root.git()
+          require("fzf-lua").oldfiles({ cwd = root_dir })
+        end,
         desc = "Find Recent Files",
       },
       -- Resume last fzf command
@@ -242,8 +245,11 @@ return {
       {
         "<leader><space>",
         function()
-          local root_dir = require("lazyvim.util").root()
-          require("fzf-lua").files({ cwd = root_dir, cwd_prompt = false })
+          local root_dir = require("lazyvim.util").root.git()
+          require("fzf-lua").files({
+            cwd = root_dir,
+            cwd_prompt = false,
+          })
         end,
         desc = "Find Files at project directory",
       },
@@ -274,7 +280,7 @@ return {
       {
         "<leader>fw",
         function()
-          local root_dir = require("lazyvim.util").root()
+          local root_dir = require("lazyvim.util").root.git()
           require("fzf-lua").grep_cword({ cwd = root_dir })
         end,
         desc = "Find word under cursor (git root)",
@@ -282,7 +288,7 @@ return {
       {
         "<leader>fW",
         function()
-          local root_dir = require("lazyvim.util").root()
+          local root_dir = require("lazyvim.util").root.git()
           require("fzf-lua").grep_cWORD({ cwd = root_dir })
         end,
         desc = "Find WORD under cursor (git root)",
@@ -291,7 +297,7 @@ return {
       {
         "<leader>gs",
         function()
-          local root_dir = require("lazyvim.util").root()
+          local root_dir = require("lazyvim.util").root.git()
           require("fzf-lua").git_status({ cwd = root_dir })
         end,
         desc = "Git Status",
