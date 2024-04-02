@@ -10,8 +10,7 @@ end
 --- Get root directory of git project
 ---@return string|nil
 function M.get_git_root()
-  local dot_git_path = vim.fn.finddir(".git", ".;")
-  return vim.fn.fnamemodify(dot_git_path, ":h")
+  return require("lazyvim.util").root.git()
 end
 
 --- Get root directory of git project or fallback to current directory

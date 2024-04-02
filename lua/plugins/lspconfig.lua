@@ -158,7 +158,7 @@ return {
         -- Fallback to nvim config dir if biome.json is not found
         root_dir = function()
           if Lsp.biome_config_exists() then
-            return require("lspconfig").util.root_pattern("biome.json")()
+            return Lsp.biome_config_path()
           end
 
           return vim.fn.stdpath("config")
