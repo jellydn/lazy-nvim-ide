@@ -14,7 +14,7 @@ end
 
 local is_transparent = is_day_time() and not is_weekend()
 
---- Check if it's WarpTerminal
+--- Check if it's Warn Terminal
 ---@return boolean
 local function is_warp_terminal()
   return os.getenv("TERM_PROGRAM") == "WarpTerminal"
@@ -24,50 +24,42 @@ local function is_tmux()
   return os.getenv("TMUX") ~= nil
 end
 
--- Default colorscheme
+-- Default color scheme
 local default_color_scheme = "kanagawa"
 
--- Select colorscheme based on the time, and load it with LazyVim
+-- Select color scheme based on the time, and load it with LazyVim
 local function selectColorSchemeByTime()
-  -- skip if running in vscode
-  if vim.g.vscode or is_warp_terminal() or is_tmux() then
-    return "kanagawa"
-  end
-
-  if vim.g.neovide then
-    return "nightfox"
-  end
-
-  if is_transparent then
+  -- If it's vscode, warp terminal, tmux, neovide, or transparent background, use default color scheme
+  if vim.g.vscode or is_warp_terminal() or is_tmux() or vim.g.neovide or is_transparent then
     return default_color_scheme
-  else
-    local night_themes = {
-      "tokyonight",
-      "nightfox",
-      "rose-pine",
-      "catppuccin-mocha",
-      "everforest",
-      "dracula",
-      "kanagawa",
-      "nord",
-      -- "cobalt2", -- too bright
-    }
-    local idx = tonumber(os.date("%S")) % #night_themes + 1
-
-    local colorscheme = night_themes[idx]
-    vim.notify("Selected colorscheme: " .. colorscheme)
-    return colorscheme
   end
+
+  local night_themes = {
+    "tokyonight",
+    "nightfox",
+    "rose-pine",
+    "catppuccin-mocha",
+    "everforest",
+    "dracula",
+    "kanagawa",
+    "nord",
+    "cobalt2", -- too bright
+  }
+  local idx = tonumber(os.date("%S")) % #night_themes + 1
+
+  local colorscheme = night_themes[idx]
+  vim.notify("Selected colorscheme: " .. colorscheme)
+  return colorscheme
 end
 
---- Set random colorscheme with turning off transparent background
+--- Set random color scheme with turning off transparent background
 local function randomize_theme()
   is_transparent = false
   local colorscheme = selectColorSchemeByTime()
   vim.cmd.colorscheme(colorscheme)
 end
 
--- Define a keymap to randomize colorscheme
+-- Define a keymap to randomize color scheme
 vim.keymap.set("n", "<leader>tc", randomize_theme, {
   desc = "Randomize colorscheme",
 })
