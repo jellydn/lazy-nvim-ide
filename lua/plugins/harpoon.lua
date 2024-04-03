@@ -18,9 +18,25 @@ return {
         "<leader>ha",
         function()
           local harpoon = require("harpoon")
-          harpoon:list():append()
+          harpoon:list():add()
         end,
         desc = "Harpoon Add File",
+      },
+      {
+        "<leader>hj",
+        function()
+          local harpoon = require("harpoon")
+          harpoon:list():next()
+        end,
+        desc = "Harpoon Next",
+      },
+      {
+        "<leader>hk",
+        function()
+          local harpoon = require("harpoon")
+          harpoon:list():prev()
+        end,
+        desc = "Harpoon Prev",
       },
     },
     opts = {
