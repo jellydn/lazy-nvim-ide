@@ -238,7 +238,10 @@ return {
       -- Live Grep, better for large projects
       {
         "<leader>fl",
-        "<cmd> :FzfLua live_grep<CR>",
+        function()
+          local root_dir = require("lazyvim.util").root.git()
+          require("fzf-lua").live_grep({ cwd = root_dir })
+        end,
         desc = "Find Live Grep",
       },
       -- Open files at the current working directory
