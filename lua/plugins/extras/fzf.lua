@@ -268,6 +268,11 @@ return {
         desc = "Search Current Buffer",
       },
       {
+        "<leader>sB",
+        "<cmd> :FzfLua lines<CR>",
+        desc = "Search Lines in Open Buffers",
+      },
+      {
         "<leader>sw",
         "<cmd> :FzfLua grep_cword<CR>",
         desc = "Search word under cursor",
