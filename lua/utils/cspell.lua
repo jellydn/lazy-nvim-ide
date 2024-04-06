@@ -40,12 +40,17 @@ function M.create_cspell_json_if_not_exist()
   end
 end
 
--- TODO: Read from the cspell.json from root of the project and add the word to the dictionary
 -- Add unknown word to dictionary
 function M.add_word_to_c_spell_dictionary()
-  M.create_cspell_json_if_not_exist()
-
   local word = vim.fn.expand("<cword>")
+
+  -- Show popup to confirm the action
+  local confirm = vim.fn.confirm("Add '" .. word .. "' to cSpell dictionary?", "&Yes\n&No", 2)
+  if confirm ~= 1 then
+    return
+  end
+
+  M.create_cspell_json_if_not_exist()
   local dictionary_path = Path.get_root_directory() .. "/cspell-tool.txt"
 
   -- Append the word to the dictionary file
