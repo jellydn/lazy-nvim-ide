@@ -10,13 +10,13 @@ return {
     keys = {
       {
         "<leader>rt",
-        ":OverseerRun<CR>",
+        "<CMD>OverseerRun<CR>",
         desc = "Overseer - Run Task",
       },
       -- Quick action
       {
         "<leader>rq",
-        ":OverseerQuickAction<CR>",
+        "<CMD>OverseerQuickAction<CR>",
         desc = "Overseer - Quick Action",
       },
       -- Rerun last command
@@ -36,7 +36,7 @@ return {
       -- Toggle
       {
         "<leader>ro",
-        ":OverseerToggle bottom<CR>",
+        "<CMD>OverseerToggle bottom<CR>",
         desc = "Overseer - Toggle at bottom",
       },
     },
