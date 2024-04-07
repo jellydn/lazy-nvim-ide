@@ -17,9 +17,18 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 
 -- Set filetype for .hurl files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = augroup("env_filetype"),
+  group = augroup("hurl_filetype"),
   pattern = { "*.hurl" },
   callback = function()
     vim.opt_local.filetype = "hurl"
+  end,
+})
+
+-- Set filetype for .toml files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup("toml_filetype"),
+  pattern = { "*.tomg-config*" },
+  callback = function()
+    vim.opt_local.filetype = "toml"
   end,
 })
