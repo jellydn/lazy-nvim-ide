@@ -45,6 +45,12 @@ return {
         silent = true,
         desc = "Replace current word (Root dir)",
       },
+      -- Search on current file
+      {
+        "<leader>sf",
+        ":lua require('spectre').open_file_search(_G.get_spectre_options({ select_word = true }))<CR>",
+        desc = "Replace in current file",
+      },
     },
   },
 }
