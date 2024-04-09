@@ -23,7 +23,17 @@ return {
           })
         end,
         mode = { "n", "x" },
-        desc = "Print variables",
+        desc = "Print below variables",
+      },
+      {
+        "<leader>dV",
+        function()
+          require("refactoring").debug.print_var({
+            below = false,
+          })
+        end,
+        mode = { "n", "x" },
+        desc = "Print above variables",
       },
       -- Clean up debugging
       {
