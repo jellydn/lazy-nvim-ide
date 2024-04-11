@@ -196,7 +196,8 @@ return {
       {
         "<leader>ff",
         function()
-          local cwd = vim.fn.expand("%:p:h")
+          -- Find files in the current directory or lsp root or git root
+          local cwd = require("lazyvim.util").root()
           require("fzf-lua").files({ cwd = cwd, cwd_prompt = false })
         end,
         desc = "Find Files",
@@ -240,7 +241,17 @@ return {
         "<leader>fl",
         function()
           local root_dir = require("lazyvim.util").root.git()
-          require("fzf-lua").live_grep({ cwd = root_dir })
+          local fzf_lua = require("fzf-lua")
+          fzf_lua.setup({
+            grep = {
+              -- use `ctrl-r` to not override the `ctrl-g` regex toggle
+              actions = { ["ctrl-r"] = { fzf_lua.actions.toggle_ignore } },
+            },
+          })
+          fzf_lua.live_grep({
+            cwd = root_dir,
+            rg_opts = "--column --hidden --smart-case --color=always --no-heading --line-number -g '!{.git,node_modules}/'",
+          })
         end,
         desc = "Find Live Grep",
       },
@@ -259,10 +270,11 @@ return {
       {
         "<leader>/",
         function()
-          local cwd = vim.fn.expand("%:p:h")
-          require("fzf-lua").live_grep({ cwd = cwd })
+          -- Live grep in the current directory or lsp root or git root
+          local root_dir = require("lazyvim.util").root()
+          require("fzf-lua").live_grep({ cwd = root_dir })
         end,
-        desc = "Grep Files at current buffer directory",
+        desc = "Grep Files at current directory",
       },
       -- Search in current buffer with grep
       {
@@ -277,29 +289,19 @@ return {
       },
       {
         "<leader>sw",
-        "<cmd> :FzfLua grep_cword<CR>",
-        desc = "Search word under cursor",
-      },
-      {
-        "<leader>sW",
-        "<cmd> :FzfLua grep_cWORD<CR>",
-        desc = "Search WORD under cursor",
-      },
-      {
-        "<leader>fw",
         function()
           local root_dir = require("lazyvim.util").root.git()
           require("fzf-lua").grep_cword({ cwd = root_dir })
         end,
-        desc = "Find word under cursor (git root)",
+        desc = "Search word under cursor (git root)",
       },
       {
-        "<leader>fW",
+        "<leader>sW",
         function()
           local root_dir = require("lazyvim.util").root.git()
           require("fzf-lua").grep_cWORD({ cwd = root_dir })
         end,
-        desc = "Find WORD under cursor (git root)",
+        desc = "Search WORD under cursor (git root)",
       },
       -- Search in git status
       {
@@ -376,7 +378,7 @@ return {
         "<cmd> :FzfLua quickfix<CR>",
         desc = "Search Quickfix",
       },
-      -- Search in recent projects
+      -- Find in recent projects
       {
         "<leader>fp",
         function()
