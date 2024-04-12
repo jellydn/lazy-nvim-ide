@@ -44,7 +44,7 @@ return {
             icon = " ",
             desc = "Grep",
             group = "Number",
-            action = [[lua require('fzf-lua').live_grep({cwd_prompt = false})]],
+            action = [[lua require('fzf-lua').live_grep({cwd_prompt = false, multiprocess = true})]],
             key = "g",
           },
           {
@@ -251,9 +251,10 @@ return {
           fzf_lua.live_grep({
             cwd = root_dir,
             rg_opts = "--column --hidden --smart-case --color=always --no-heading --line-number -g '!{.git,node_modules}/'",
+            multiprocess = true,
           })
         end,
-        desc = "Find Live Grep",
+        desc = "Find Live Grep (including hidden files)",
       },
       -- Open files at the current working directory
       {
@@ -272,7 +273,7 @@ return {
         function()
           -- Live grep in the current directory or lsp root or git root
           local root_dir = require("lazyvim.util").root()
-          require("fzf-lua").live_grep({ cwd = root_dir })
+          require("fzf-lua").live_grep({ cwd = root_dir, multiprocess = true })
         end,
         desc = "Grep Files at current directory",
       },
@@ -291,7 +292,7 @@ return {
         "<leader>sw",
         function()
           local root_dir = require("lazyvim.util").root.git()
-          require("fzf-lua").grep_cword({ cwd = root_dir })
+          require("fzf-lua").grep_cword({ cwd = root_dir, multiprocess = true })
         end,
         desc = "Search word under cursor (git root)",
       },
@@ -299,7 +300,7 @@ return {
         "<leader>sW",
         function()
           local root_dir = require("lazyvim.util").root.git()
-          require("fzf-lua").grep_cWORD({ cwd = root_dir })
+          require("fzf-lua").grep_cWORD({ cwd = root_dir, multiprocess = true })
         end,
         desc = "Search WORD under cursor (git root)",
       },
