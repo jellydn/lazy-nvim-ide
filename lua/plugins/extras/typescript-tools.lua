@@ -70,4 +70,19 @@ return {
       },
     },
   },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      setup = {
+        -- Disable tsserver
+        tsserver = function()
+          return true
+        end,
+        -- Disable vtsls
+        vtsls = function()
+          return true
+        end,
+      },
+    },
+  },
 }

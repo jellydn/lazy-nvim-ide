@@ -83,6 +83,10 @@ return {
         },
       },
       setup = {
+        -- Disable tsserver
+        tsserver = function()
+          return true
+        end,
         vtsls = function()
           -- Disable tsserver if denols is present
           if Lsp.deno_config_exist() then

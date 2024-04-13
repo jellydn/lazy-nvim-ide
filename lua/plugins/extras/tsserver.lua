@@ -139,6 +139,10 @@ return {
       enabled = false, -- Run `lua vim.lsp.codelens.refresh({ bufnr = 0 })` for refreshing code lens
     },
     setup = {
+      -- Disable vtsls
+      vtsls = function()
+        return true
+      end,
       tsserver = function()
         -- Disable tsserver if denols is present
         if Lsp.deno_config_exist() then
