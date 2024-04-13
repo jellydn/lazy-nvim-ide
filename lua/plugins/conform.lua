@@ -1,3 +1,5 @@
+local Lsp = require("utils.lsp")
+
 return {
   -- Setup config for formatter
   {
@@ -16,29 +18,33 @@ return {
         php = { "pint" },
         rust = { "rustfmt" },
         -- Use a sub-list to run only the first available formatter
-        ["markdown"] = { { "prettier" } },
-        ["markdown.mdx"] = { { "prettier" } },
-        ["javascript"] = { { "biome", "deno_fmt", "prettier" } },
-        ["javascriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
-        ["typescript"] = { { "biome", "deno_fmt", "prettier" } },
-        ["typescriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
-        ["svelte"] = { "rustywind", { "biome", "deno_fmt", "prettier" } },
+        ["markdown"] = { { "prettierd", "prettier" } },
+        ["markdown.mdx"] = { { "prettierd", "prettier" } },
+        ["javascript"] = { { "deno_fmt", "prettierd", "prettier", "biome" } },
+        ["javascriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettierd", "prettier" } },
+        ["typescript"] = { { "deno_fmt", "prettierd", "prettier", "biome" } },
+        ["typescriptreact"] = { "rustywind", { "deno_fmt", "prettierd", "prettier", "biome" } },
+        ["svelte"] = { "rustywind", { "deno_fmt", "prettierd", "prettier", "biome" } },
       },
       formatters = {
         biome = {
-          condition = function(ctx)
-            return vim.fs.find({ "biome.json" }, { path = ctx.filename, upward = true })[1]
+          condition = function()
+            return Lsp.biome_config_exists()
           end,
         },
         deno_fmt = {
-          condition = function(ctx)
-            return vim.fs.find({ "deno.json" }, { path = ctx.filename, upward = true })[1]
+          condition = function()
+            return Lsp.deno_config_exist()
           end,
         },
         prettier = {
-          condition = function(ctx)
-            return not vim.fs.find({ "biome.json" }, { path = ctx.filename, upward = true })[1]
-              and not vim.fs.find({ "deno.json" }, { path = ctx.filename, upward = true })[1]
+          condition = function()
+            return not Lsp.biome_config_exists()
+          end,
+        },
+        prettierd = {
+          condition = function()
+            return not Lsp.biome_config_exists()
           end,
         },
       },
