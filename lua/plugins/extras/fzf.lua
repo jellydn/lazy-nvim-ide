@@ -122,13 +122,17 @@ return {
         },
       },
       files = {
+        multiprocess = true,
         git_icons = false,
         file_icons = false,
       },
       grep = {
-        debug = false,
+        multiprocess = true,
       },
       git = {
+        files = {
+          multiprocess = true,
+        },
         status = {
           winopts = {
             preview = { vertical = "down:70%", horizontal = "right:70%" },
@@ -415,13 +419,14 @@ return {
       -- change keymap to use FzfLua
       keys[#keys + 1] = {
         "gr",
-        ":lua require('fzf-lua').lsp_references({ ignore_current_line = true, jump_to_single_result = true }) <CR>",
+        "<cmd> FzfLua lsp_references async=true<CR>",
+        desc = "Go to references",
       }
-      keys[#keys + 1] = { "gd", "<cmd> FzfLua lsp_definitions <CR>", desc = "Go to definition" }
-      keys[#keys + 1] = { "gD", "<cmd> FzfLua lsp_declarations <CR>", desc = "Go to declaration" }
-      keys[#keys + 1] = { "gI", "<cmd> FzfLua lsp_implementations <CR>", desc = "Go to implementation" }
-      keys[#keys + 1] = { "gT", "<cmd> FzfLua lsp_typedefs <CR>", desc = "Go to type definition" }
-      keys[#keys + 1] = { "gF", "<cmd> FzfLua lsp_finder <CR>", desc = "LSP Finder" }
+      keys[#keys + 1] = { "gd", "<cmd> FzfLua lsp_definitions async=true<CR>", desc = "Go to definition" }
+      keys[#keys + 1] = { "gD", "<cmd> FzfLua lsp_declarations async=true<CR>", desc = "Go to declaration" }
+      keys[#keys + 1] = { "gI", "<cmd> FzfLua lsp_implementations async=true<CR>", desc = "Go to implementation" }
+      keys[#keys + 1] = { "gT", "<cmd> FzfLua lsp_typedefs async=true<CR>", desc = "Go to type definition" }
+      keys[#keys + 1] = { "gF", "<cmd> FzfLua lsp_finder async=true<CR>", desc = "LSP Finder" }
     end,
   },
 }
