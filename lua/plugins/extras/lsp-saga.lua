@@ -78,6 +78,9 @@ return {
       -- Jump to next information
       -- stylua: ignore
       { "]i", function()require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.INFO })end, desc = "Jump to Next Information",  },
+      -- Jump to next hint
+      -- stylua: ignore
+      { "]H", function()require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.HINT })end, desc = "Jump to Next Hint",  },
       -- Jump to prev error
       -- stylua: ignore
       { "[e", function()require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })end, desc = "Jump to Prev Error",  },
@@ -87,6 +90,9 @@ return {
       -- Jump to prev information
       -- stylua: ignore
       { "[i", function()require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.INFO })end, desc = "Jump to Prev Information",  },
+      -- Jump to prev hint
+      -- stylua: ignore
+      { "[H", function()require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.HINT })end, desc = "Jump to Prev Hint",  },
     },
   },
 }
