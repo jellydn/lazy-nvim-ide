@@ -105,6 +105,27 @@ else
   keymap("n", "<S-q>", "<cmd>bd<CR>", opts)
 end
 
+-- ------------------------------------------------------------------------- }}}
+-- {{{ Folding commands.
+
+-- Author: Karl Yngve Lervåg
+--    See: https://github.com/lervag/dotnvim
+
+-- Close all fold except the current one.
+keymap("n", "zv", "zMzvzz", {
+  desc = "Close all folds except the current one",
+})
+
+-- Close current fold when open. Always open next fold.
+keymap("n", "zj", "zcjzOzz", {
+  desc = "Close current fold when open. Always open next fold.",
+})
+
+-- Close current fold when open. Always open previous fold.
+keymap("n", "zk", "zckzOzz", {
+  desc = "Close current fold when open. Always open previous fold.",
+})
+
 -- Better paste
 -- remap "p" in visual mode to delete the highlighted text without overwriting your yanked/copied text, and then paste the content from the unnamed register.
 keymap("v", "p", '"_dP', opts)
