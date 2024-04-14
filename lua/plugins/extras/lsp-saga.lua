@@ -94,5 +94,18 @@ return {
       -- stylua: ignore
       { "[H", function()require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.HINT })end, desc = "Jump to Prev Hint",  },
     },
+    config = function(_, opts)
+      require("lspsaga").setup(opts)
+
+      -- Add which-key mappings
+      local wk = require("which-key")
+      wk.register({
+        g = {
+          l = {
+            name = "+LSP Saga",
+          },
+        },
+      })
+    end,
   },
 }
