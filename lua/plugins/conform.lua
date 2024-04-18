@@ -17,6 +17,7 @@ return {
         python = { "ruff_fix", "ruff_format" },
         php = { "pint" },
         rust = { "rustfmt" },
+        yaml = { { "prettierd", "prettier" } },
         -- Use a sub-list to run only the first available formatter
         ["markdown"] = { { "prettierd", "prettier" } },
         ["markdown.mdx"] = { { "prettierd", "prettier" } },
