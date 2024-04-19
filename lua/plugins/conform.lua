@@ -30,7 +30,15 @@ return {
       formatters = {
         biome = {
           condition = function()
-            return Lsp.biome_config_exists()
+            local path = Lsp.biome_config_path()
+            -- Skip if biome.json is in nvim
+            local is_nvim = path and string.match(path, "nvim")
+
+            if path and not is_nvim then
+              return true
+            end
+
+            return false
           end,
         },
         deno_fmt = {
@@ -40,12 +48,28 @@ return {
         },
         prettier = {
           condition = function()
-            return not Lsp.biome_config_exists()
+            local path = Lsp.biome_config_path()
+            -- Skip if biome.json is in nvim
+            local is_nvim = path and string.match(path, "nvim")
+
+            if path and not is_nvim then
+              return false
+            end
+
+            return true
           end,
         },
         prettierd = {
           condition = function()
-            return not Lsp.biome_config_exists()
+            local path = Lsp.biome_config_path()
+            -- Skip if biome.json is in nvim
+            local is_nvim = path and string.match(path, "nvim")
+
+            if path and not is_nvim then
+              return false
+            end
+
+            return true
           end,
         },
       },
