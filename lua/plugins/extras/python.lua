@@ -13,7 +13,7 @@ return {
     opts = {
       servers = {
         basedpyright = {},
-        ruff_lsp = {
+        ruff = {
           keys = {
             {
               "<leader>co",
@@ -32,7 +32,7 @@ return {
         },
       },
       setup = {
-        ruff_lsp = function()
+        ruff = function()
           require("lazyvim.util").lsp.on_attach(function(client, _)
             if client.name == "ruff_lsp" then
               -- Disable hover in favor of Pyright
