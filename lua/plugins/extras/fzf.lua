@@ -147,6 +147,7 @@ return {
         },
       },
       lsp = {
+        async_or_timeout = true,
         symbols = {
           path_shorten = 1,
         },
@@ -159,6 +160,11 @@ return {
     },
     config = function(_, options)
       local fzf_lua = require("fzf-lua")
+
+      -- Refer https://github.com/ibhagwan/fzf-lua/blob/main/lua/fzf-lua/defaults.lua#L69 for default keymaps
+      -- Shift+up/down to move the preview window
+      -- Alt+q to send to quickfix
+      -- Alt+a to toggle all
       fzf_lua.setup(options)
 
       -- Automatic sizing of height/width of vim.ui.select
