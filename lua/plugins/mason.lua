@@ -6,8 +6,6 @@ return {
       ensure_installed = {
         "stylua",
         -- formatters
-        "eslint_d",
-        "prettier",
         "prettierd",
         "biome",
         -- code spell
@@ -24,9 +22,6 @@ return {
         "astro-language-server",
         -- Solidity
         "solidity",
-        -- Python
-        "ruff",
-        "isort",
       },
     },
   },
