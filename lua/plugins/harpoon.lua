@@ -44,7 +44,9 @@ return {
         save_on_toggle = false,
         sync_on_ui_close = false,
         key = function()
-          return require("lazyvim.util").root()
+          -- Use the current working directory as the key
+          local cwd = require("lazyvim.util").root.cwd()
+          return cwd
         end,
       },
     },
