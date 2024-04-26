@@ -48,13 +48,6 @@ return {
             key = "g",
           },
           {
-            icon = " ",
-            desc = "Session",
-            group = "Label",
-            action = [[lua require('persisted').load()]],
-            key = "s",
-          },
-          {
             icon = " ",
             desc = "Config",
             group = "Number",
