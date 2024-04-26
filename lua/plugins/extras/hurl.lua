@@ -29,6 +29,8 @@ return {
       { "<leader>rv", "<cmd>HurlVerbose<CR>", desc = "Hurl - Run Api in verbose mode" },
       -- Run Hurl request in visual mode
       { "<leader>rh", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
+      -- Show last response
+      { "<leader>rh", "<cmd>HurlShowLastResponse<CR>", desc = "Hurl History", mode = "n" },
       -- Manage variable
       { "<leader>rg", ":HurlSetVariable", desc = "Hurl - Set global variable" },
       { "<leader>rG", "<cmd>HurlManageVariable<CR>", desc = "Hurl - Manage global variable" },
