@@ -17,15 +17,15 @@ return {
         python = { "ruff_fix", "ruff_format" },
         php = { "pint" },
         rust = { "rustfmt" },
-        yaml = { { "prettierd", "prettier" } },
         -- Use a sub-list to run only the first available formatter
-        ["markdown"] = { { "prettierd", "prettier" } },
-        ["markdown.mdx"] = { { "prettierd", "prettier" } },
-        ["javascript"] = { { "deno_fmt", "prettierd", "prettier", "biome" } },
-        ["javascriptreact"] = { "rustywind", { "biome", "deno_fmt", "prettierd", "prettier" } },
-        ["typescript"] = { { "deno_fmt", "prettierd", "prettier", "biome" } },
-        ["typescriptreact"] = { "rustywind", { "deno_fmt", "prettierd", "prettier", "biome" } },
-        ["svelte"] = { "rustywind", { "deno_fmt", "prettierd", "prettier", "biome" } },
+        yaml = { { "prettierd", "prettier", "dprint" } },
+        ["markdown"] = { { "prettierd", "prettier", "dprint" } },
+        ["markdown.mdx"] = { { "prettierd", "prettier", "dprint" } },
+        ["javascript"] = { { "deno_fmt", "prettierd", "prettier", "biome", "dprint" } },
+        ["javascriptreact"] = { "rustywind", { "deno_fmt", "prettierd", "prettier", "biome", "dprint" } },
+        ["typescript"] = { { "deno_fmt", "prettierd", "prettier", "biome", "dprint" } },
+        ["typescriptreact"] = { "rustywind", { "deno_fmt", "prettierd", "prettier", "biome", "dprint" } },
+        ["svelte"] = { "rustywind", { "deno_fmt", "prettierd", "prettier", "biome", "dprint" } },
       },
       formatters = {
         biome = {
@@ -44,6 +44,11 @@ return {
         deno_fmt = {
           condition = function()
             return Lsp.deno_config_exist()
+          end,
+        },
+        dprint = {
+          condition = function()
+            return Lsp.dprint_config_exist()
           end,
         },
         prettier = {

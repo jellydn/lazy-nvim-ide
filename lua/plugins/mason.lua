@@ -7,7 +7,6 @@ return {
         "stylua",
         -- formatters
         "prettierd",
-        "biome",
         -- code spell
         "codespell",
         "misspell",
