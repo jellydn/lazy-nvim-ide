@@ -1,4 +1,33 @@
+local icons = {
+  Canceled = " ",
+  Failure = " ",
+  Success = " ",
+  Running = " ",
+}
 return {
+  {
+    "nvim-lualine/lualine.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local overseer = require("overseer")
+      table.insert(opts.sections.lualine_x, {
+        "overseer",
+        label = "", -- Prefix for task counts
+        colored = true, -- Color the task icons and counts
+        symbols = {
+          [overseer.STATUS.CANCELED] = icons.Canceled,
+          [overseer.STATUS.FAILURE] = icons.Failure,
+          [overseer.STATUS.SUCCESS] = icons.Success,
+          [overseer.STATUS.RUNNING] = icons.Running,
+        },
+        unique = false, -- Unique-ify non-running task count by name
+        name = nil, -- List of task names to search for
+        name_not = false, -- When true, invert the name search
+        status = nil, -- List of task statuses to display
+        status_not = false, -- When true, invert the status search
+      })
+    end,
+  },
   {
     "stevearc/overseer.nvim",
     dependencies = {

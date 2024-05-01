@@ -6,6 +6,7 @@ return {
       ensure_installed = {
         "stylua",
         -- formatters
+        "prettier",
         "prettierd",
         -- code spell
         "codespell",
