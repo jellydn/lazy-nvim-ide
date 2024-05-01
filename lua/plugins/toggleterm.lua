@@ -20,6 +20,18 @@ return {
         "<c-_>",
         desc = "Toggle term",
       },
+      -- Send to terminal
+      {
+        "<leader><c-_>",
+        "<cmd>:ToggleTermSendCurrentLine<cr>",
+        desc = "Send current line to terminal",
+      },
+      {
+        "<leader><c-_>",
+        "<cmd>:ToggleTermSendVisualSelection<cr>",
+        desc = "Send visual selection to terminal",
+        mode = "v",
+      },
     },
   },
 }
