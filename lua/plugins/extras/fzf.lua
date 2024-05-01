@@ -42,10 +42,17 @@ return {
           },
           {
             icon = " ",
-            desc = "Grep",
+            desc = "Live Grep",
             group = "Number",
             action = [[lua require('fzf-lua').live_grep({cwd_prompt = false, multiprocess = true})]],
             key = "g",
+          },
+          {
+            icon = " ",
+            desc = " Restore Session",
+            group = "Number",
+            action = [[lua require('persistence').load()]],
+            key = "s",
           },
           {
             icon = " ",
@@ -185,46 +192,34 @@ return {
       vim.lsp.handlers["callHierarchy/outgoingCalls"] = fzf_lua.lsp_outgoing_calls
     end,
     keys = {
-      -- Files keymaps
+      -- Find file by grep
       {
-        "<leader>fg",
+        "<C-g>",
         "<cmd> :FzfLua grep_project<CR>",
         desc = "Find Grep",
       },
       {
-        "<leader>fG",
+        "<C-g>",
+        function()
+          -- Grep visual selection in the current directory or lsp root or git root
+          local root_dir = require("lazyvim.util").root()
+          require("fzf-lua").grep_visual({ cwd = root_dir, multiprocess = true })
+        end,
+        desc = "Search Grep in visual selection",
+        mode = "v",
+      },
+      {
+        "<leader>fg",
         "<cmd> :FzfLua grep_project --cmd 'git grep --line-number --column --color=always'<CR>",
         desc = "Find Git Grep",
       },
+      -- Find open buffers
       {
-        "<leader>ff",
-        function()
-          -- Find files in the current directory or lsp root or git root
-          local cwd = require("lazyvim.util").root()
-          require("fzf-lua").files({ cwd = cwd, cwd_prompt = false })
-        end,
-        desc = "Find Files",
-      },
-      {
-        "<leader>fF",
-        function()
-          local root_dir = require("lazyvim.util").root.git()
-          require("fzf-lua").git_files({ cwd = root_dir })
-        end,
-        desc = "Find Git Files",
-      },
-      {
-        "<leader>fc",
-        function()
-          require("fzf-lua").files({ cwd = "~/.config/nvim" })
-        end,
-        desc = "Find Neovim Configs",
-      },
-      {
-        "<leader>fb",
+        "<C-\\>",
         "<cmd> :FzfLua buffers<CR>",
         desc = "Find Buffers",
       },
+      -- Find recent files
       {
         "<leader>fr",
         function()
@@ -239,7 +234,7 @@ return {
         "<cmd> :FzfLua resume<CR>",
         desc = "Resume Fzf",
       },
-      -- Live Grep, better for large projects
+      -- File file by live grep, better for large projects
       {
         "<leader>fl",
         function()
@@ -259,7 +254,7 @@ return {
         end,
         desc = "Find Live Grep (including hidden files)",
       },
-      -- Open files at the current working directory
+      -- Find files at the current working directory
       {
         "<leader><space>",
         function()
@@ -272,14 +267,44 @@ return {
         desc = "Find Files at project directory",
       },
       {
+        "<C-p>",
+        function()
+          local root_dir = require("lazyvim.util").root()
+          require("fzf-lua").files({
+            cwd = root_dir,
+            cwd_prompt = false,
+          })
+        end,
+        desc = "Find Files at project directory",
+      },
+      -- File files by live grep in the current directory or LSP root or git root
+      {
         "<leader>/",
         function()
-          -- Live grep in the current directory or lsp root or git root
+          -- Live grep in the current directory or LSP root or git root
           local root_dir = require("lazyvim.util").root()
           require("fzf-lua").live_grep({ cwd = root_dir, multiprocess = true })
         end,
         desc = "Grep Files at current directory",
       },
+      -- Find file in git
+      {
+        "<leader>ff",
+        function()
+          local root_dir = require("lazyvim.util").root.git()
+          require("fzf-lua").git_files({ cwd = root_dir })
+        end,
+        desc = "Find Git Files",
+      },
+      -- Find nvim config file
+      {
+        "<leader>fc",
+        function()
+          require("fzf-lua").files({ cwd = "~/.config/nvim" })
+        end,
+        desc = "Find Neovim Configs",
+      },
+
       -- Search in current buffer with grep
       {
         "<leader>sb",
@@ -307,6 +332,8 @@ return {
         end,
         desc = "Search WORD under cursor (git root)",
       },
+
+      -- Git related keymaps
       -- Search in git status
       {
         "<leader>gs",
@@ -331,6 +358,7 @@ return {
         "<cmd> :FzfLua git_bcommits<CR>",
         desc = "Git Buffer Commits",
       },
+
       -- Search keymaps
       {
         "<leader>sa",
@@ -382,6 +410,8 @@ return {
         "<cmd> :FzfLua quickfix<CR>",
         desc = "Search Quickfix",
       },
+
+      -- Switch project
       -- Find in recent projects
       {
         "<leader>fp",
