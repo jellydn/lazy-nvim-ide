@@ -267,7 +267,7 @@ return {
         desc = "Find Files at project directory",
       },
       {
-        "<C-p>",
+        "<C-e>",
         function()
           local root_dir = require("lazyvim.util").root()
           require("fzf-lua").files({
