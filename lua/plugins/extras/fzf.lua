@@ -203,9 +203,43 @@ return {
         function()
           -- Grep visual selection in the current directory or lsp root or git root
           local root_dir = require("lazyvim.util").root()
-          require("fzf-lua").grep_visual({ cwd = root_dir, multiprocess = true })
+          local fzf_lua = require("fzf-lua")
+          fzf_lua.setup({
+            grep = {
+              -- use `ctrl-r` to not override the `ctrl-g` regex toggle
+              actions = { ["ctrl-r"] = { fzf_lua.actions.toggle_ignore } },
+            },
+          })
+
+          fzf_lua.grep_visual({
+            cwd = root_dir,
+            rg_opts = "--column --hidden --smart-case --color=always --no-heading --line-number -g '!{.git,node_modules}/'",
+            multiprocess = true,
+          })
         end,
         desc = "Search Grep in visual selection",
+        mode = "v",
+      },
+      {
+        "<leader>sw",
+        function()
+          -- Grep visual selection in the current directory or lsp root or git root
+          local root_dir = require("lazyvim.util").root.git()
+          local fzf_lua = require("fzf-lua")
+          fzf_lua.setup({
+            grep = {
+              -- use `ctrl-r` to not override the `ctrl-g` regex toggle
+              actions = { ["ctrl-r"] = { fzf_lua.actions.toggle_ignore } },
+            },
+          })
+
+          fzf_lua.grep_visual({
+            cwd = root_dir,
+            rg_opts = "--column --hidden --smart-case --color=always --no-heading --line-number -g '!{.git,node_modules}/'",
+            multiprocess = true,
+          })
+        end,
+        desc = "Search word in visual selection (git root)",
         mode = "v",
       },
       {
@@ -379,6 +413,16 @@ return {
         "<leader>sS",
         "<cmd> :FzfLua lsp_workspace_symbols<CR>",
         desc = "LSP Workspace Symbols",
+      },
+      {
+        "<leader>si",
+        "<cmd> :FzfLua lsp_incoming_calls<CR>",
+        desc = "LSP Incoming Calls",
+      },
+      {
+        "<leader>so",
+        "<cmd> :FzfLua lsp_outgoing_calls<CR>",
+        desc = "LSP Outgoing Calls",
       },
       {
         "<leader>sk",
