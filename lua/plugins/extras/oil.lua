@@ -26,7 +26,7 @@ return {
         show_hidden = false,
         -- This function defines what is considered a "hidden" file
         is_hidden_file = function(name)
-          local ignore_folders = { "node_modules", "dist", "build", "coverage" }
+          local ignore_folders = { "node_modules", "dist", "build", "coverage", "__pycache__" }
           return vim.startswith(name, ".") or vim.tbl_contains(ignore_folders, name)
         end,
       },
