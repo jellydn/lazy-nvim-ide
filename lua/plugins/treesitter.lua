@@ -1,7 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "windwp/nvim-ts-autotag" },
+    dependencies = {
+      "windwp/nvim-ts-autotag",
+    },
     opts = {
       ensure_installed = {
         "bash",
@@ -28,6 +30,7 @@ return {
         "proto",
         "svelte",
         "astro",
+        "embedded_template",
       },
       auto_install = true,
       -- ensure_installed = "all", -- one of "all" or a list of languages
