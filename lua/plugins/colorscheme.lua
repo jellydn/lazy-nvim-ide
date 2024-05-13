@@ -55,7 +55,19 @@ end
 --- Set random color scheme with turning off transparent background
 local function randomize_theme()
   is_transparent = false
-  local colorscheme = selectColorSchemeByTime()
+  local night_themes = {
+    "tokyonight",
+    "nightfox",
+    "rose-pine",
+    "catppuccin-mocha",
+    "dracula",
+    "kanagawa",
+  }
+  local idx = tonumber(os.date("%S")) % #night_themes + 1
+
+  local colorscheme = night_themes[idx]
+  vim.notify("Selected colorscheme: " .. colorscheme)
+
   vim.cmd.colorscheme(colorscheme)
 end
 
