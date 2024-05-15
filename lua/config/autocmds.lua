@@ -32,3 +32,12 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.opt_local.filetype = "toml"
   end,
 })
+
+-- Set filetype for .ejs files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup("ejs_filetype"),
+  pattern = { "*.ejs", "*.ejs.t" },
+  callback = function()
+    vim.opt_local.filetype = "embedded_template"
+  end,
+})
