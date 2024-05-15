@@ -25,7 +25,7 @@ return {
       { "<leader>rA", "<cmd>HurlRunner<CR>", desc = "Hurl - Run All requests" },
       { "<leader>ra", "<cmd>HurlRunnerAt<CR>", desc = "Hurl - Run Api request" },
       { "<leader>re", "<cmd>HurlRunnerToEntry<CR>", desc = "Hurl -Run Api request to entry" },
-      { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "Hurl - Toggle Mode" },
+      { "<leader>th", "<cmd>HurlToggleMode<CR>", desc = "Hurl - Toggle Mode" },
       { "<leader>rv", "<cmd>HurlVerbose<CR>", desc = "Hurl - Run Api in verbose mode" },
       -- Run Hurl request in visual mode
       { "<leader>rh", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },

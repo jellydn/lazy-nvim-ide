@@ -11,7 +11,8 @@ return {
   {
     "lukas-reineke/headlines.nvim",
     -- Not enabled if neovide
-    enabled = not vim.g.neovide,
+    -- enabled = not vim.g.neovide,
+    enabled = false, -- Use markdown.nvim instead
     opts = function()
       local opts = {}
       for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
@@ -42,6 +43,19 @@ return {
         })
       end)
     end,
+  },
+  {
+    "MeanderingProgrammer/markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {},
+    ft = { "markdown" },
+    keys = {
+      {
+        "<leader>tm",
+        "<cmd>RenderMarkdownToggle<cr>",
+        desc = "Toggle Markdown preview",
+      },
+    },
   },
   {
     "previm/previm",
