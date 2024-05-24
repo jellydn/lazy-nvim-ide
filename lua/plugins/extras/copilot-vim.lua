@@ -1,6 +1,7 @@
 -- NOTE: Only enable either copilot-vim or codeium-vim at the same time
 return {
-  -- Disable default <tab> and <s-tab> behavior in LuaSnip
+  { import = "lazyvim.plugins.extras.coding.luasnip", enable = true },
+  -- Disable default <tab> and <s-tab> behavior in nvim-cmp, and LuaSnip
   {
     "L3MON4D3/LuaSnip",
     event = "VeryLazy",
@@ -8,13 +9,15 @@ return {
       return {}
     end,
   },
-  -- Setup nvim-cmp
   {
     "nvim-cmp",
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       -- Disable ghost text for nvim-cmp, use copilot suggestion instead
       opts.experimental.ghost_text = false
+    end,
+    keys = function()
+      return {}
     end,
   },
   -- Setup copilot.vim
