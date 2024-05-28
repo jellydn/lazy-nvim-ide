@@ -35,7 +35,6 @@ return {
       question_header = "## User ",
       answer_header = "## Copilot ",
       error_header = "## Error ",
-      separator = " ", -- Separator to use in chat
       prompts = prompts,
       auto_follow_cursor = false, -- Don't follow the cursor after getting response
       show_help = false, -- Show help in virtual text, set to true if that's 1st time using Copilot Chat
@@ -89,6 +88,10 @@ return {
       -- Use unnamed register for the selection
       opts.selection = select.unnamed
 
+      local user = vim.env.USER or "User"
+      user = user:sub(1, 1):upper() .. user:sub(2)
+      opts.question_header = "  " .. user .. " "
+      opts.answer_header = "  Copilot "
       -- Override the git prompts message
       opts.prompts.Commit = {
         prompt = "Write commit message for the change with commitizen convention",
@@ -242,5 +245,17 @@ return {
       -- Toggle Copilot Chat Vsplit
       { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
     },
+  },
+  {
+    "folke/edgy.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.right = opts.right or {}
+      table.insert(opts.right, {
+        ft = "copilot-chat",
+        title = "Copilot Chat",
+        size = { width = 50 },
+      })
+    end,
   },
 }
