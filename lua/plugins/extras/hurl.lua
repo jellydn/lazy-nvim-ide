@@ -36,4 +36,16 @@ return {
       { "<leader>rG", "<cmd>HurlManageVariable<CR>", desc = "Hurl - Manage global variable" },
     },
   },
+  {
+    "folke/edgy.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.right = opts.right or {}
+      table.insert(opts.right, {
+        title = "hurl.nvim",
+        ft = "hurl-nvim",
+        size = { width = 0.4 },
+      })
+    end,
+  },
 }

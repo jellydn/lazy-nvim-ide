@@ -35,21 +35,11 @@ return {
         { title = "UndoTree", ft = "undotree" },
       },
       right = {
-        {
-          title = "CopilotChat.nvim",
-          ft = "copilot-chat",
-          size = { width = 0.5 },
-          -- exclude floating windows
-          filter = function(buf, win)
-            return vim.api.nvim_win_get_config(win).relative == ""
-          end,
-        },
         { title = "Neotest Summary", ft = "neotest-summary" },
         {
           ft = "Outline",
           open = "SymbolsOutlineOpen",
         },
-        { title = "hurl.nvim", ft = "hurl-nvim", size = { width = 0.4 } },
         "aerial",
         "lspsagaoutline",
       },
