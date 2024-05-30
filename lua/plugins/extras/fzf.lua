@@ -249,7 +249,7 @@ return {
       },
       -- Find open buffers
       {
-        "<C-\\>",
+        "<leader>fb",
         "<cmd> :FzfLua buffers<CR>",
         desc = "Find Buffers",
       },
