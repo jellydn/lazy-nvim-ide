@@ -10,6 +10,8 @@ local enabled = {
   "mini.comment",
   "mini.pairs",
   "mini.surround",
+  "ts-comments.nvim",
+  "mini.move",
   "nvim-treesitter",
   "nvim-treesitter-textobjects",
   "nvim-ts-context-commentstring",

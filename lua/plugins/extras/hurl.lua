@@ -44,7 +44,7 @@ return {
       table.insert(opts.right, {
         title = "hurl.nvim",
         ft = "hurl-nvim",
-        size = { width = 0.4 },
+        size = { width = 0.5 },
       })
     end,
   },
