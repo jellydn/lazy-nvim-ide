@@ -25,7 +25,7 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    -- version = "v2.4.0",
+    -- version = "v2.10.0",
     branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
     -- Do not use branch and version together, either use branch or version
     dependencies = {
@@ -105,6 +105,8 @@ return {
       }
 
       chat.setup(opts)
+      -- Setup CMP integration
+      require("CopilotChat.integrations.cmp").setup()
 
       vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
         chat.ask(args.args, { selection = select.visual })
