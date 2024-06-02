@@ -1,14 +1,6 @@
 -- NOTE: Only enable either copilot-vim or codeium-vim at the same time
 return {
-  { import = "lazyvim.plugins.extras.coding.luasnip", enable = true },
-  -- Disable default <tab> and <s-tab> behavior in nvim-cmp, and LuaSnip
-  {
-    "L3MON4D3/LuaSnip",
-    event = "VeryLazy",
-    keys = function()
-      return {}
-    end,
-  },
+  -- Use native snippets from Neovim v0.10
   {
     "nvim-cmp",
     ---@param opts cmp.ConfigSchema
