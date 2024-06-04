@@ -23,4 +23,15 @@ return {
       vim.g.undotree_WindowLayout = 2
     end,
   },
+  {
+    "folke/edgy.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.left = opts.left or {}
+      table.insert(opts.left, {
+        title = "Undo Tree",
+        ft = "undotree",
+      })
+    end,
+  },
 }

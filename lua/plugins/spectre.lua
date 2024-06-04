@@ -53,4 +53,16 @@ return {
       },
     },
   },
+  {
+    "folke/edgy.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.left = opts.left or {}
+      table.insert(opts.left, {
+        title = "Spectre",
+        ft = "spectre_panel",
+        size = { width = 0.3 },
+      })
+    end,
+  },
 }
