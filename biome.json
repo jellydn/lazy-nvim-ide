@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.6.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
   "organizeImports": {
     "enabled": false
   },
@@ -10,6 +10,7 @@
       "suspicious": {
         "noExplicitAny": "off",
         "noCommentText": "warn",
+        "noImplicitAnyLet": "warn",
         "noShadowRestrictedNames": "warn"
       },
       "complexity": {

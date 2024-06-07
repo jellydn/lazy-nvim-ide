@@ -27,9 +27,9 @@ return {
               function()
                 -- NOTE:Migrate to LSP later if it's available
                 local file = vim.fn.fnameescape(vim.fn.expand("%:p")) -- Escape file path for shell
-                vim.cmd("silent !biome lint --apply-unsafe " .. file)
+                vim.cmd("silent !biome lint --write " .. file)
               end,
-              desc = "Biome apply unsafe check",
+              desc = "Biome lint fix",
             },
           },
         },
