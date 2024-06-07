@@ -411,7 +411,7 @@ return {
       },
       {
         "<leader>sS",
-        "<cmd> :FzfLua lsp_workspace_symbols<CR>",
+        "<cmd> :FzfLua lsp_live_workspace_symbols<CR>",
         desc = "LSP Workspace Symbols",
       },
       {
