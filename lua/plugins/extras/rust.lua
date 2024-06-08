@@ -1,3 +1,4 @@
+-- Credit to https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/lang/rust.lua
 return {
   -- Extend auto completion
   {
@@ -23,10 +24,7 @@ return {
   -- Add Rust & related to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "ron", "rust", "toml" })
-    end,
+    opts = { ensure_installed = { "rust", "ron" } },
   },
   {
     "mrcjkb/rustaceanvim",
@@ -69,6 +67,12 @@ return {
     },
     config = function(_, opts)
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
+      if vim.fn.executable("rust-analyzer") == 0 then
+        LazyVim.error(
+          "**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/",
+          { title = "rustaceanvim" }
+        )
+      end
     end,
   },
 
@@ -77,7 +81,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        rust_analyzer = {},
         taplo = {
           keys = {
             {
@@ -93,11 +96,6 @@ return {
             },
           },
         },
-      },
-      setup = {
-        rust_analyzer = function()
-          return true
-        end,
       },
     },
   },
