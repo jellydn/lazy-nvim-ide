@@ -41,7 +41,7 @@ return {
           },
           { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
         },
-        left = {
+        right = {
           { title = "Neotest Summary", ft = "neotest-summary" },
         },
         keys = {
