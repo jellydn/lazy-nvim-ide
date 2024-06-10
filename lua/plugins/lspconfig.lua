@@ -1,5 +1,3 @@
-local Lsp = require("utils.lsp")
-
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -31,11 +29,7 @@ return {
   },
   ---@class PluginLspOpts
   opts = {
-    servers = {
-      denols = {
-        root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc", "deno.lock"),
-      },
-    },
+    servers = {},
     -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
     -- Be aware that you also will need to properly configure your LSP server to
     -- provide the inlay hints.
