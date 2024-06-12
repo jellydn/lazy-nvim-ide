@@ -9,6 +9,17 @@ local logo = [[
 
 logo = string.rep("\n", 4) .. logo .. "\n\n"
 
+-- Base on LazyVim extra for fzf
+local function symbols_filter(entry, ctx)
+  if ctx.symbols_filter == nil then
+    ctx.symbols_filter = require("lazyvim.config").get_kind_filter(ctx.bufnr) or false
+  end
+  if ctx.symbols_filter == false then
+    return true
+  end
+  return vim.tbl_contains(ctx.symbols_filter, entry.kind)
+end
+
 return {
   -- Disable telescope
   {
@@ -109,16 +120,17 @@ return {
         ["--info"] = false,
         ["--border"] = false,
         ["--preview-window"] = false,
+        ["--no-scrollbar"] = true,
       },
       winopts = {
-        height = 0.85,
-        width = 0.80,
-        row = 0.35,
-        col = 0.55,
+        width = 0.8,
+        height = 0.8,
+        row = 0.5,
+        col = 0.5,
         preview = {
           layout = "flex",
           flip_columns = 130,
-          scrollbar = "float",
+          scrollchars = { "┃", "" },
         },
       },
       files = {
@@ -160,6 +172,15 @@ return {
     },
     config = function(_, options)
       local fzf_lua = require("fzf-lua")
+      local actions = require("fzf-lua.actions")
+      local config = require("fzf-lua.config")
+
+      -- Files actions
+      config.defaults.actions.files["alt-h"] = actions.toggle_hidden
+
+      actions.open_with_trouble = require("trouble.sources.fzf").actions.open
+      -- Trouble
+      config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
 
       -- Refer https://github.com/ibhagwan/fzf-lua/blob/main/lua/fzf-lua/defaults.lua#L69 for default keymaps
       -- Shift+up/down to move the preview window
@@ -192,6 +213,9 @@ return {
       vim.lsp.handlers["callHierarchy/outgoingCalls"] = fzf_lua.lsp_outgoing_calls
     end,
     keys = {
+      { "<esc>", "<cmd>close<cr>", ft = "fzf", mode = "t", nowait = true },
+      { "<c-j>", "<Down>", ft = "fzf", mode = "t", nowait = true },
+      { "<c-k>", "<Up>", ft = "fzf", mode = "t", nowait = true },
       -- Find file by grep
       {
         "<C-g>",
@@ -204,12 +228,6 @@ return {
           -- Grep visual selection in the current directory or lsp root or git root
           local root_dir = require("lazyvim.util").root()
           local fzf_lua = require("fzf-lua")
-          fzf_lua.setup({
-            grep = {
-              -- use `ctrl-r` to not override the `ctrl-g` regex toggle
-              actions = { ["ctrl-r"] = { fzf_lua.actions.toggle_ignore } },
-            },
-          })
 
           fzf_lua.grep_visual({
             cwd = root_dir,
@@ -226,12 +244,6 @@ return {
           -- Grep visual selection in the current directory or lsp root or git root
           local root_dir = require("lazyvim.util").root.git()
           local fzf_lua = require("fzf-lua")
-          fzf_lua.setup({
-            grep = {
-              -- use `ctrl-r` to not override the `ctrl-g` regex toggle
-              actions = { ["ctrl-r"] = { fzf_lua.actions.toggle_ignore } },
-            },
-          })
 
           fzf_lua.grep_visual({
             cwd = root_dir,
@@ -250,8 +262,13 @@ return {
       -- Find open buffers
       {
         "<leader>fb",
-        "<cmd> :FzfLua buffers<CR>",
+        "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
         desc = "Find Buffers",
+      },
+      {
+        "<leader>,",
+        "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
+        desc = "Switch Buffer",
       },
       -- Find recent files
       {
@@ -274,12 +291,6 @@ return {
         function()
           local root_dir = require("lazyvim.util").root.git()
           local fzf_lua = require("fzf-lua")
-          fzf_lua.setup({
-            grep = {
-              -- use `ctrl-r` to not override the `ctrl-g` regex toggle
-              actions = { ["ctrl-r"] = { fzf_lua.actions.toggle_ignore } },
-            },
-          })
           fzf_lua.live_grep({
             cwd = root_dir,
             rg_opts = "--column --hidden --smart-case --color=always --no-heading --line-number -g '!{.git,node_modules}/'",
@@ -400,19 +411,37 @@ return {
         desc = "Find Actions",
       },
       {
+        "<leader>sd",
+        "<cmd>FzfLua diagnostics_document<cr>",
+        desc = "Document Diagnostics",
+      },
+      {
+        "<leader>sD",
+        "<cmd>FzfLua diagnostics_workspace<cr>",
+        desc = "Workspace Diagnostics",
+      },
+      {
         "<leader>s:",
         "<cmd> :FzfLua command_history<CR>",
         desc = "Find Command History",
       },
       {
         "<leader>ss",
-        "<cmd> :FzfLua lsp_document_symbols<CR>",
-        desc = "LSP Document Symbols",
+        function()
+          require("fzf-lua").lsp_document_symbols({
+            regex_filter = symbols_filter,
+          })
+        end,
+        desc = "Goto Symbol",
       },
       {
         "<leader>sS",
-        "<cmd> :FzfLua lsp_live_workspace_symbols<CR>",
-        desc = "LSP Workspace Symbols",
+        function()
+          require("fzf-lua").lsp_live_workspace_symbols({
+            regex_filter = symbols_filter,
+          })
+        end,
+        desc = "Goto Symbol (Workspace)",
       },
       {
         "<leader>si",
@@ -435,11 +464,6 @@ return {
         desc = "Search Marks",
       },
       {
-        "<leader>st",
-        "<cmd> :FzfLua tmux_buffers<CR>",
-        desc = "Search Tmux buffers",
-      },
-      {
         "<leader>sc",
         "<cmd> :FzfLua colorschemes<CR>",
         desc = "Search colorschemes",
@@ -448,6 +472,11 @@ return {
         "<leader>sh",
         "<cmd> :FzfLua help_tags<CR>",
         desc = "Search Help",
+      },
+      {
+        "<leader>sj",
+        "<cmd>FzfLua jumps<cr>",
+        desc = "Search Jumplist",
       },
       {
         "<leader>sq",
@@ -492,7 +521,7 @@ return {
       -- change keymap to use FzfLua
       keys[#keys + 1] = {
         "gr",
-        "<cmd> FzfLua lsp_references async=true<CR>",
+        "<cmd> FzfLua lsp_references jump_to_single_result=true ignore_current_line=true async=true<CR>",
         desc = "Go to references",
       }
       keys[#keys + 1] = { "gd", "<cmd> FzfLua lsp_definitions async=true<CR>", desc = "Go to definition" }
@@ -501,5 +530,25 @@ return {
       keys[#keys + 1] = { "gT", "<cmd> FzfLua lsp_typedefs async=true<CR>", desc = "Go to type definition" }
       keys[#keys + 1] = { "gF", "<cmd> FzfLua lsp_finder async=true<CR>", desc = "LSP Finder" }
     end,
+  },
+  {
+    "folke/todo-comments.nvim",
+    optional = true,
+    keys = {
+      {
+        "<leader>st",
+        function()
+          require("todo-comments.fzf").todo()
+        end,
+        desc = "Todo",
+      },
+      {
+        "<leader>sT",
+        function()
+          require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } })
+        end,
+        desc = "Todo/Fix/Fixme",
+      },
+    },
   },
 }
