@@ -158,9 +158,20 @@ return {
           },
         },
       },
+      defaults = {
+        -- VS Code style
+        formatter = { "path.filename_first", 2 },
+      },
       lsp = {
         async_or_timeout = true,
         symbols = {
+          symbol_hl = function(s)
+            return "TroubleIcon" .. s
+          end,
+          symbol_fmt = function(s)
+            return s:lower() .. "\t"
+          end,
+          child_prefix = false,
           path_shorten = 1,
         },
         code_actions = {
@@ -178,7 +189,6 @@ return {
       -- Files actions
       config.defaults.actions.files["alt-h"] = actions.toggle_hidden
 
-      actions.open_with_trouble = require("trouble.sources.fzf").actions.open
       -- Trouble
       config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
 
@@ -301,9 +311,9 @@ return {
       },
       -- Find files at the current working directory
       {
-        "<leader><space>",
+        "<C-e>", -- <leader>e is used by oil.nvim for open file explorer in float window
         function()
-          local root_dir = require("lazyvim.util").root.git()
+          local root_dir = require("lazyvim.util").root()
           require("fzf-lua").files({
             cwd = root_dir,
             cwd_prompt = false,
@@ -312,9 +322,9 @@ return {
         desc = "Find Files at project directory",
       },
       {
-        "<C-e>",
+        "<leader><space>",
         function()
-          local root_dir = require("lazyvim.util").root()
+          local root_dir = require("lazyvim.util").root.git()
           require("fzf-lua").files({
             cwd = root_dir,
             cwd_prompt = false,
