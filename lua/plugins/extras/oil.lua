@@ -14,6 +14,7 @@ return {
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   {
     "stevearc/oil.nvim",
+    commit = "18272aba9d00a3176a5443d50dbb4464acc167bd",
     opts = {
       -- Set to false if you still want to use netrw.
       default_file_explorer = true,
