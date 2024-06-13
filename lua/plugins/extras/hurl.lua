@@ -32,8 +32,8 @@ return {
       -- Show last response
       { "<leader>rh", "<cmd>HurlShowLastResponse<CR>", desc = "Hurl History", mode = "n" },
       -- Manage variable
-      { "<leader>rg", ":HurlSetVariable", desc = "Hurl - Set global variable" },
-      { "<leader>rG", "<cmd>HurlManageVariable<CR>", desc = "Hurl - Manage global variable" },
+      { "<leader>hg", ":HurlSetVariable", desc = "Hurl - Set global variable" },
+      { "<leader>hG", "<cmd>HurlManageVariable<CR>", desc = "Hurl - Manage global variable" },
     },
   },
   {
