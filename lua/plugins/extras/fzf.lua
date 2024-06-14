@@ -114,6 +114,7 @@ return {
         cursorline = "Visual",
         cursorlinenr = "Visual",
       },
+      fzf_colors = false,
       -- History file
       fzf_opts = {
         ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-history",
