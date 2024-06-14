@@ -94,11 +94,11 @@ return {
       opts.answer_header = "  Copilot "
       -- Override the git prompts message
       opts.prompts.Commit = {
-        prompt = "Write commit message for the change with commitizen convention",
+        prompt = 'Write commit message with commitizen convention. Write clear, informative commit messages that explain the "what" and "why" behind changes, not just the "how".',
         selection = select.gitdiff,
       }
       opts.prompts.CommitStaged = {
-        prompt = "Write commit message for the change with commitizen convention",
+        prompt = 'Write commit message for the change with commitizen convention. Write clear, informative commit messages that explain the "what" and "why" behind changes, not just the "how".',
         selection = function(source)
           return select.gitdiff(source, true)
         end,
