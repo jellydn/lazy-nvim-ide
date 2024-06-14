@@ -16,8 +16,6 @@ return {
         "markdownlint",
         -- rustywind for tailwindcss
         "rustywind",
-        -- php
-        "pint",
         -- astro
         "astro-language-server",
         -- Solidity
