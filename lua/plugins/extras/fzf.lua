@@ -104,6 +104,7 @@ return {
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
   },
   -- Setup fzf-lua
+  { import = "lazyvim.plugins.extras.editor.fzf" },
   {
     "ibhagwan/fzf-lua",
     -- optional for icon support
