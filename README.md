@@ -34,6 +34,14 @@ Make sure to remove or move your current `nvim` directory
 git clone https://github.com/jellydn/lazy-nvim-ide.git ~/.config/nvim
 ```
 
+Or use the following command to install the config:
+
+```sh
+git clone https://github.com/jellydn/lazy-nvim-ide.git ~/.config/lazyvim
+alias lvim="NVIM_APPNAME=lazyvim nvim"
+```
+
+
 Run `nvim` and wait for the plugins to be installed
 
 ## Get healthy
