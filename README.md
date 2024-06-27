@@ -2,6 +2,9 @@
 
 [![IT Man - LazyVim Power User Guide](https://i.ytimg.com/vi/jveM3hZs_oI/hqdefault.jpg)](https://www.youtube.com/watch?v=jveM3hZs_oI)
 
+> [!NOTE]
+> I've moved from LazyVim to my own Neovim setup. Check it out here: [jellydn/my-nvim-ide: My personal neovim configuration.](https://github.com/jellydn/my-nvim-ide)
+
 ## TOC
 
 <!--toc:start-->
