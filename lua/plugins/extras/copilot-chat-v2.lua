@@ -24,7 +24,7 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    version = "v2.10.1",
+    version = "v2.11.0",
     -- branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
     -- Do not use branch and version together, either use branch or version
     dependencies = {
@@ -144,16 +144,12 @@ return {
 
       -- Add which-key mappings
       local wk = require("which-key")
-      wk.register({
-        g = {
-          m = {
-            name = "+Copilot Chat",
-            d = "Show diff",
-            p = "System prompt",
-            s = "Show selection",
-            y = "Yank diff",
-          },
-        },
+      wk.add({
+        { "<leader>gm", group = "+Copilot Chat" }, -- group
+        { "<leader>gmd", desc = "Show diff" },
+        { "<leader>gmp", desc = "System prompt" },
+        { "<leader>gms", desc = "Show selection" },
+        { "<leader>gmy", desc = "Yank diff" },
       })
     end,
     event = "VeryLazy",
@@ -242,6 +238,8 @@ return {
       { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
       -- Toggle Copilot Chat Vsplit
       { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
+      -- Copilot Chat Models
+      { "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
     },
   },
 }

@@ -148,16 +148,12 @@ return {
 
       -- Add which-key mappings
       local wk = require("which-key")
-      wk.register({
-        g = {
-          m = {
-            name = "+Copilot Chat",
-            d = "Show diff",
-            p = "System prompt",
-            s = "Show selection",
-            y = "Yank diff",
-          },
-        },
+      wk.add({
+        { "<leader>gm", group = "+Copilot Chat" }, -- group
+        { "<leader>gmd", desc = "Show diff" },
+        { "<leader>gmp", desc = "System prompt" },
+        { "<leader>gms", desc = "Show selection" },
+        { "<leader>gmy", desc = "Yank diff" },
       })
     end,
     event = "VeryLazy",
@@ -246,6 +242,8 @@ return {
       { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
       -- Toggle Copilot Chat Vsplit
       { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
+      -- Copilot Chat Models
+      { "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
     },
   },
   {
