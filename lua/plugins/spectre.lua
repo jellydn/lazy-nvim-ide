@@ -13,6 +13,7 @@ function _G.get_spectre_options(default_opts)
 end
 
 return {
+  { "MagicDuck/grug-far.nvim", enabled = false },
   {
     -- Search and replace with pattern
     "nvim-pack/nvim-spectre",
