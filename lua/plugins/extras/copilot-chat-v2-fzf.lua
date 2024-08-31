@@ -23,10 +23,25 @@ return {
   { import = "plugins.extras.copilot-vim" }, -- Or use { import = "lazyvim.plugins.extras.coding.copilot" },
   { import = "plugins.extras.fzf" }, -- Use fzf for fuzzy finding
   {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      spec = {
+        { "<leader>a", group = "ai" },
+        { "gm", group = "+Copilot chat" },
+        { "gmh", desc = "Show help" },
+        { "gmd", desc = "Show diff" },
+        { "gmp", desc = "Show system prompt" },
+        { "gms", desc = "Show selection" },
+        { "gmy", desc = "Yank diff" },
+      },
+    },
+  },
+  {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    -- version = "v2.10.0",
     branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
+    -- version = "v2.10.0",
     -- Do not use branch and version together, either use branch or version
     dependencies = {
       { "nvim-lua/plenary.nvim" },
@@ -79,6 +94,10 @@ return {
         -- Show the user selection
         show_user_selection = {
           normal = "gms",
+        },
+        -- Show help
+        show_help = {
+          normal = "gmh",
         },
       },
     },
@@ -144,16 +163,6 @@ return {
             vim.bo.filetype = "markdown"
           end
         end,
-      })
-
-      -- Add which-key mappings
-      local wk = require("which-key")
-      wk.add({
-        { "<leader>gm", group = "+Copilot Chat" }, -- group
-        { "<leader>gmd", desc = "Show diff" },
-        { "<leader>gmp", desc = "System prompt" },
-        { "<leader>gms", desc = "Show selection" },
-        { "<leader>gmy", desc = "Yank diff" },
       })
     end,
     event = "VeryLazy",
