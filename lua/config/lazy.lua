@@ -18,7 +18,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.linting.eslint" },
-    { import = "plugins.extras.tsserver" },
+    { import = "plugins.extras.vtsls" },
     { import = "plugins.extras.edgy" },
     { import = "plugins.extras.copilot-chat-v2-fzf" },
     -- { import = "plugins.extras.vtsls" }, -- Typescript Server alternative
