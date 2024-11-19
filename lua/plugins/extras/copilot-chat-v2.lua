@@ -39,9 +39,8 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    commit = "78ea7304b2ae851c09b61a3f694b13f171348970",
-    -- branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
-    -- version = "v2.11.0",
+    branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
+    -- version = "v3.1.0",
     -- Do not use branch and version together, either use branch or version
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
@@ -53,7 +52,6 @@ return {
       error_header = "## Error ",
       prompts = prompts,
       auto_follow_cursor = false, -- Don't follow the cursor after getting response
-      show_help = false, -- Show help in virtual text, set to true if that's 1st time using Copilot Chat
       mappings = {
         -- Use tab for completion
         complete = {
@@ -108,21 +106,7 @@ return {
       -- Use unnamed register for the selection
       opts.selection = select.unnamed
 
-      -- Override the git prompts message
-      opts.prompts.Commit = {
-        prompt = "Write commit message for the change with commitizen convention",
-        selection = select.gitdiff,
-      }
-      opts.prompts.CommitStaged = {
-        prompt = "Write commit message for the change with commitizen convention",
-        selection = function(source)
-          return select.gitdiff(source, true)
-        end,
-      }
-
       chat.setup(opts)
-      -- Setup the CMP integration
-      require("CopilotChat.integrations.cmp").setup()
 
       vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
         chat.ask(args.args, { selection = select.visual })
@@ -164,15 +148,6 @@ return {
     end,
     event = "VeryLazy",
     keys = {
-      -- Show help actions with telescope
-      {
-        "<leader>ah",
-        function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-        end,
-        desc = "CopilotChat - Help actions",
-      },
       -- Show prompts actions with telescope
       {
         "<leader>ap",
@@ -223,11 +198,6 @@ return {
         "<leader>am",
         "<cmd>CopilotChatCommit<cr>",
         desc = "CopilotChat - Generate commit message for all changes",
-      },
-      {
-        "<leader>aM",
-        "<cmd>CopilotChatCommitStaged<cr>",
-        desc = "CopilotChat - Generate commit message for staged changes",
       },
       -- Quick chat with Copilot
       {
