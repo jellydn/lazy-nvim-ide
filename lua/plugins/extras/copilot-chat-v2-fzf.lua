@@ -31,8 +31,8 @@ return {
         { "gm", group = "+Copilot chat" },
         { "gmh", desc = "Show help" },
         { "gmd", desc = "Show diff" },
-        { "gmp", desc = "Show system prompt" },
-        { "gms", desc = "Show selection" },
+        { "gmi", desc = "Show info" },
+        { "gmc", desc = "Show context" },
         { "gmy", desc = "Yank diff" },
       },
     },
@@ -86,13 +86,13 @@ return {
         show_diff = {
           normal = "gmd",
         },
-        -- Show the prompt
-        show_system_prompt = {
-          normal = "gmp",
+        -- Show the info
+        show_info = {
+          normal = "gmi",
         },
-        -- Show the user selection
-        show_user_selection = {
-          normal = "gms",
+        -- Show the context
+        show_context = {
+          normal = "gmc",
         },
         -- Show help
         show_help = {
