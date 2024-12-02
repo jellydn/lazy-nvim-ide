@@ -40,9 +40,7 @@ return {
   {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary", -- Use the canary branch if you want to test the latest features but it might be unstable
-    -- version = "v3.1.0",
-    -- Do not use branch and version together, either use branch or version
+    -- version = "v3.3.0", -- Use a specific version to prevent breaking changes
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
