@@ -2,7 +2,8 @@
 return {
   -- Use native snippets from Neovim v0.10
   {
-    "nvim-cmp",
+    "hrsh7th/nvim-cmp",
+    optional = true,
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       -- Disable ghost text for nvim-cmp, use copilot suggestion instead
