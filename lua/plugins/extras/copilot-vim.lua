@@ -51,7 +51,6 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
-      local Util = require("lazyvim.util")
       table.insert(opts.sections.lualine_x, 2, {
         function()
           local icon = require("lazyvim.config").icons.kinds.Copilot
@@ -62,7 +61,7 @@ return {
           return ok and #clients > 0
         end,
         color = function()
-          return Util.ui.fg("Special")
+          return { fg = Snacks.util.color("Special") }
         end,
       })
     end,
