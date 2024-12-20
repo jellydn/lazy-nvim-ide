@@ -28,12 +28,6 @@ return {
     opts = {
       spec = {
         { "<leader>a", group = "ai" },
-        { "gm", group = "+Copilot chat" },
-        { "gmh", desc = "Show help" },
-        { "gmd", desc = "Show diff" },
-        { "gmi", desc = "Show info" },
-        { "gmc", desc = "Show context" },
-        { "gmy", desc = "Yank diff" },
       },
     },
   },
@@ -76,34 +70,14 @@ return {
           normal = "<C-y>",
           insert = "<C-y>",
         },
-        -- Yank the diff in the response to register
-        yank_diff = {
-          normal = "gmy",
-        },
-        -- Show the diff
-        show_diff = {
-          normal = "gmd",
-        },
-        -- Show the info
-        show_info = {
-          normal = "gmi",
-        },
-        -- Show the context
-        show_context = {
-          normal = "gmc",
-        },
         -- Show help
         show_help = {
-          normal = "gmh",
+          normal = "g?",
         },
       },
     },
     config = function(_, opts)
       local chat = require("CopilotChat")
-      local select = require("CopilotChat.select")
-      -- Use unnamed register for the selection
-      opts.selection = select.unnamed
-
       local user = vim.env.USER or "User"
       user = user:sub(1, 1):upper() .. user:sub(2)
       opts.question_header = "  " .. user .. " "
@@ -111,6 +85,7 @@ return {
 
       chat.setup(opts)
 
+      local select = require("CopilotChat.select")
       vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
         chat.ask(args.args, { selection = select.visual })
       end, { nargs = "*", range = true })
@@ -232,6 +207,8 @@ return {
       { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
       -- Copilot Chat Models
       { "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
+      -- Copilot Chat Agents
+      { "<leader>aa", "<cmd>CopilotChatAgents<cr>", desc = "CopilotChat - Select Agents" },
     },
   },
   {
