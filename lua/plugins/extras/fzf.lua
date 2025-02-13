@@ -533,7 +533,7 @@ return {
       -- change keymap to use FzfLua
       keys[#keys + 1] = {
         "gr",
-        "<cmd> FzfLua lsp_references jump_to_single_result=true ignore_current_line=true async=true<CR>",
+        "<cmd> FzfLua lsp_references jump1=true ignore_current_line=true async=true<CR>",
         desc = "Go to references",
       }
       keys[#keys + 1] = { "gd", "<cmd> FzfLua lsp_definitions async=true<CR>", desc = "Go to definition" }
