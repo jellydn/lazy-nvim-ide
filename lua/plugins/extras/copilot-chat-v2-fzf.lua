@@ -28,12 +28,23 @@ return {
     opts = {
       spec = {
         { "<leader>a", group = "ai" },
+        { "<leader>gm", group = "Copilot Chat" },
       },
     },
   },
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    optional = true,
+    opts = {
+      file_types = { "markdown", "copilot-chat" },
+    },
+    ft = { "markdown", "copilot-chat" },
+  },
+
+  {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "main",
     -- version = "v3.3.0", -- Use a specific version to prevent breaking changes
     dependencies = {
       { "nvim-lua/plenary.nvim" },
@@ -43,7 +54,7 @@ return {
       answer_header = "## Copilot ",
       error_header = "## Error ",
       prompts = prompts,
-      auto_follow_cursor = false, -- Don't follow the cursor after getting response
+      -- model = "claude-3.5-sonnet",
       mappings = {
         -- Use tab for completion
         complete = {
@@ -210,17 +221,5 @@ return {
       -- Copilot Chat Agents
       { "<leader>aa", "<cmd>CopilotChatAgents<cr>", desc = "CopilotChat - Select Agents" },
     },
-  },
-  {
-    "folke/edgy.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.right = opts.right or {}
-      table.insert(opts.right, {
-        ft = "copilot-chat",
-        title = "Copilot Chat",
-        size = { width = 50 },
-      })
-    end,
   },
 }
