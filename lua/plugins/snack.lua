@@ -16,5 +16,15 @@ return {
         },
       },
     },
+    keys = {
+      -- Zen mode
+      {
+        "<leader>cz",
+        function()
+          Snacks.zen()
+        end,
+        desc = "Toggle Zen Mode",
+      },
+    },
   },
 }
