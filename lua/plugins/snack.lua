@@ -14,6 +14,10 @@ return {
           -- Turn off dim plugin for zen mode
           dim = false,
         },
+        show = {
+          statusline = false, -- can only be shown when using the global statusline
+          tabline = true,
+        },
       },
     },
     keys = {
