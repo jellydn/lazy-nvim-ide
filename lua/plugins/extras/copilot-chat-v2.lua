@@ -27,12 +27,22 @@ return {
     opts = {
       spec = {
         { "<leader>a", group = "ai" },
+        { "<leader>gm", group = "Copilot Chat" },
       },
     },
   },
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    optional = true,
+    opts = {
+      file_types = { "markdown", "copilot-chat" },
+    },
+    ft = { "markdown", "copilot-chat" },
+  },
+  {
     dir = IS_DEV and "~/Projects/research/CopilotChat.nvim" or nil,
     "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "main",
     -- version = "v3.3.0", -- Use a specific version to prevent breaking changes
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
@@ -43,7 +53,7 @@ return {
       answer_header = "## Copilot ",
       error_header = "## Error ",
       prompts = prompts,
-      auto_follow_cursor = false, -- Don't follow the cursor after getting response
+      -- model = "claude-3.7-sonnet",
       mappings = {
         -- Use tab for completion
         complete = {
@@ -125,14 +135,19 @@ return {
       {
         "<leader>ap",
         function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+          require("CopilotChat").select_prompt({
+            context = {
+              "buffers",
+            },
+          })
         end,
         desc = "CopilotChat - Prompt actions",
       },
       {
         "<leader>ap",
-        ":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
+        function()
+          require("CopilotChat").select_prompt()
+        end,
         mode = "x",
         desc = "CopilotChat - Prompt actions",
       },
