@@ -172,7 +172,7 @@ return {
       },
       {
         "<leader>ax",
-        ":CopilotChatInline<cr>",
+        ":CopilotChatInline",
         mode = "x",
         desc = "CopilotChat - Inline chat",
       },
