@@ -204,10 +204,8 @@ return {
         end,
         desc = "CopilotChat - Quick chat",
       },
-      -- Debug
-      { "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
       -- Fix the issue with diagnostic
-      { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
+      { "<leader>af", "<cmd>CopilotChatFixError<cr>", desc = "CopilotChat - Fix Diagnostic" },
       -- Clear buffer and chat history
       { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
       -- Toggle Copilot Chat Vsplit
